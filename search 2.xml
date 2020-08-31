@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Build a blog with Hexo</title>
+      <link href="/2020/08/29/Build-a-blog-with-Hexo/"/>
+      <url>/2020/08/29/Build-a-blog-with-Hexo/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><ol><li>Download <code>Node.js</code> from <code>https://nodejs.org/</code>.</li><li>When you install <code>Node.js</code>, <code>npm</code> will be installed automatically.</li><li>Make sure you have <code>git</code> installed.</li><li>Download Hexo’s framework using <code>npm</code>.</li></ol><pre class=" language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli</code></pre><hr><h2 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h2><ol><li>Make a new folder and navigate to it through terminal.</li><li>Initialize a blog with Hexo command line under the folder.</li></ol><pre class=" language-bash"><code class="language-bash">hexo init</code></pre><ol start="3"><li>Start a local server to host your blog.</li></ol><pre class=" language-bash"><code class="language-bash">hexo server</code></pre><ol start="4"><li>Now open a browser, and type <code>localhost:4000</code> in address bar. You will see the blog that you just created!</li></ol><hr><h2 id="Host-the-blog-on-Github"><a href="#Host-the-blog-on-Github" class="headerlink" title="Host the blog on Github"></a>Host the blog on Github</h2><ol><li><p>In order to have others see your blog, you have to find a place to host your blog. Here I suggest using GitHub page, because each Github account can have a free domain ending with <code>github.io</code>.<br>npm install hexo-deployer-git –save</p></li><li><p>Go to Github, create a new repository and name it <code>web-name.github.io</code> (<strong>replace <code>web-name</code> with the name that you want</strong>). Make sure the repository is <strong>public</strong>.<br><img src="init-github-io.png" alt="Make a new repo to host blogs"></p></li><li><p>Open <code>_config.yml</code> with your favorite editor, and configure it as follows:</p></li></ol><pre class=" language-yml"><code class="language-yml">deploy:  type: git  repo: https://github.com/GaoxiangLuo/web-name.github.io.git  branch: master</code></pre><ol start="4"><li>Deploy your blog onto Github, login with username and password if being prompted</li></ol><pre class=" language-bash"><code class="language-bash">hexo deploy</code></pre><ol start="5"><li>Congratulation! You blog has been published at <code>web-name.github.io</code>!</li></ol>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Tutorial </tag>
+            
+            <tag> Web Dev </tag>
+            
+            <tag> Hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>I started my blog</title>
+      <link href="/2020/08/29/I-started-my-blog/"/>
+      <url>/2020/08/29/I-started-my-blog/</url>
+      
+        <content type="html"><![CDATA[<p>Hey all! I finally started my own blog, since I’ve been captured by how elegant the markdown language is. There are some reasons for me to start blogging.  Firstly, it motivates me to summarize the cool stuff that I’ve learned, which helps me to review and gain deeper insights of those knowledge. Secondly, I hope my blog will be a place where people can know me more; meanwhile, I would like to contribute my effort to the overall ComSci society, in publishing blogs that help people resolve technical issues. I hope it’s not too late to start as a rising junior undergrad, and I would like to see my blog grows as I grow!</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> log </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>

@@ -55,9 +55,8 @@
     <!-- rss -->
     
     
-      <link rel="alternate" href="/atom.xml" title="Leon" type="application/atom+xml" />
-    
-<meta name="generator" content="Hexo 5.1.1"><link rel="stylesheet" href="/css/prism-duotone-dark.css" type="text/css"></head>
+<meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Leon" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-duotone-dark.css" type="text/css"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -200,6 +199,28 @@
   </div>
 </article>
 
+<!-- Gitalk start  -->
+
+<!-- Link Gitalk files  -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"/></script> 
+<div id="gitalk-container"></div>     
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+
+      // gitalk's main params
+      clientID: `3ce407f9c6ed6aaffdf8`,
+      clientSecret: `2c6bc0465d806a6dc4ee20c9b1a0043d7a6101fe`,
+      repo: `gaoxiangluo.github.io`,
+      owner: 'GaoxiangLuo',
+      admin: ['GaoxiangLuo'],
+      id: 'identifier for a page，gitalk will create issues with this id',
+    
+    });
+    gitalk.render('gitalk-container');
+</script> 
+<!-- Gitalk end -->
+
 
 
         
@@ -279,17 +300,16 @@
     <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <span class="site-pv">
-      Page View <i class="fa fa-eye"></i>
+      Page View <i class="fa fa-users"></i>
       <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
     </span>
-    Number of Visitors <i class="fa fa-users"></i> <span id="busuanzi_value_site_uv"></span>
     <!-- <span class="site-uv">
       Number of Visitors <i class="fa fa-user"></i>
       <span class="busuanzi-value" id="busuansi_value_site_uv"></span>
     </span> -->
   </div>
-  <div class="word-count">
-    <i class="fa fa-area-chart"></i> word count <span class="post-count">336</span>
+  <div class="Word-count">
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">336</span>
   </div>
 </footer>
 
