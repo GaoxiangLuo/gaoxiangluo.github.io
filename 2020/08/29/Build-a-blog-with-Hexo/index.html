@@ -199,29 +199,31 @@
   </div>
 </article>
 
-<!-- Gitalk start  -->
 
-<!-- Link Gitalk files  -->
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"/></script> 
-<div id="gitalk-container"></div>     
-<script type="text/javascript">
-    var gitalk = new Gitalk({
+  <!-- Gitalk start  -->
 
-      // gitalk's main params
-      clientID: `3ce407f9c6ed6aaffdf8`,
-      clientSecret: `2c6bc0465d806a6dc4ee20c9b1a0043d7a6101fe`,
-      repo: `gaoxiangluo.github.io`,
-      owner: 'GaoxiangLuo',
-      admin: ['GaoxiangLuo'],
-      id: location.pathname.slice(0, 50),
-      distractionFreeMode: true,
-      enableHotKey: true,
-      language: `en`
-    });
-    gitalk.render('gitalk-container');
-</script> 
-<!-- Gitalk end -->
+  <!-- Link Gitalk files  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"/></script> 
+  <div id="gitalk-container"></div>     
+  <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+        // gitalk's main params
+        clientID: `3ce407f9c6ed6aaffdf8`,
+        clientSecret: `2c6bc0465d806a6dc4ee20c9b1a0043d7a6101fe`,
+        repo: `gaoxiangluo.github.io`,
+        owner: 'GaoxiangLuo',
+        admin: ['GaoxiangLuo'],
+        id: location.pathname.slice(0, 50),
+        distractionFreeMode: true,
+        enableHotKey: true,
+        language: `en`
+      });
+      gitalk.render('gitalk-container');
+  </script> 
+  <!-- Gitalk end -->
+
 
 
 
