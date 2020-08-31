@@ -6,17 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Setup Download Node.js from https:&#x2F;&#x2F;nodejs.org&#x2F;. When you install Node.js, npm will be installed automatically. Make sure you have git installed. Download Hexo’s framework using npm.1sudo npm install">
+    <meta name="description" content="Setup Download Node.js from https:&#x2F;&#x2F;nodejs.org&#x2F;. When you install Node.js, npm will be installed automatically. Make sure you have git installed. Download Hexo’s framework using npm.  sudo npm install">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Build a blog with Hexo">
 <meta property="og:url" content="https://gaoxiangluo.github.io/2020/08/29/Build-a-blog-with-Hexo/index.html">
 <meta property="og:site_name" content="Leon">
-<meta property="og:description" content="Setup Download Node.js from https:&#x2F;&#x2F;nodejs.org&#x2F;. When you install Node.js, npm will be installed automatically. Make sure you have git installed. Download Hexo’s framework using npm.1sudo npm install">
+<meta property="og:description" content="Setup Download Node.js from https:&#x2F;&#x2F;nodejs.org&#x2F;. When you install Node.js, npm will be installed automatically. Make sure you have git installed. Download Hexo’s framework using npm.  sudo npm install">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/08/29/Build-a-blog-with-Hexo/init-github-io.png">
-<meta property="og:image" content="https://gaoxiangluo.github.io/2020/08/29/Build-a-blog-with-Hexo/config-hexo-git.png">
 <meta property="article:published_time" content="2020-08-30T01:15:25.000Z">
-<meta property="article:modified_time" content="2020-08-30T07:45:55.000Z">
+<meta property="article:modified_time" content="2020-08-31T17:27:35.701Z">
 <meta property="article:author" content="Gaoxiang Luo">
 <meta property="article:tag" content="Tutorial">
 <meta property="article:tag" content="Web Dev">
@@ -56,7 +55,9 @@
     <!-- rss -->
     
     
-<meta name="generator" content="Hexo 5.1.1"></head>
+      <link rel="alternate" href="/atom.xml" title="Leon" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.1.1"><link rel="stylesheet" href="/css/prism-duotone-dark.css" type="text/css"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -159,22 +160,40 @@
 <li>Download <code>Node.js</code> from <code>https://nodejs.org/</code>.</li>
 <li>When you install <code>Node.js</code>, <code>npm</code> will be installed automatically.</li>
 <li>Make sure you have <code>git</code> installed.</li>
-<li>Download Hexo’s framework using <code>npm</code>.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-</li>
+<li>Download Hexo’s framework using <code>npm</code>.</li>
 </ol>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli</code></pre>
 <hr>
 <h2 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h2><ol>
 <li>Make a new folder and navigate to it through terminal.</li>
-<li>Initialize a blog with Hexo command line under the folder.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure></li>
-<li>Start a local server to host your blog.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure></li>
+<li>Initialize a blog with Hexo command line under the folder.</li>
+</ol>
+<pre class=" language-bash"><code class="language-bash">hexo init</code></pre>
+<ol start="3">
+<li>Start a local server to host your blog.</li>
+</ol>
+<pre class=" language-bash"><code class="language-bash">hexo server</code></pre>
+<ol start="4">
 <li>Now open a browser, and type <code>localhost:4000</code> in address bar. You will see the blog that you just created!</li>
 </ol>
 <hr>
 <h2 id="Host-the-blog-on-Github"><a href="#Host-the-blog-on-Github" class="headerlink" title="Host the blog on Github"></a>Host the blog on Github</h2><ol>
-<li>In order to have others see your blog, you have to find a place to host your blog. Here I suggest using GitHub page, because each Github account can have a free domain ending with <code>github.io</code>.<br>npm install hexo-deployer-git –save</li>
-<li>Go to Github, create a new repository and name it <code>web-name.github.io</code> (<strong>replace <code>web-name</code> with the name that you want</strong>). Make sure the repository is <strong>public</strong>.<br><img src="init-github-io.png" alt="Make a new repo to host blogs"></li>
-<li>Open <code>_config.yml</code> with your favorite editor, and configure it as follows:<br><img src="config-hexo-git.png" alt="Edit configuration of git deployment"></li>
-<li>Deploy your blog onto Github, login with username and password if being prompted<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure></li>
+<li><p>In order to have others see your blog, you have to find a place to host your blog. Here I suggest using GitHub page, because each Github account can have a free domain ending with <code>github.io</code>.<br>npm install hexo-deployer-git –save</p>
+</li>
+<li><p>Go to Github, create a new repository and name it <code>web-name.github.io</code> (<strong>replace <code>web-name</code> with the name that you want</strong>). Make sure the repository is <strong>public</strong>.<br><img src="init-github-io.png" alt="Make a new repo to host blogs"></p>
+</li>
+<li><p>Open <code>_config.yml</code> with your favorite editor, and configure it as follows:</p>
+</li>
+</ol>
+<pre class=" language-yml"><code class="language-yml">deploy:
+  type: git
+  repo: https://github.com/GaoxiangLuo/web-name.github.io.git
+  branch: master</code></pre>
+<ol start="4">
+<li>Deploy your blog onto Github, login with username and password if being prompted</li>
+</ol>
+<pre class=" language-bash"><code class="language-bash">hexo deploy</code></pre>
+<ol start="5">
 <li>Congratulation! You blog has been published at <code>web-name.github.io</code>!</li>
 </ol>
 
@@ -241,7 +260,7 @@
     2020
     Gaoxiang Luo
   </div>
-  <div class="footer-right">
+  <!-- <div class="footer-right">
     <nav>
       <ul>
          
@@ -255,19 +274,22 @@
         
       </ul>
     </nav>
-  </div>
+  </div> -->
   <div class="busuanzi-count">
     <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-    <!-- <span class="site-pv">
+    <span class="site-pv">
       Page View <i class="fa fa-eye"></i>
       <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-    </span> -->
+    </span>
     Number of Visitors <i class="fa fa-users"></i> <span id="busuanzi_value_site_uv"></span>
     <!-- <span class="site-uv">
       Number of Visitors <i class="fa fa-user"></i>
       <span class="busuanzi-value" id="busuansi_value_site_uv"></span>
     </span> -->
+  </div>
+  <div class="word-count">
+    <i class="fa fa-area-chart"></i> word count <span class="post-count">336</span>
   </div>
 </footer>
 
