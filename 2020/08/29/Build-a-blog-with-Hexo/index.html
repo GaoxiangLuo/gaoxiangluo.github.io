@@ -214,7 +214,7 @@
       repo: `gaoxiangluo.github.io`,
       owner: 'GaoxiangLuo',
       admin: ['GaoxiangLuo'],
-      id: 'identifier for a page，gitalk will create issues with this id',
+      id: location.pathname.slice(0, 50),
     
     });
     gitalk.render('gitalk-container');
