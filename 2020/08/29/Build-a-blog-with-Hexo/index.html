@@ -6,16 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Setup Download Node.js from https:&#x2F;&#x2F;nodejs.org&#x2F;. When you install Node.js, npm will be installed automatically. Make sure you have git installed. Download Hexo’s framework using npm.  sudo npm install">
+    <meta name="description" content="Setup Install Node.js.  MacOS: Download Node.js from https:&#x2F;&#x2F;nodejs.org&#x2F;. When you install Node.js, npm will be installed automatically. Ubuntu 20.04: Download them from command line.sudo apt update s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Build a blog with Hexo">
 <meta property="og:url" content="https://gaoxiangluo.github.io/2020/08/29/Build-a-blog-with-Hexo/index.html">
 <meta property="og:site_name" content="Leon">
-<meta property="og:description" content="Setup Download Node.js from https:&#x2F;&#x2F;nodejs.org&#x2F;. When you install Node.js, npm will be installed automatically. Make sure you have git installed. Download Hexo’s framework using npm.  sudo npm install">
+<meta property="og:description" content="Setup Install Node.js.  MacOS: Download Node.js from https:&#x2F;&#x2F;nodejs.org&#x2F;. When you install Node.js, npm will be installed automatically. Ubuntu 20.04: Download them from command line.sudo apt update s">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/08/29/Build-a-blog-with-Hexo/init-github-io.png">
 <meta property="article:published_time" content="2020-08-30T01:15:25.000Z">
-<meta property="article:modified_time" content="2020-08-31T17:27:35.701Z">
+<meta property="article:modified_time" content="2020-09-04T14:05:22.757Z">
 <meta property="article:author" content="Gaoxiang Luo">
 <meta property="article:tag" content="Tutorial">
 <meta property="article:tag" content="Web Dev">
@@ -156,12 +156,23 @@
 
   <div class="content" itemprop="articleBody">
     <h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><ol>
-<li>Download <code>Node.js</code> from <code>https://nodejs.org/</code>.</li>
-<li>When you install <code>Node.js</code>, <code>npm</code> will be installed automatically.</li>
-<li>Make sure you have <code>git</code> installed.</li>
-<li>Download Hexo’s framework using <code>npm</code>.</li>
-</ol>
+<li><p>Install <code>Node.js</code>.</p>
+<ul>
+<li>MacOS: Download <code>Node.js</code> from <code>https://nodejs.org/</code>. When you install <code>Node.js</code>, <code>npm</code> will be installed automatically.</li>
+<li>Ubuntu 20.04: Download them from command line.<pre class=" language-bash"><code class="language-bash"><span class="token function">sudo</span> apt update
+<span class="token function">sudo</span> apt <span class="token function">install</span> nodejs
+<span class="token function">sudo</span> apt <span class="token function">install</span> <span class="token function">npm</span></code></pre>
+</li>
+</ul>
+</li>
+<li><p>When you install <code>Node.js</code>, <code>npm</code> will be installed automatically.</p>
+</li>
+<li><p>Make sure you have <code>git</code> installed.</p>
+</li>
+<li><p>Download Hexo’s framework using <code>npm</code>.</p>
 <pre class=" language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli</code></pre>
+</li>
+</ol>
 <hr>
 <h2 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h2><ol>
 <li>Make a new folder and navigate to it through terminal.</li>
@@ -182,18 +193,16 @@
 <li><p>Go to Github, create a new repository and name it <code>web-name.github.io</code> (<strong>replace <code>web-name</code> with the name that you want</strong>). Make sure the repository is <strong>public</strong>.<br><img src="init-github-io.png" alt="Make a new repo to host blogs"></p>
 </li>
 <li><p>Open <code>_config.yml</code> with your favorite editor, and configure it as follows:</p>
-</li>
-</ol>
 <pre class=" language-yml"><code class="language-yml">deploy:
   type: git
   repo: https://github.com/GaoxiangLuo/web-name.github.io.git
   branch: master</code></pre>
-<ol start="4">
-<li>Deploy your blog onto Github, login with username and password if being prompted</li>
-</ol>
+</li>
+<li><p>Deploy your blog onto Github, login with username and password if being prompted</p>
 <pre class=" language-bash"><code class="language-bash">hexo deploy</code></pre>
-<ol start="5">
-<li>Congratulation! You blog has been published at <code>web-name.github.io</code>!</li>
+</li>
+<li><p>Congratulation! You blog has been published at <code>web-name.github.io</code>!</p>
+</li>
 </ol>
 
   </div>
@@ -313,7 +322,7 @@
     </span> -->
   </div>
   <div class="Word-count">
-    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">336</span>
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">369</span>
   </div>
 </footer>
 
