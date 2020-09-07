@@ -6,7 +6,7 @@
   <link href="https://gaoxiangluo.github.io/atom.xml" rel="self"/>
   
   <link href="https://gaoxiangluo.github.io/"/>
-  <updated>2020-09-05T04:37:07.736Z</updated>
+  <updated>2020-09-07T03:51:52.451Z</updated>
   <id>https://gaoxiangluo.github.io/</id>
   
   <author>
@@ -17,11 +17,39 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Robotics: Perception study note week 1</title>
+    <link href="https://gaoxiangluo.github.io/2020/09/06/Robotics-Perception-study-note-week-1/"/>
+    <id>https://gaoxiangluo.github.io/2020/09/06/Robotics-Perception-study-note-week-1/</id>
+    <published>2020-09-07T03:47:32.000Z</published>
+    <updated>2020-09-07T03:51:52.451Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Robotics-Perception"><a href="#Robotics-Perception" class="headerlink" title="Robotics: Perception"></a>Robotics: Perception</h1><h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><ul><li>Week 1: Geometry of Projection</li><li>Week 2: Augmented Reality &amp; Visual Metrology</li><li>Week 3 &amp; 4: Where am I? </li></ul><hr><h3 id="Week-1"><a href="#Week-1" class="headerlink" title="Week 1"></a>Week 1</h3><p><img src="Robotics-Perception-study-note-week-1/camera_types.png" alt="camera_type"><br>There are panoromic cameras, stereos camera, laser scanner and Kinect. </p><h5 id="How-does-a-thin-lens-work"><a href="#How-does-a-thin-lens-work" class="headerlink" title="How does a thin lens work?"></a>How does a thin lens work?</h5><p><img src="Robotics-Perception-study-note-week-1/thin_lens.png" alt="thin_lens"></p><ul><li>Rays parallet to the optical axis meet the focus after leaving the lens.</li><li>Rays through center of the lens do not change direction.</li></ul><p><img src="Robotics-Perception-study-note-week-1/thin_lens_equation.png" alt="equation"></p><h5 id="What-happens-when-we-move-the-image-plane"><a href="#What-happens-when-we-move-the-image-plane" class="headerlink" title="What happens when we move the image plane?"></a>What happens when we move the image plane?</h5><p>moving image plane = focusing (practically)<br><img src="Robotics-Perception-study-note-week-1/move_image_plane.png" alt="plane_move"><br>The read line segment is what makes image blur.</p><h5 id="Perspective-projection-size-of-object-image"><a href="#Perspective-projection-size-of-object-image" class="headerlink" title="Perspective projection: size of object image"></a>Perspective projection: size of object image</h5><p><img src="Robotics-Perception-study-note-week-1/perspective_projection.png" alt="perspective_projection"></p><ul><li>This is easily proved by similarity of triangle.</li><li>A point object of the same size coming closer results on a larger image.</li><li>A point moving on the same ray does not change its image.</li></ul><hr><h5 id="Single-View-Geometry"><a href="#Single-View-Geometry" class="headerlink" title="Single View Geometry"></a>Single View Geometry</h5><h6 id="Two-facts"><a href="#Two-facts" class="headerlink" title="Two facts:"></a>Two facts:</h6><ul><li>When we take a pictuer, the 3D location has become a 2D plane. We have lost the third dimension in this process.</li><li>It matters how are oritented to the world when we take a picture.</li></ul><h6 id="Ideas-I-Measurements-on-planes"><a href="#Ideas-I-Measurements-on-planes" class="headerlink" title="Ideas I: Measurements on planes"></a>Ideas I: Measurements on planes</h6><p>We can unwarp then measutre, which means to make parallel lines stay parallel and perpendicular angle stay perpendicular.<br><img src="Robotics-Perception-study-note-week-1/measure_planes.png" alt="measure_planes"></p><h6 id="Ideas-II-Vanishing-points"><a href="#Ideas-II-Vanishing-points" class="headerlink" title="Ideas II: Vanishing points"></a>Ideas II: Vanishing points</h6><p><img src="Robotics-Perception-study-note-week-1/vanishing_point.png" alt="vanishing_point"><br>The roof and ground are parellel in real world (blue lines), and they converge to a point if we draw them. That’s the vanishing point.</p><p><img src="Robotics-Perception-study-note-week-1/imaging_vanishing_point.png" alt="imaging_vanishing_point"><br>As the blue dot moves further away, the projection point on the image plane will be closer and closer to the vanishing point.</p><h5 id="More-on-Perspective-Projection"><a href="#More-on-Perspective-Projection" class="headerlink" title="More on Perspective Projection"></a>More on Perspective Projection</h5><h6 id="Bi-perspectograph"><a href="#Bi-perspectograph" class="headerlink" title="Bi-perspectograph"></a>Bi-perspectograph</h6><p><img src="Robotics-Perception-study-note-week-1/prove_bi_perspectograph.png" alt="prove_bi_perspectograph"><br>Take some time to understand this proof. As the point P* on image plane moves, we’re able to draw the projection curve on the ground plane with point P’. </p><h6 id="Two-parameters"><a href="#Two-parameters" class="headerlink" title="Two parameters:"></a>Two parameters:</h6><ul><li>Height of camera (line O*S)<ul><li>If we project a circle from image plane, the lower the camera is, the more squeezed is the ellipse.</li></ul></li><li>Distance of projection center from image plane (distance between two parallel lines LM and OS); also known as focal length<ul><li>When it moves, it <strong>only change the size not the shape</strong>. </li></ul></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Robotics-Perception&quot;&gt;&lt;a href=&quot;#Robotics-Perception&quot; class=&quot;headerlink&quot; title=&quot;Robotics: Perception&quot;&gt;&lt;/a&gt;Robotics: Perception&lt;/h1&gt;&lt;h3</summary>
+      
+    
+    
+    
+    
+    <category term="Study Note" scheme="https://gaoxiangluo.github.io/tags/Study-Note/"/>
+    
+    <category term="Coursera" scheme="https://gaoxiangluo.github.io/tags/Coursera/"/>
+    
+    <category term="Robotics" scheme="https://gaoxiangluo.github.io/tags/Robotics/"/>
+    
+    <category term="Perception" scheme="https://gaoxiangluo.github.io/tags/Perception/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Work on multiple computers for your schoolwork? Use git!</title>
     <link href="https://gaoxiangluo.github.io/2020/09/04/Work-on-multiple-computers-for-your-schoolwork-Use-git/"/>
     <id>https://gaoxiangluo.github.io/2020/09/04/Work-on-multiple-computers-for-your-schoolwork-Use-git/</id>
     <published>2020-09-05T02:16:57.000Z</published>
-    <updated>2020-09-05T04:37:07.736Z</updated>
+    <updated>2020-09-07T03:50:02.578Z</updated>
     
     <content type="html"><![CDATA[<h3 id="Sync-Computers"><a href="#Sync-Computers" class="headerlink" title="Sync Computers"></a>Sync Computers</h3><p>How do I use git to sync my Projects/HWs/Labs if I need to code them on laptop/desktop/lab machine?</p><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># On the first device</span>$ <span class="token function">git</span> init$ <span class="token function">git</span> add <span class="token keyword">.</span>$ <span class="token function">git</span> commit -m <span class="token string">"First release"</span>$ <span class="token function">git</span> push </code></pre><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># On other devices</span>$ <span class="token function">git</span> clone URL <span class="token comment" spellcheck="true"># end with .git</span></code></pre><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># From now on, every time one of devices is ready to release</span>$ <span class="token function">git</span> commit -a -m <span class="token string">"Next release"</span>$ <span class="token function">git</span> push</code></pre><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Any devices that want to sync to latest release</span>$ <span class="token function">git</span> pull <span class="token comment" spellcheck="true"># a pull is simply a fetch then merge</span></code></pre><p>What if you want to continue edit on your file that wasn’t finished on other devices? In other words, without pushing.</p><pre class=" language-bash"><code class="language-bash">$ <span class="token function">git</span> pull other.computer:/path/to/files HEAD <span class="token comment" spellcheck="true"># HEAD tag is like a cursor that normally points at the latest commit</span></code></pre><p>If you’re using MacOS or Windows, there is a offcial GUI called <strong>Github Destop</strong> that will do the job for you. Also, <strong>Visual Studio Code</strong> has build-in plugin for git.</p><hr><h3 id="Branch-is-Your-Friend"><a href="#Branch-is-Your-Friend" class="headerlink" title="Branch is Your Friend"></a>Branch is Your Friend</h3><p>What if you just want to try out some new ideas or maybe make a hotfix without interrupting the main repo from being used? </p><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Try new ideas</span>$ <span class="token function">git</span> commit -m <span class="token string">"Initial commit"</span> <span class="token comment" spellcheck="true"># always remember to commit before switching around</span>$ <span class="token function">git</span> checkout -b new_branch <span class="token comment" spellcheck="true"># create a new branch and switch to it</span><span class="token comment" spellcheck="true">#### try some new ideas on this branch ####</span>$ <span class="token function">git</span> commit -a -m <span class="token string">"Another commit"</span> <span class="token comment" spellcheck="true"># good habbit to commit</span>$ <span class="token function">git</span> checkout master <span class="token comment" spellcheck="true"># switch back to master</span>$ <span class="token function">git</span> branch -m new_branch <span class="token comment" spellcheck="true"># if you want to remove the branch that was created</span></code></pre><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Quick Fixes</span>$ <span class="token function">git</span> commit -a$ <span class="token function">git</span> checkout -b fixes<span class="token comment" spellcheck="true">###### fix goes here #######</span>$ <span class="token function">git</span> commit -a -m <span class="token string">"Bug fixed"</span>$ <span class="token function">git</span> checkout master<span class="token comment" spellcheck="true"># You can even merge in the freshly baked bugfix</span>$ <span class="token function">git</span> merge fixes</code></pre><hr><h3 id="Commit-Message-is-Important"><a href="#Commit-Message-is-Important" class="headerlink" title="Commit Message is Important"></a>Commit Message is Important</h3><p>Sometimes it’s good to be descriptive in your commit, so that other users will understand what changes you’ve made. If you use two <code>-m</code> flag, the first one will act like a title and the second will act like a descriptive body. </p><pre class=" language-bash"><code class="language-bash">$ <span class="token function">git</span> commit -m <span class="token string">"title"</span> -m <span class="token string">"more detailed info"</span></code></pre><p>Did you just commit, but wish you had typed a different message? This can help you to change the last message.</p><pre class=" language-bash"><code class="language-bash">$ <span class="token function">git</span> commit --amend -m <span class="token string">"an updated commit message"</span></code></pre><hr><h3 id="Acknowledgement"><a href="#Acknowledgement" class="headerlink" title="Acknowledgement"></a>Acknowledgement</h3><p>Thanks <a href="http://www-cs-students.stanford.edu/~blynn/">Ben Lynn</a> for publishing the fun and informative git guide <a href="http://www-cs-students.stanford.edu/~blynn/gitmagic/">git magic</a>.</p>]]></content>
     
@@ -34,9 +62,9 @@
     
     
     
-    <category term="git" scheme="https://gaoxiangluo.github.io/tags/git/"/>
+    <category term="Tutorial" scheme="https://gaoxiangluo.github.io/tags/Tutorial/"/>
     
-    <category term="tutorial" scheme="https://gaoxiangluo.github.io/tags/tutorial/"/>
+    <category term="Git" scheme="https://gaoxiangluo.github.io/tags/Git/"/>
     
   </entry>
   
@@ -45,7 +73,7 @@
     <link href="https://gaoxiangluo.github.io/2020/08/29/Build-a-blog-with-Hexo/"/>
     <id>https://gaoxiangluo.github.io/2020/08/29/Build-a-blog-with-Hexo/</id>
     <published>2020-08-30T01:15:25.000Z</published>
-    <updated>2020-09-04T18:31:30.000Z</updated>
+    <updated>2020-09-07T03:49:54.158Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><ol><li><p>Install <code>Node.js</code>.</p><ul><li>MacOS: Download <code>Node.js</code> from <code>https://nodejs.org/</code>. When you install <code>Node.js</code>, <code>npm</code> will be installed automatically.</li><li>Ubuntu 20.04: Download them from command line.<pre class=" language-bash"><code class="language-bash">$ <span class="token function">sudo</span> apt update$ <span class="token function">sudo</span> apt <span class="token function">install</span> nodejs$ <span class="token function">sudo</span> apt <span class="token function">install</span> <span class="token function">npm</span></code></pre></li></ul></li><li><p>When you install <code>Node.js</code>, <code>npm</code> will be installed automatically.</p></li><li><p>Make sure you have <code>git</code> installed.</p></li><li><p>Download Hexo’s framework using <code>npm</code>.</p><pre class=" language-bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli</code></pre></li></ol><hr><h2 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h2><ol><li>Make a new folder and navigate to it through terminal.</li><li>Initialize a blog with Hexo command line under the folder.</li></ol><pre class=" language-bash"><code class="language-bash">$ hexo init</code></pre><ol start="3"><li>Start a local server to host your blog.</li></ol><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre><ol start="4"><li>Now open a browser, and type <code>localhost:4000</code> in address bar. You will see the blog that you just created!</li></ol><hr><h2 id="Host-the-blog-on-Github"><a href="#Host-the-blog-on-Github" class="headerlink" title="Host the blog on Github"></a>Host the blog on Github</h2><ol><li><p>In order to have others see your blog, you have to find a place to host your blog. Here I suggest using GitHub page, because each Github account can have a free domain ending with <code>github.io</code>.<br>npm install hexo-deployer-git –save</p></li><li><p>Go to Github, create a new repository and name it <code>web-name.github.io</code> (<strong>replace <code>web-name</code> with the name that you want</strong>). Make sure the repository is <strong>public</strong>.<br><img src="init-github-io.png" alt="Make a new repo to host blogs"></p></li><li><p>Open <code>_config.yml</code> with your favorite editor, and configure it as follows:</p><pre class=" language-yml"><code class="language-yml">deploy:  type: git  repo: https://github.com/GaoxiangLuo/web-name.github.io.git  branch: master</code></pre></li><li><p>Deploy your blog onto Github, login with username and password if being prompted</p><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre></li><li><p>Congratulation! You blog has been published at <code>web-name.github.io</code>!</p></li></ol><hr><div style="text-align: right"> To be continued... </div>]]></content>
     
@@ -74,7 +102,7 @@
     <link href="https://gaoxiangluo.github.io/2020/08/29/I-started-my-blog/"/>
     <id>https://gaoxiangluo.github.io/2020/08/29/I-started-my-blog/</id>
     <published>2020-08-29T19:13:36.000Z</published>
-    <updated>2020-08-30T07:45:43.986Z</updated>
+    <updated>2020-09-07T03:49:56.219Z</updated>
     
     <content type="html"><![CDATA[<p>Hey all! I finally started my own blog, since I’ve been captured by how elegant the markdown language is. There are some reasons for me to start blogging.  Firstly, it motivates me to summarize the cool stuff that I’ve learned, which helps me to review and gain deeper insights of those knowledge. Secondly, I hope my blog will be a place where people can know me more; meanwhile, I would like to contribute my effort to the overall ComSci society, in publishing blogs that help people resolve technical issues. I hope it’s not too late to start as a rising junior undergrad, and I would like to see my blog grows as I grow!</p>]]></content>
     
@@ -87,7 +115,7 @@
     
     
     
-    <category term="log" scheme="https://gaoxiangluo.github.io/tags/log/"/>
+    <category term="Log" scheme="https://gaoxiangluo.github.io/tags/Log/"/>
     
   </entry>
   
