@@ -6,7 +6,7 @@
   <link href="https://gaoxiangluo.github.io/atom.xml" rel="self"/>
   
   <link href="https://gaoxiangluo.github.io/"/>
-  <updated>2020-09-12T14:59:07.317Z</updated>
+  <updated>2020-09-21T03:36:42.734Z</updated>
   <id>https://gaoxiangluo.github.io/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Think DL: old and new neural networks</title>
+    <link href="https://gaoxiangluo.github.io/2020/09/20/Think-DL-old-and-new-neural-networks/"/>
+    <id>https://gaoxiangluo.github.io/2020/09/20/Think-DL-old-and-new-neural-networks/</id>
+    <published>2020-09-21T03:29:00.000Z</published>
+    <updated>2020-09-21T03:36:42.734Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Acknowledgement: This course is being offered by <a href="https://www.sunju.org/">Prof. Ju Sun</a> at the University of Minnesota in Fall 2020. Pictures of slides are from the course. </p></blockquote><h1 id="Netruel-Networks-Old-and-New"><a href="#Netruel-Networks-Old-and-New" class="headerlink" title="Netruel Networks: Old and New"></a>Netruel Networks: Old and New</h1><h2 id="Start-from-Neurons"><a href="#Start-from-Neurons" class="headerlink" title="Start from Neurons"></a>Start from Neurons</h2><h3 id="Model-of-biological-neurons"><a href="#Model-of-biological-neurons" class="headerlink" title="Model of biological neurons"></a>Model of biological neurons</h3><p><img src="slide4.png" alt="slide4"></p><h2 id="Shallow-to-DNNs"><a href="#Shallow-to-DNNs" class="headerlink" title="Shallow to DNNs"></a>Shallow to DNNs</h2><h3 id="Artificial-Neurons"><a href="#Artificial-Neurons" class="headerlink" title="Artificial Neurons"></a>Artificial Neurons</h3><p><img src="slide7.png" alt="slide7"><br>ReLU is the most popular activation function nowadays.</p><p><img src="slide8.png" alt="slide8"><br>People play diverse forms of NN but only play with graph without cycles, because we cannot do auto differentiation once we have cycles. </p><h3 id="Supervised-Learning-in-ML"><a href="#Supervised-Learning-in-ML" class="headerlink" title="Supervised Learning in ML"></a>Supervised Learning in ML</h3><p><img src="slide9.png" alt="slide9"></p><h3 id="Supervised-Learning-in-DL"><a href="#Supervised-Learning-in-DL" class="headerlink" title="Supervised Learning in DL"></a>Supervised Learning in DL</h3><p><img src="slide10.png" alt="slide10"><br>Instead of finding a function from a family of functions, we try to find a group of weights (w) and offsets(b) to minimize the average loss.</p><h3 id="Perceptron"><a href="#Perceptron" class="headerlink" title="Perceptron"></a>Perceptron</h3><p>Def: Perceptron is a single artificial neuron for binary classification.<br><img src="slide12.png" alt="slide12"><br><img src="slide13.png" alt="slide13"><br><img src="slide14.png" alt="slide14"><br><img src="slide16.png" alt="slide16"></p><h3 id="They-are-all-shallow-NNs"><a href="#They-are-all-shallow-NNs" class="headerlink" title="They are all (shallow) NNs"></a>They are all (shallow) NNs</h3><ul><li>Linear Regression</li><li>Perceptron and Logistic Regression</li><li>Softmax Regression</li><li>Multilayer Perceptron (feedforward NNs)</li><li>Support Vector Machine (SVM)</li><li>PCA (autoencoder)</li><li>Matrix Factorization</li></ul><h2 id="Some-Background-Knowledge"><a href="#Some-Background-Knowledge" class="headerlink" title="Some Background Knowledge"></a>Some Background Knowledge</h2><h3 id="Turing-Test"><a href="#Turing-Test" class="headerlink" title="Turing Test"></a>Turing Test</h3><p>How we measure whether we achieve human-level AI?<br><img src="slide20.png" alt="slide20"></p><h3 id="Key-ingredients-of-DL"><a href="#Key-ingredients-of-DL" class="headerlink" title="Key ingredients of DL"></a>Key ingredients of DL</h3><p><img src="slide26.png" alt="slide26"><br>Suprisingly, we’re still using those computational methods that were invented 25-30 years ago. Nowadays the progress of DL largely depends on improvement of hardware (GPUs), but seldom on new computational methods.</p><hr><div style="text-align: right"> To be continued... </div>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;Acknowledgement: This course is being offered by &lt;a href=&quot;https://www.sunju.org/&quot;&gt;Prof. Ju Sun&lt;/a&gt; at the University of Minn</summary>
+      
+    
+    
+    
+    
+    <category term="Deep Learning" scheme="https://gaoxiangluo.github.io/tags/Deep-Learning/"/>
+    
+    <category term="Neural Network" scheme="https://gaoxiangluo.github.io/tags/Neural-Network/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Think DL: overview</title>
+    <link href="https://gaoxiangluo.github.io/2020/09/20/Think-DL-overview/"/>
+    <id>https://gaoxiangluo.github.io/2020/09/20/Think-DL-overview/</id>
+    <published>2020-09-21T03:23:39.000Z</published>
+    <updated>2020-09-21T03:37:47.396Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Acknowledgement: This course is being offered by <a href="https://www.sunju.org/">Prof. Ju Sun</a> at the University of Minnesota in Fall 2020. Pictures of slides are from the course. </p></blockquote><h1 id="Why-Deep-Learning"><a href="#Why-Deep-Learning" class="headerlink" title="Why Deep Learning"></a>Why Deep Learning</h1><h2 id="What-is-Deep-Learning-DL"><a href="#What-is-Deep-Learning-DL" class="headerlink" title="What is Deep Learning (DL)?"></a>What is Deep Learning (DL)?</h2><h3 id="DL-is-about…"><a href="#DL-is-about…" class="headerlink" title="DL is about…"></a>DL is about…</h3><ul><li>Deep Neural Network (DNNs)</li><li><strong>Data</strong> or training DNNs (e.g. images, videos, text sequences)</li><li><strong>Methods</strong> for training DNNs (e.g. AdaGrad, ADAM, RMSProp, Dropout)</li><li><strong>Hardware</strong> platforms for training DNNs (e.g. GPUs, TPUs, FPGAs)</li><li><strong>Software</strong> platforms for training DNNs (e.g., Tensorflow, Pytorch, MXNet)</li><li><strong>Applications!</strong> (e.g. vision, speech, NLP, imaging, physics, mathematics finance)</li></ul><h3 id="DL-leads-to-many-things-…"><a href="#DL-leads-to-many-things-…" class="headerlink" title="DL leads to many things …"></a>DL leads to many things …</h3><blockquote><p>Oxford Dictionary </br><br>Revolution: a great change in conditions, ways of working, beliefs, etc. that affects large numbers of people.</p></blockquote><h3 id="Academic-breakthroughs"><a href="#Academic-breakthroughs" class="headerlink" title="Academic breakthroughs"></a>Academic breakthroughs</h3><ul><li>increasing successful rate in image classification (2012)</li><li>increasing successful rate in speech recognition (2012)</li><li>Go game (2017)</li><li>image generation</li></ul><p><img src="slide5.png" alt="slide5"></p><h2 id="Commercial-breakthroughs"><a href="#Commercial-breakthroughs" class="headerlink" title="Commercial breakthroughs"></a>Commercial breakthroughs</h2><ul><li>self-driving vehicles</li><li>smart-home devices</li><li>healthcare</li><li>robotics</li></ul><p>Paper are produced at an <strong>overwhelming</strong> rate. </br><br>Note: <a href="arvis.org">arvis</a> (where people post preprint papers)</p><h1 id="Why-first-principles"><a href="#Why-first-principles" class="headerlink" title="Why first principles?"></a>Why first principles?</h1><ul><li>Tuning and optimizing for a task require basic intuitions</li><li>Historial lesson: model structures in data</li><li>Current challenge: move toward trustworthiness</li><li>Future world: navigate uncertainties</li></ul><h2 id="Structures-are-crucial"><a href="#Structures-are-crucial" class="headerlink" title="Structures are crucial"></a>Structures are crucial</h2><p><img src="slide14.png" alt="slide14"></p><h2 id="Toward-trustworthy-AI"><a href="#Toward-trustworthy-AI" class="headerlink" title="Toward trustworthy AI"></a>Toward trustworthy AI</h2><ul><li>we need to know first principles in order to improve and understand</li><li>Trustworthiness: <ul><li>robustness</li><li>fairness (<em>what if data is primarily from certain population group</em>)</li><li>explainability (<em>what if we make human-level robot but we don’t understand how to make decision</em>)</li><li>transparency</li></ul></li></ul><h2 id="Future-uncertainties"><a href="#Future-uncertainties" class="headerlink" title="Future uncertainties"></a>Future uncertainties</h2><ul><li>New types of data (e.g. 6-D tensors)</li><li>New hardware (e.g. better GPU memory)</li><li>New model pipelines (e.g. network of networks, differential programming)</li><li>New applications</li><li>New techniques replacing DL</li></ul><hr><div style="text-align: right"> To be continued... </div>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;Acknowledgement: This course is being offered by &lt;a href=&quot;https://www.sunju.org/&quot;&gt;Prof. Ju Sun&lt;/a&gt; at the University of Minn</summary>
+      
+    
+    
+    
+    
+    <category term="Deep Learning" scheme="https://gaoxiangluo.github.io/tags/Deep-Learning/"/>
+    
+    <category term="Neural Network" scheme="https://gaoxiangluo.github.io/tags/Neural-Network/"/>
+    
+  </entry>
   
   <entry>
     <title>For UMN: How to setup remote enviroment with CSE lab machine via VSCode</title>
