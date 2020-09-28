@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="VSCode Setup with CSE Lab Machines on Your Own ComputerDemo(P.S. The OCaml code above is supposed to be wrong) Why should you consider this setup? feel like working on CSE Lab Machines literally don’t">
+    <meta name="description" content="VSCode Setup with CSE Lab Machines on Your Own Computer Demo  (P.S. The OCaml code above is supposed to be wrong) Why should you consider this setup?  feel like working on CSE Lab Machines literally d">
 <meta property="og:type" content="article">
 <meta property="og:title" content="For UMN: How to setup remote enviroment with CSE lab machine via VSCode">
 <meta property="og:url" content="https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/index.html">
 <meta property="og:site_name" content="Leon">
-<meta property="og:description" content="VSCode Setup with CSE Lab Machines on Your Own ComputerDemo(P.S. The OCaml code above is supposed to be wrong) Why should you consider this setup? feel like working on CSE Lab Machines literally don’t">
+<meta property="og:description" content="VSCode Setup with CSE Lab Machines on Your Own Computer Demo  (P.S. The OCaml code above is supposed to be wrong) Why should you consider this setup?  feel like working on CSE Lab Machines literally d">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/Demo.png">
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/step1.png">
@@ -61,7 +61,11 @@
     <!-- rss -->
     
     
-<meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Leon" type="application/atom+xml">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Leon" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-duotone-dark.css" type="text/css"></head>
 
 <body class="max-width mx-auto px3 ltr">
@@ -119,7 +123,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#VSCode-Setup-with-CSE-Lab-Machines-on-Your-Own-Computer"><span class="toc-number">1.</span> <span class="toc-text">VSCode Setup with CSE Lab Machines on Your Own Computer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo"><span class="toc-number">1.1.</span> <span class="toc-text">Demo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Why-should-you-consider-this-setup"><span class="toc-number">1.1.1.</span> <span class="toc-text">Why should you consider this setup?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tutorial"><span class="toc-number">1.2.</span> <span class="toc-text">Tutorial</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">VSCode Setup with CSE Lab Machines on Your Own Computer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo"><span class="toc-number">1.1.</span> <span class="toc-text">Demo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Why-should-you-consider-this-setup"><span class="toc-number">1.1.1.</span> <span class="toc-text">Why should you consider this setup?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tutorial"><span class="toc-number">1.2.</span> <span class="toc-text">Tutorial</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -163,8 +167,12 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h1 id="VSCode-Setup-with-CSE-Lab-Machines-on-Your-Own-Computer"><a href="#VSCode-Setup-with-CSE-Lab-Machines-on-Your-Own-Computer" class="headerlink" title="VSCode Setup with CSE Lab Machines on Your Own Computer"></a>VSCode Setup with CSE Lab Machines on Your Own Computer</h1><h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><p><img src="Demo.png" alt="Demo"><br>(P.S. The OCaml code above is supposed to be wrong)</p>
-<h3 id="Why-should-you-consider-this-setup"><a href="#Why-should-you-consider-this-setup" class="headerlink" title="Why should you consider this setup?"></a>Why should you consider this setup?</h3><ul>
+    <h1>VSCode Setup with CSE Lab Machines on Your Own Computer</h1>
+<h2 id="Demo">Demo</h2>
+<p><img src="Demo.png" alt="Demo"><br>
+(P.S. The OCaml code above is supposed to be wrong)</p>
+<h3 id="Why-should-you-consider-this-setup">Why should you consider this setup?</h3>
+<ul>
 <li>feel like working on CSE Lab Machines literally</li>
 <li>don’t have to install <code>OCaml</code> on your computer because you’re using lab <code>OCaml</code>;</li>
 <li>graphical user interface with <code>OCaml</code> Syntax Highlighting</li>
@@ -172,16 +180,23 @@
 <li>can be used on <code>Linux</code>, <code>MacOS</code> and <code>Windows</code> because they all have <code>VSCode</code></li>
 <li>file transfer: drag you local file into CSE lab machine</li>
 </ul>
-<h2 id="Tutorial"><a href="#Tutorial" class="headerlink" title="Tutorial"></a>Tutorial</h2><p>This tutorial can help you to set up your remote enviroment graphically with CSE lab machines on your own computer.</p>
+<h2 id="Tutorial">Tutorial</h2>
+<p>This tutorial can help you to set up your remote enviroment graphically with CSE lab machines on your own computer.</p>
 <hr>
 <ol>
-<li><p>Open <code>VSCode</code>, go to extension on the left nevigation bar and search <code>ssh</code><br><img src="step1.png" alt="step1"></p>
+<li>
+<p>Open <code>VSCode</code>, go to extension on the left nevigation bar and search <code>ssh</code><br>
+<img src="step1.png" alt="step1"></p>
 </li>
-<li><p>Install <code>REMOTE - SSH</code>, click <code>SSH extension</code> icon on the left nevigation bar and click <code>connect</code><br><img src="step2.png" alt="step2"></p>
+<li>
+<p>Install <code>REMOTE - SSH</code>, click <code>SSH extension</code> icon on the left nevigation bar and click <code>connect</code><br>
+<img src="step2.png" alt="step2"></p>
 </li>
-<li><p>On the pop-up command window, type in <code>ssh &lt;x500&gt;@&lt;cse lab machines&gt; -A</code>.<br>For instance, I will use:</p>
+<li>
+<p>On the pop-up command window, type in <code>ssh &lt;x500&gt;@&lt;cse lab machines&gt; -A</code>.<br>
+For instance, I will use:</p>
 <ul>
-<li><code>ssh luo00042@atlas.cselabs.umn.edu -A</code> ATLAS is a server machine which has 256G RAM! But sometimes if a student is running heavy-duty task on ATLAS, you may want to use another machine. </li>
+<li><code>ssh luo00042@atlas.cselabs.umn.edu -A</code> ATLAS is a server machine which has 256G RAM! But sometimes if a student is running heavy-duty task on ATLAS, you may want to use another machine.</li>
 <li><code>ssh luo00042@csel-kh4250-03.cselabs.umn.edu -A</code></li>
 </ul>
 </li>
@@ -190,16 +205,25 @@
 <p><strong>Note:</strong> A list of CSE lab UNIX machines that you can remotely work on, you can find them <a target="_blank" rel="noopener" href="https://cseit.umn.edu/computer-classrooms/cse-labs-unix-machine-listings">here</a>.</p>
 <p><strong>Remember:</strong> Replace the <code>x500</code> with yours, not mine; and make sure to include the <code>-A</code> flag, otherwise you have to use VPN or be under university wifi to connect.</p>
 <ol start="4">
-<li>Click to update ssh configuration so you don’t have to type the long ssh command every time.<br><img src="step4.png" alt="step4"></li>
-</ol>
-<ol start="5">
-<li><p>When it’s done, there will be a SSH target on the left. Click <code>connect</code><br><img src="step5.png" alt="step5"></p>
+<li>
+<p>Click to update ssh configuration so you don’t have to type the long ssh command every time.<br>
+<img src="step4.png" alt="step4"></p>
 </li>
-<li><p>A new window will pop up and there will be prompt that you need to enter your <code>x500</code> password.<br><img src="step6.png" alt="step6"></p>
+<li>
+<p>When it’s done, there will be a SSH target on the left. Click <code>connect</code><br>
+<img src="step5.png" alt="step5"></p>
 </li>
-<li><p>You are in CSE lab machine via SSH connection! Click <code>Open Folder</code>. Doesn’t it look familiar to you? That’s your CSE lab folder! Navigate to your own repo and click <code>OK</code><br><img src="step7.png" alt="step7"></p>
+<li>
+<p>A new window will pop up and there will be prompt that you need to enter your <code>x500</code> password.<br>
+<img src="step6.png" alt="step6"></p>
 </li>
-<li><p>That’s it! You can open a terminal within <code>VSCode</code>, and it will be under SSH connection as well!<br><img src="step8.png" alt="step8"></p>
+<li>
+<p>You are in CSE lab machine via SSH connection! Click <code>Open Folder</code>. Doesn’t it look familiar to you? That’s your CSE lab folder! Navigate to your own repo and click <code>OK</code><br>
+<img src="step7.png" alt="step7"></p>
+</li>
+<li>
+<p>That’s it! You can open a terminal within <code>VSCode</code>, and it will be under SSH connection as well!<br>
+<img src="step8.png" alt="step8"></p>
 </li>
 </ol>
 <p>Now you can edit your code <strong>on lab machine</strong>, save your code <strong>on lab machine</strong>, and test your code with terminal <strong>on lab machine</strong>!</p>
@@ -255,7 +279,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#VSCode-Setup-with-CSE-Lab-Machines-on-Your-Own-Computer"><span class="toc-number">1.</span> <span class="toc-text">VSCode Setup with CSE Lab Machines on Your Own Computer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo"><span class="toc-number">1.1.</span> <span class="toc-text">Demo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Why-should-you-consider-this-setup"><span class="toc-number">1.1.1.</span> <span class="toc-text">Why should you consider this setup?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tutorial"><span class="toc-number">1.2.</span> <span class="toc-text">Tutorial</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">VSCode Setup with CSE Lab Machines on Your Own Computer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo"><span class="toc-number">1.1.</span> <span class="toc-text">Demo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Why-should-you-consider-this-setup"><span class="toc-number">1.1.1.</span> <span class="toc-text">Why should you consider this setup?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tutorial"><span class="toc-number">1.2.</span> <span class="toc-text">Tutorial</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -322,7 +346,7 @@
     </span> -->
   </div>
   <div class="Word-count">
-    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">3.2k</span>
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">3.5k</span>
   </div>
 </footer>
 

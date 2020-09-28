@@ -6,17 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Acknowledgement: This course is being offered by Prof. Ju Sun at the University of Minnesota in Fall 2020. Pictures of slides are from the course.   Why Deep LearningWhat is Deep Learning (DL)?DL is">
+    <meta name="description" content="Acknowledgement: This course (CSCI 8980) is being offered by Prof. Ju Sun at the University of Minnesota in Fall 2020. Pictures of slides are from the course.  Why Deep Learning What is Deep Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Think DL: overview">
 <meta property="og:url" content="https://gaoxiangluo.github.io/2020/09/20/Think-DL-overview/index.html">
 <meta property="og:site_name" content="Leon">
-<meta property="og:description" content="Acknowledgement: This course is being offered by Prof. Ju Sun at the University of Minnesota in Fall 2020. Pictures of slides are from the course.   Why Deep LearningWhat is Deep Learning (DL)?DL is">
+<meta property="og:description" content="Acknowledgement: This course (CSCI 8980) is being offered by Prof. Ju Sun at the University of Minnesota in Fall 2020. Pictures of slides are from the course.  Why Deep Learning What is Deep Learning">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/20/Think-DL-overview/slide5.png">
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/20/Think-DL-overview/slide14.png">
 <meta property="article:published_time" content="2020-09-21T03:23:39.000Z">
-<meta property="article:modified_time" content="2020-09-21T03:39:50.527Z">
+<meta property="article:modified_time" content="2020-09-28T02:37:04.746Z">
 <meta property="article:author" content="Gaoxiang Luo">
 <meta property="article:tag" content="Deep Learning">
 <meta property="article:tag" content="Neural Network">
@@ -55,7 +55,11 @@
     <!-- rss -->
     
     
-<meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Leon" type="application/atom+xml">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Leon" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-duotone-dark.css" type="text/css"></head>
 
 <body class="max-width mx-auto px3 ltr">
@@ -113,7 +117,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Deep-Learning"><span class="toc-number">1.</span> <span class="toc-text">Why Deep Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-Deep-Learning-DL"><span class="toc-number">1.1.</span> <span class="toc-text">What is Deep Learning (DL)?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DL-is-about%E2%80%A6"><span class="toc-number">1.1.1.</span> <span class="toc-text">DL is about…</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DL-leads-to-many-things-%E2%80%A6"><span class="toc-number">1.1.2.</span> <span class="toc-text">DL leads to many things …</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Academic-breakthroughs"><span class="toc-number">1.1.3.</span> <span class="toc-text">Academic breakthroughs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Commercial-breakthroughs"><span class="toc-number">1.2.</span> <span class="toc-text">Commercial breakthroughs</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-first-principles"><span class="toc-number">2.</span> <span class="toc-text">Why first principles?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Structures-are-crucial"><span class="toc-number">2.1.</span> <span class="toc-text">Structures are crucial</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Toward-trustworthy-AI"><span class="toc-number">2.2.</span> <span class="toc-text">Toward trustworthy AI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Future-uncertainties"><span class="toc-number">2.3.</span> <span class="toc-text">Future uncertainties</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Why Deep Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-Deep-Learning-DL"><span class="toc-number">1.1.</span> <span class="toc-text">What is Deep Learning (DL)?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DL-is-about%E2%80%A6"><span class="toc-number">1.1.1.</span> <span class="toc-text">DL is about…</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DL-leads-to-many-things-%E2%80%A6"><span class="toc-number">1.1.2.</span> <span class="toc-text">DL leads to many things …</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Academic-breakthroughs"><span class="toc-number">1.1.3.</span> <span class="toc-text">Academic breakthroughs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Commercial-breakthroughs"><span class="toc-number">1.2.</span> <span class="toc-text">Commercial breakthroughs</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Why first principles?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Structures-are-crucial"><span class="toc-number">2.1.</span> <span class="toc-text">Structures are crucial</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Toward-trustworthy-AI"><span class="toc-number">2.2.</span> <span class="toc-text">Toward trustworthy AI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Future-uncertainties"><span class="toc-number">2.3.</span> <span class="toc-text">Future uncertainties</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -158,9 +162,12 @@
 
   <div class="content" itemprop="articleBody">
     <blockquote>
-<p>Acknowledgement: This course is being offered by <a target="_blank" rel="noopener" href="https://sunju.org/">Prof. Ju Sun</a> at the University of Minnesota in Fall 2020. Pictures of slides are from the course. </p>
+<p>Acknowledgement: This course (CSCI 8980) is being offered by <a target="_blank" rel="noopener" href="https://sunju.org/">Prof. Ju Sun</a> at the University of Minnesota in Fall 2020. Pictures of slides are from the course.</p>
 </blockquote>
-<h1 id="Why-Deep-Learning"><a href="#Why-Deep-Learning" class="headerlink" title="Why Deep Learning"></a>Why Deep Learning</h1><h2 id="What-is-Deep-Learning-DL"><a href="#What-is-Deep-Learning-DL" class="headerlink" title="What is Deep Learning (DL)?"></a>What is Deep Learning (DL)?</h2><h3 id="DL-is-about…"><a href="#DL-is-about…" class="headerlink" title="DL is about…"></a>DL is about…</h3><ul>
+<h1>Why Deep Learning</h1>
+<h2 id="What-is-Deep-Learning-DL">What is Deep Learning (DL)?</h2>
+<h3 id="DL-is-about…">DL is about…</h3>
+<ul>
 <li>Deep Neural Network (DNNs)</li>
 <li><strong>Data</strong> or training DNNs (e.g. images, videos, text sequences)</li>
 <li><strong>Methods</strong> for training DNNs (e.g. AdaGrad, ADAM, RMSProp, Dropout)</li>
@@ -168,33 +175,42 @@
 <li><strong>Software</strong> platforms for training DNNs (e.g., Tensorflow, Pytorch, MXNet)</li>
 <li><strong>Applications!</strong> (e.g. vision, speech, NLP, imaging, physics, mathematics finance)</li>
 </ul>
-<h3 id="DL-leads-to-many-things-…"><a href="#DL-leads-to-many-things-…" class="headerlink" title="DL leads to many things …"></a>DL leads to many things …</h3><blockquote>
-<p>Oxford Dictionary </br><br>Revolution: a great change in conditions, ways of working, beliefs, etc. that affects large numbers of people.</p>
+<h3 id="DL-leads-to-many-things-…">DL leads to many things …</h3>
+<blockquote>
+<p>Oxford Dictionary </br><br>
+Revolution: a great change in conditions, ways of working, beliefs, etc. that affects large numbers of people.</p>
 </blockquote>
-<h3 id="Academic-breakthroughs"><a href="#Academic-breakthroughs" class="headerlink" title="Academic breakthroughs"></a>Academic breakthroughs</h3><ul>
+<h3 id="Academic-breakthroughs">Academic breakthroughs</h3>
+<ul>
 <li>increasing successful rate in image classification (2012)</li>
 <li>increasing successful rate in speech recognition (2012)</li>
 <li>Go game (2017)</li>
 <li>image generation</li>
 </ul>
 <p><img src="slide5.png" alt="slide5"></p>
-<h2 id="Commercial-breakthroughs"><a href="#Commercial-breakthroughs" class="headerlink" title="Commercial breakthroughs"></a>Commercial breakthroughs</h2><ul>
+<h2 id="Commercial-breakthroughs">Commercial breakthroughs</h2>
+<ul>
 <li>self-driving vehicles</li>
 <li>smart-home devices</li>
 <li>healthcare</li>
 <li>robotics</li>
 </ul>
-<p>Paper are produced at an <strong>overwhelming</strong> rate. </br><br>Note: <a href="arvis.org">arvis</a> (where people post preprint papers)</p>
-<h1 id="Why-first-principles"><a href="#Why-first-principles" class="headerlink" title="Why first principles?"></a>Why first principles?</h1><ul>
+<p>Paper are produced at an <strong>overwhelming</strong> rate. </br><br>
+Note: <a href="arvis.org">arvis</a> (where people post preprint papers)</p>
+<h1>Why first principles?</h1>
+<ul>
 <li>Tuning and optimizing for a task require basic intuitions</li>
 <li>Historial lesson: model structures in data</li>
 <li>Current challenge: move toward trustworthiness</li>
 <li>Future world: navigate uncertainties</li>
 </ul>
-<h2 id="Structures-are-crucial"><a href="#Structures-are-crucial" class="headerlink" title="Structures are crucial"></a>Structures are crucial</h2><p><img src="slide14.png" alt="slide14"></p>
-<h2 id="Toward-trustworthy-AI"><a href="#Toward-trustworthy-AI" class="headerlink" title="Toward trustworthy AI"></a>Toward trustworthy AI</h2><ul>
+<h2 id="Structures-are-crucial">Structures are crucial</h2>
+<p><img src="slide14.png" alt="slide14"></p>
+<h2 id="Toward-trustworthy-AI">Toward trustworthy AI</h2>
+<ul>
 <li>we need to know first principles in order to improve and understand</li>
-<li>Trustworthiness: <ul>
+<li>Trustworthiness:
+<ul>
 <li>robustness</li>
 <li>fairness (<em>what if data is primarily from certain population group</em>)</li>
 <li>explainability (<em>what if we make human-level robot but we don’t understand how to make decision</em>)</li>
@@ -202,7 +218,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="Future-uncertainties"><a href="#Future-uncertainties" class="headerlink" title="Future uncertainties"></a>Future uncertainties</h2><ul>
+<h2 id="Future-uncertainties">Future uncertainties</h2>
+<ul>
 <li>New types of data (e.g. 6-D tensors)</li>
 <li>New hardware (e.g. better GPU memory)</li>
 <li>New model pipelines (e.g. network of networks, differential programming)</li>
@@ -261,7 +278,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Deep-Learning"><span class="toc-number">1.</span> <span class="toc-text">Why Deep Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-Deep-Learning-DL"><span class="toc-number">1.1.</span> <span class="toc-text">What is Deep Learning (DL)?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DL-is-about%E2%80%A6"><span class="toc-number">1.1.1.</span> <span class="toc-text">DL is about…</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DL-leads-to-many-things-%E2%80%A6"><span class="toc-number">1.1.2.</span> <span class="toc-text">DL leads to many things …</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Academic-breakthroughs"><span class="toc-number">1.1.3.</span> <span class="toc-text">Academic breakthroughs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Commercial-breakthroughs"><span class="toc-number">1.2.</span> <span class="toc-text">Commercial breakthroughs</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-first-principles"><span class="toc-number">2.</span> <span class="toc-text">Why first principles?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Structures-are-crucial"><span class="toc-number">2.1.</span> <span class="toc-text">Structures are crucial</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Toward-trustworthy-AI"><span class="toc-number">2.2.</span> <span class="toc-text">Toward trustworthy AI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Future-uncertainties"><span class="toc-number">2.3.</span> <span class="toc-text">Future uncertainties</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Why Deep Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-Deep-Learning-DL"><span class="toc-number">1.1.</span> <span class="toc-text">What is Deep Learning (DL)?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DL-is-about%E2%80%A6"><span class="toc-number">1.1.1.</span> <span class="toc-text">DL is about…</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DL-leads-to-many-things-%E2%80%A6"><span class="toc-number">1.1.2.</span> <span class="toc-text">DL leads to many things …</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Academic-breakthroughs"><span class="toc-number">1.1.3.</span> <span class="toc-text">Academic breakthroughs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Commercial-breakthroughs"><span class="toc-number">1.2.</span> <span class="toc-text">Commercial breakthroughs</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Why first principles?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Structures-are-crucial"><span class="toc-number">2.1.</span> <span class="toc-text">Structures are crucial</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Toward-trustworthy-AI"><span class="toc-number">2.2.</span> <span class="toc-text">Toward trustworthy AI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Future-uncertainties"><span class="toc-number">2.3.</span> <span class="toc-text">Future uncertainties</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -328,7 +345,7 @@
     </span> -->
   </div>
   <div class="Word-count">
-    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">3.2k</span>
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">3.5k</span>
   </div>
 </footer>
 
