@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="K Nearest Neighbor (KNN) Classfiers (Overview) Basic idea: If it walks like a duck, quacks like a duck, then it’s probably a duck. Require three things:  The set of labeled records Distance metric to">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers">
+<meta property="og:url" content="https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/index.html">
+<meta property="og:site_name" content="Leon">
+<meta property="og:description" content="K Nearest Neighbor (KNN) Classfiers (Overview) Basic idea: If it walks like a duck, quacks like a duck, then it’s probably a duck. Require three things:  The set of labeled records Distance metric to">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://math.now.sh?inline=k">
+<meta property="og:image" content="https://math.now.sh?from=d%28x%2Cy%29%20%3D%20%5Csqrt%7B%5Csum_i(x_i-y_i)%5E2%7D%0A">
+<meta property="og:image" content="https://math.now.sh?inline=w%20%3D%20%5Cfrac%7B1%7D%7Bd%5E2%7D">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/ex1.png">
+<meta property="og:image" content="https://math.now.sh?inline=k">
+<meta property="og:image" content="https://math.now.sh?inline=k">
+<meta property="og:image" content="https://math.now.sh?inline=%5Crightarrow">
+<meta property="og:image" content="https://math.now.sh?inline=y">
+<meta property="og:image" content="https://math.now.sh?inline=y">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cbigcap">
+<meta property="og:image" content="https://math.now.sh?inline=%5Crightarrow">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cbigcap">
+<meta property="og:image" content="https://math.now.sh?inline=%5Crightarrow">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/figure1.png">
+<meta property="og:image" content="https://math.now.sh?inline=R">
+<meta property="og:image" content="https://math.now.sh?inline=x">
+<meta property="og:image" content="https://math.now.sh?inline=R1">
+<meta property="og:image" content="https://math.now.sh?inline=R2">
+<meta property="og:image" content="https://math.now.sh?inline=R1">
+<meta property="og:image" content="https://math.now.sh?from=%5Cfrac%7B%5Ctext%7Brecords%20that%20satisfy%20the%20antecedent%20of%20a%20rule%7D%7D%7B%5Ctext%7Btotal%20records%7D%7D%0A">
+<meta property="og:image" content="https://math.now.sh?from=%5Cfrac%7B%5Ctext%7Brecords%20that%20satisfy%20the%20antecedent%20that%20also%20satisfy%20the%20consequent%20of%20a%20rule%7D%7D%7B%5Ctext%7Brecords%20that%20satisfy%20the%20antecedent%20of%20a%20rule%7D%7D%0A">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/figure2.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/figure3.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/figure4.png">
+<meta property="og:image" content="https://math.now.sh?inline=R_0%3A%20%5C%7B%5C%7D%20%5Crightarrow%20class%20%5Ctext%7B%28initial%20rule%29%7D">
+<meta property="og:image" content="https://math.now.sh?inline=R_1%3A%20%5C%7BA%5C%7D%20%5Crightarrow%20class%20%5Ctext%7B%28rule%20after%20adding%20conject%29%7D">
+<meta property="og:image" content="https://math.now.sh?from=Gain%28R_0%2CR_1%29%20%3D%20p_1%20%5Ctimes%20%5B%20log_2(%5Cfrac%7Bp_1%7D%7Bp_1%2Bn_1%7D)-%20log_2(%5Cfrac%7Bp_0%7D%7Bp_0%2Bn_0%7D)%20%5D%0A">
+<meta property="og:image" content="https://math.now.sh?inline=p_0">
+<meta property="og:image" content="https://math.now.sh?inline=n_0">
+<meta property="og:image" content="https://math.now.sh?inline=p_1">
+<meta property="og:image" content="https://math.now.sh?inline=n_1">
+<meta property="og:image" content="https://math.now.sh?inline=v%20%3D%20%5Cfrac%7Bp-n%7D%7Bp%2Bn%7D">
+<meta property="og:image" content="https://math.now.sh?inline=p">
+<meta property="og:image" content="https://math.now.sh?inline=n">
+<meta property="og:image" content="https://math.now.sh?inline=v">
+<meta property="article:published_time" content="2020-10-03T05:17:12.000Z">
+<meta property="article:modified_time" content="2020-10-04T05:22:16.662Z">
+<meta property="article:author" content="Gaoxiang Luo">
+<meta property="article:tag" content="Data Mining">
+<meta property="article:tag" content="K Nearest Neighbor">
+<meta property="article:tag" content="Classifier">
+<meta property="article:tag" content="Rule-Based Classifier">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://math.now.sh?inline=k">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Leon" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/10/01/Math-that-you-need-to-know-for-Deep-Neural-Networks/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/&text=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/&title=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/&is_video=false&description=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers&body=Check out this article: https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/&title=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/&title=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/&title=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/&title=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/&name=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/&t=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">K Nearest Neighbor (KNN) Classfiers (Overview)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-value-of-k-matters"><span class="toc-number">1.1.</span> <span class="toc-text">The value of k matters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Choice-of-promixity-measure-matters"><span class="toc-number">1.2.</span> <span class="toc-text">Choice of promixity measure matters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-preprocessing-is-often-required"><span class="toc-number">1.3.</span> <span class="toc-text">Data preprocessing is often required</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Issues-of-missing-values-in-training-and-test-sets"><span class="toc-number">1.4.</span> <span class="toc-text">Issues of missing values in training and test sets</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Issues-of-irrelevant-and-redundant-attributes"><span class="toc-number">1.5.</span> <span class="toc-text">Issues of irrelevant and redundant attributes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Improving-KNN-Efficiency"><span class="toc-number">1.6.</span> <span class="toc-text">Improving KNN Efficiency</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Rule-Based Classifiers</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Rule-Coverage-and-Accuracy"><span class="toc-number">2.1.</span> <span class="toc-text">Rule Coverage and Accuracy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Characteristics-of-Rule-Sets-Strategy-1"><span class="toc-number">2.2.</span> <span class="toc-text">Characteristics of Rule Sets: Strategy 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What-if-rules-are-not-mutually-exclusive"><span class="toc-number">2.3.</span> <span class="toc-text">What if rules are not mutually exclusive?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Direct-method-to-build-classification-rules"><span class="toc-number">2.4.</span> <span class="toc-text">Direct method to build classification rules</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rule-evaluation"><span class="toc-number">2.5.</span> <span class="toc-text">Rule evaluation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Direct-Method-RIPPER"><span class="toc-number">2.6.</span> <span class="toc-text">Direct Method: RIPPER</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Advantages-of-Rule-Based-Classifiers"><span class="toc-number">2.7.</span> <span class="toc-text">Advantages of Rule-Based Classifiers</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Leon</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-10-03T05:17:12.000Z" itemprop="datePublished">2020-10-03</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Classifier/" rel="tag">Classifier</a>, <a class="tag-link-link" href="/tags/Data-Mining/" rel="tag">Data Mining</a>, <a class="tag-link-link" href="/tags/K-Nearest-Neighbor/" rel="tag">K Nearest Neighbor</a>, <a class="tag-link-link" href="/tags/Rule-Based-Classifier/" rel="tag">Rule-Based Classifier</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1>K Nearest Neighbor (KNN) Classfiers (Overview)</h1>
+<p>Basic idea: If it walks like a duck, quacks like a duck, then it’s probably a duck.</p>
+<p>Require three things:</p>
+<ul>
+<li>The set of labeled records</li>
+<li>Distance metric to compute distance between records</li>
+<li>The value of <img src="https://math.now.sh?inline=k" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, the number of nearest neighbors to retrieve</li>
+</ul>
+<p>To classify an unknown record:</p>
+<ul>
+<li>Compute distance to other training records</li>
+<li>identify k nearest neighbors</li>
+<li>Use class labels of nearest neighbors to determine the class label of unknown record</li>
+</ul>
+<p>Sometimes we call KNN the laziest because it doesn’t do anything until we have to make a decision. In other words, there is not much happening during the training period.</p>
+<p>To recall: to compute proximity between two points, we need certain distance metric.<br>
+For example: Euclidean distance</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=d%28x%2Cy%29%20%3D%20%5Csqrt%7B%5Csum_i(x_i-y_i)%5E2%7D%0A" /></p><p>Next, determine the class from nearest neighbor list</p>
+<ul>
+<li>Take the majority vote of class labels among the KNNs</li>
+<li>Weight the vote accoridng to distance. E.g. weight factor <img src="https://math.now.sh?inline=w%20%3D%20%5Cfrac%7B1%7D%7Bd%5E2%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+</ul>
+<h2 id="The-value-of-k-matters">The value of k matters</h2>
+<ul>
+<li>If k is too small, sensitive to noice points</li>
+<li>If k is too large, neighborhood may include points from other classes</li>
+</ul>
+<h2 id="Choice-of-promixity-measure-matters">Choice of promixity measure matters</h2>
+<p>For documents, cosine is better than correlation or Euclidean. E.g: in the image below, they have the same Euclidean distance but different cosine similarity.</p>
+<p><img src="ex1.png" alt="ex1"></p>
+<h2 id="Data-preprocessing-is-often-required">Data preprocessing is often required</h2>
+<p>Arributes may have to be scaled to prevent distance measures from being dominated by one of the attributes. In addition, time series are often standardized to have a mean of 0 and a standard deviation of 1.</p>
+<p>Is there a notion of complexity in KNN? Yes, the complexity may depend on the choice of <img src="https://math.now.sh?inline=k" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. If the choice of <img src="https://math.now.sh?inline=k" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is 1, then we will get many arbitrary shapes that include a single record respectively. Any classifiers we learn, we shall think about its complexity. Decision tree’s complexity can be the depth of the tree, or whether the tree is a binary tree.</p>
+<h2 id="Issues-of-missing-values-in-training-and-test-sets">Issues of missing values in training and test sets</h2>
+<ul>
+<li>Proximity computations normally require the presence of all attributes</li>
+<li>Some appoaches use the subset of attributes present in two instances</li>
+</ul>
+<h2 id="Issues-of-irrelevant-and-redundant-attributes">Issues of irrelevant and redundant attributes</h2>
+<ul>
+<li>Irrelevant attributes add noise to the proximity measure</li>
+<li>Redundant attributes bias the proximity measure towards certain attributes</li>
+<li>Can use variable selection or dimensionality reduction to address irrelevant and redundant attributes</li>
+</ul>
+<h2 id="Improving-KNN-Efficiency">Improving KNN Efficiency</h2>
+<ul>
+<li>Avoid having to compute distance to all objects in the training set
+<ul>
+<li>Multi-dimensional access methods (k-d trees)</li>
+<li>Fast approximate similarity search</li>
+<li>Locality Sensetive Hashing (LSH)</li>
+</ul>
+</li>
+<li>Condensing
+<ul>
+<li>Determine a smaller set of objects that give the same performance</li>
+</ul>
+</li>
+<li>Editing
+<ul>
+<li>Remove objects to improve efficiency</li>
+</ul>
+</li>
+</ul>
+<h1>Rule-Based Classifiers</h1>
+<p>Rule-based classifier: classify records by using a collection of “if…then…” rules.</p>
+<p>Rule: (Condition) <img src="https://math.now.sh?inline=%5Crightarrow" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> <img src="https://math.now.sh?inline=y" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></p>
+<ul>
+<li>
+<p>Where</p>
+<ul>
+<li>Condition is a conjection of tests on attributes</li>
+<li><img src="https://math.now.sh?inline=y" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the class label</li>
+</ul>
+</li>
+<li>
+<p>Exmaples of classification rules</p>
+<ul>
+<li>(Blood Type=Warm) <img src="https://math.now.sh?inline=%5Cbigcap" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> (Lay Eggs=Yes) <img src="https://math.now.sh?inline=%5Crightarrow" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> Birds</li>
+<li>(Taxable Income&lt;50K) <img src="https://math.now.sh?inline=%5Cbigcap" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> (Refund=Yes) <img src="https://math.now.sh?inline=%5Crightarrow" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> Evade=No</li>
+</ul>
+</li>
+</ul>
+<p>An example:<br>
+<img src="figure1.png" alt="figure1"><br>
+A rule <img src="https://math.now.sh?inline=R" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> covers an instance <img src="https://math.now.sh?inline=x" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> if the attributes of the instance satisfy the condition of the rule, just like <img src="https://math.now.sh?inline=R1" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, <img src="https://math.now.sh?inline=R2" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, etc above. <img src="https://math.now.sh?inline=R1" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> covers a bird.</p>
+<h2 id="Rule-Coverage-and-Accuracy">Rule Coverage and Accuracy</h2>
+<ul>
+<li>Coverage of a rule</li>
+</ul>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=%5Cfrac%7B%5Ctext%7Brecords%20that%20satisfy%20the%20antecedent%20of%20a%20rule%7D%7D%7B%5Ctext%7Btotal%20records%7D%7D%0A" /></p><ul>
+<li>Accuracy of a rule</li>
+</ul>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=%5Cfrac%7B%5Ctext%7Brecords%20that%20satisfy%20the%20antecedent%20that%20also%20satisfy%20the%20consequent%20of%20a%20rule%7D%7D%7B%5Ctext%7Brecords%20that%20satisfy%20the%20antecedent%20of%20a%20rule%7D%7D%0A" /></p><h2 id="Characteristics-of-Rule-Sets-Strategy-1">Characteristics of Rule Sets: Strategy 1</h2>
+<ul>
+<li>
+<p>Mutually exclusive rules</p>
+<ul>
+<li>Classifier contains mutually exclusive rules if the rules are independent of each other</li>
+<li>Every record is covered by at most one rule</li>
+</ul>
+</li>
+<li>
+<p>Exhaustive Rules</p>
+<ul>
+<li>Classifier has exhaustive coverage if it accounts for every possible combination of attribute values</li>
+<li>Each record is covered by at least one rule</li>
+</ul>
+</li>
+</ul>
+<h2 id="What-if-rules-are-not-mutually-exclusive">What if rules are not mutually exclusive?</h2>
+<ul>
+<li>We can solve this by ordering rule sets. Rules are rank ordered according to their priority. When a test record is presented to the classifier, it will be assigned to the class label of the higheset ranked rule it has triggered. If none of the rules fired, it will be assigned to the default class. There are two ways to order rules:
+<ul>
+<li>Rule-based ordering: Individual rules are ranked based on their quality</li>
+<li>Class-based ordering: Rules that belong to the same class appear together</li>
+</ul>
+</li>
+</ul>
+<h2 id="Direct-method-to-build-classification-rules">Direct method to build classification rules</h2>
+<ol>
+<li>Start from an empty rule</li>
+<li>Grow a rule using the Learn-One-Rule function</li>
+<li>Remove training records covered by the rule</li>
+<li>Repeat Step 2 and 3 until stopping criterion is met</li>
+</ol>
+<p>Here is a visual example of the steps above:<br>
+<img src="figure2.png" alt="figure2"><br>
+<img src="figure3.png" alt="figure3"></p>
+<p>Here are two common strategies to grow the rule:<br>
+<img src="figure4.png" alt="figure4"></p>
+<h2 id="Rule-evaluation">Rule evaluation</h2>
+<ul>
+<li>Foil’s Information Gain (FOIL: First Order Inductive Learner – an early rule-based learning algorithm)</li>
+<li><img src="https://math.now.sh?inline=R_0%3A%20%5C%7B%5C%7D%20%5Crightarrow%20class%20%5Ctext%7B%28initial%20rule%29%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+<li><img src="https://math.now.sh?inline=R_1%3A%20%5C%7BA%5C%7D%20%5Crightarrow%20class%20%5Ctext%7B%28rule%20after%20adding%20conject%29%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+</ul>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=Gain%28R_0%2CR_1%29%20%3D%20p_1%20%5Ctimes%20%5B%20log_2(%5Cfrac%7Bp_1%7D%7Bp_1%2Bn_1%7D)-%20log_2(%5Cfrac%7Bp_0%7D%7Bp_0%2Bn_0%7D)%20%5D%0A" /></p><ul>
+<li><img src="https://math.now.sh?inline=p_0" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>: number of positive instances covered by R0</li>
+<li><img src="https://math.now.sh?inline=n_0" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>: number of negative instances covered by R0</li>
+<li><img src="https://math.now.sh?inline=p_1" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>: number of positive instances covered by R1</li>
+<li><img src="https://math.now.sh?inline=n_1" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>: number of negative instances covered by R1</li>
+</ul>
+<h2 id="Direct-Method-RIPPER">Direct Method: RIPPER</h2>
+<ul>
+<li>For 2-class problem, choose one of the classes as positive class, and the other as negative class.
+<ul>
+<li>Learn rules for postiive class</li>
+<li>Negative class will be default class</li>
+</ul>
+</li>
+<li>For multi-class problem
+<ul>
+<li>Order the classes according to increasing class prevelence (fraction of instances that belong to a particular class)</li>
+<li>Learning the rule set for smallest class first, treat the rest as negative class</li>
+<li>Repeat with next smallest class as positive class</li>
+</ul>
+</li>
+</ul>
+<p>How to grow a rule in RIPPER?</p>
+<ul>
+<li>Start from empty rule</li>
+<li>Add conjuncts as long as they improve FOIL’s information gain</li>
+<li>Stop when rule no longer covers negative examples</li>
+<li>Prune the rule immediately using incremental reduced error pruning</li>
+<li>Measure for pruning <img src="https://math.now.sh?inline=v%20%3D%20%5Cfrac%7Bp-n%7D%7Bp%2Bn%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>
+<ul>
+<li><img src="https://math.now.sh?inline=p" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>: number of positive examples covered by the rule in the validation set</li>
+<li><img src="https://math.now.sh?inline=n" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>: number of negative examples covered by the rule in the validation set</li>
+</ul>
+</li>
+<li>Pruning method: delete any final sequence of conditions that maximizes <img src="https://math.now.sh?inline=v" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+</ul>
+<p>Build a rule set:</p>
+<ul>
+<li>Use sequential covering algorithms
+<ul>
+<li>Find the best rule that covers the current set of positive examples</li>
+<li>Eliminate both positive and negative examples covered by the rule</li>
+</ul>
+</li>
+<li>Each time a rule is added to the rule set compute the new description length
+<ul>
+<li>Stop adding new rules when the new description length is a bit longer than the smallest description length obtained so far’</li>
+</ul>
+</li>
+</ul>
+<h2 id="Advantages-of-Rule-Based-Classifiers">Advantages of Rule-Based Classifiers</h2>
+<ul>
+<li>Has characterstics quite similiar to decision trees
+<ul>
+<li>As highly expressive as decision trees</li>
+<li>Easy to interpret (if rules are ordered by class)</li>
+<li>Performance comparable to decision trees
+<ul>
+<li>Can handle redundant and irrelevant attributes</li>
+<li>Variable interaction can cause issues (e.g., X-OR problem)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Better suited for handling imbalanced classes</li>
+<li>Harder to handle missing values in the test set</li>
+</ul>
+
+  </div>
+</article>
+
+
+  <!-- Gitalk start  -->
+
+  <!-- Link Gitalk files  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"/></script> 
+  <div id="gitalk-container"></div>     
+  <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+        // gitalk's main params
+        clientID: `3ce407f9c6ed6aaffdf8`,
+        clientSecret: `2c6bc0465d806a6dc4ee20c9b1a0043d7a6101fe`,
+        repo: `gaoxiangluo.github.io`,
+        owner: 'GaoxiangLuo',
+        admin: ['GaoxiangLuo'],
+        id: location.pathname.slice(0, 50),
+        distractionFreeMode: true,
+        enableHotKey: true,
+        language: `en`
+      });
+      gitalk.render('gitalk-container');
+  </script> 
+  <!-- Gitalk end -->
+
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">K Nearest Neighbor (KNN) Classfiers (Overview)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-value-of-k-matters"><span class="toc-number">1.1.</span> <span class="toc-text">The value of k matters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Choice-of-promixity-measure-matters"><span class="toc-number">1.2.</span> <span class="toc-text">Choice of promixity measure matters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-preprocessing-is-often-required"><span class="toc-number">1.3.</span> <span class="toc-text">Data preprocessing is often required</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Issues-of-missing-values-in-training-and-test-sets"><span class="toc-number">1.4.</span> <span class="toc-text">Issues of missing values in training and test sets</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Issues-of-irrelevant-and-redundant-attributes"><span class="toc-number">1.5.</span> <span class="toc-text">Issues of irrelevant and redundant attributes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Improving-KNN-Efficiency"><span class="toc-number">1.6.</span> <span class="toc-text">Improving KNN Efficiency</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Rule-Based Classifiers</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Rule-Coverage-and-Accuracy"><span class="toc-number">2.1.</span> <span class="toc-text">Rule Coverage and Accuracy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Characteristics-of-Rule-Sets-Strategy-1"><span class="toc-number">2.2.</span> <span class="toc-text">Characteristics of Rule Sets: Strategy 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What-if-rules-are-not-mutually-exclusive"><span class="toc-number">2.3.</span> <span class="toc-text">What if rules are not mutually exclusive?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Direct-method-to-build-classification-rules"><span class="toc-number">2.4.</span> <span class="toc-text">Direct method to build classification rules</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rule-evaluation"><span class="toc-number">2.5.</span> <span class="toc-text">Rule evaluation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Direct-Method-RIPPER"><span class="toc-number">2.6.</span> <span class="toc-text">Direct Method: RIPPER</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Advantages-of-Rule-Based-Classifiers"><span class="toc-number">2.7.</span> <span class="toc-text">Advantages of Rule-Based Classifiers</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/&text=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/&title=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/&is_video=false&description=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers&body=Check out this article: https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/&title=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/&title=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/&title=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/&title=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/&name=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/&t=Overview of K Nearest Neighbor Classifiers and Rule-Based Classifiers"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    Gaoxiang Luo
+  </div>
+  <!-- <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div> -->
+  <div class="busuanzi-count">
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span class="site-pv">
+      Page View <i class="fa fa-users"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+    <!-- <span class="site-uv">
+      Number of Visitors <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuansi_value_site_uv"></span>
+    </span> -->
+  </div>
+  <div class="Word-count">
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">8.5k</span>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-176745887-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":200,"height":400,"hOffset":5,"vOffset":-38},"mobile":{"show":false,"scale":0.2},"react":{"opacityDefault":0.8,"opacityOnHover":0.2},"log":false});</script></body>
+</html>
