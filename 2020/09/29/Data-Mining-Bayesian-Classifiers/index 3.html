@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Acknowledgement: This course (CSCI 5523) is being offered by Prof. Vipin Kumar at the University of Minnesota in Fall 2020.  Bayesian Classifiers Let’s recall what bayes theorem is from Intro to Stat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data Mining: Bayesian Classifiers">
+<meta property="og:url" content="https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/index.html">
+<meta property="og:site_name" content="Leon">
+<meta property="og:description" content="Acknowledgement: This course (CSCI 5523) is being offered by Prof. Vipin Kumar at the University of Minnesota in Fall 2020.  Bayesian Classifiers Let’s recall what bayes theorem is from Intro to Stat">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://math.now.sh?from=P%28Y%20%7C%20X%29%20%3D%20%5Cfrac%7BP(X%20%7C%20Y)P(Y)%7D%7BP(X)%7D%0A">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/figure1.png">
+<meta property="og:image" content="https://math.now.sh?inline=X_d">
+<meta property="og:image" content="https://math.now.sh?inline=Y_j">
+<meta property="og:image" content="https://math.now.sh?from=P%28X_1%2CX_2%2C...%2CX_d%7CY_j%29%3DP(X_1%7CY_j)P(X_2%7CY_j)...P(X_d%7CY_j)%0A">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/figure2.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/figure4.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/figure3.png">
+<meta property="og:image" content="https://math.now.sh?from=P%28X_i%7CY_j%29%3D%5Cfrac%7B1%7D%7B%5Csqrt%7B2%20%5Cpi%20%5Csigma_%7Bij%7D%5E2%7D%7De%5E-%5Cfrac%7B(X_i-%20%5Cmu_%7Bij%7D)%5E2%7D%7B2%20%5Csigma_%7Bij%7D%5E2%7D%0A">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/figure5.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/figure6.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/figure7.png">
+<meta property="og:image" content="https://math.now.sh?inline=P%28X_i%20%3D%20c%20%7C%20y%29%20%3D%20%5Cfrac%7Bn_c%7D%7Bn%7D">
+<meta property="og:image" content="https://math.now.sh?inline=n">
+<meta property="og:image" content="https://math.now.sh?inline=n_c">
+<meta property="og:image" content="https://math.now.sh?inline=X_i%20%3D%20c">
+<meta property="og:image" content="https://math.now.sh?inline=Y%20%3D%20y">
+<meta property="og:image" content="https://math.now.sh?inline=P%28X_i%20%3D%20c%20%7C%20y%29%20%3D%20%5Cfrac%7Bn_c%20%2B%201%7D%7Bn%20%2B%20v%7D">
+<meta property="og:image" content="https://math.now.sh?inline=v">
+<meta property="og:image" content="https://math.now.sh?inline=X_i">
+<meta property="og:image" content="https://math.now.sh?inline=P%28X_i%20%3D%20c%20%7C%20y%29%20%3D%20%5Cfrac%7Bn_c%20%2B%20mp%7D%7Bn%20%2B%20m%7D">
+<meta property="og:image" content="https://math.now.sh?inline=p">
+<meta property="og:image" content="https://math.now.sh?inline=P%28X_i%20%3D%20c%20%7C%20y%29">
+<meta property="og:image" content="https://math.now.sh?inline=m">
+<meta property="og:image" content="https://math.now.sh?inline=p">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/figure8.png">
+<meta property="og:image" content="https://math.now.sh?inline=x%3D5">
+<meta property="og:image" content="https://math.now.sh?inline=y">
+<meta property="article:published_time" content="2020-09-29T14:26:59.000Z">
+<meta property="article:modified_time" content="2020-10-02T06:39:55.862Z">
+<meta property="article:author" content="Gaoxiang Luo">
+<meta property="article:tag" content="Data Mining">
+<meta property="article:tag" content="Bayesian Classifier">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://math.now.sh?from=P%28Y%20%7C%20X%29%20%3D%20%5Cfrac%7BP(X%20%7C%20Y)P(Y)%7D%7BP(X)%7D%0A">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Data Mining: Bayesian Classifiers</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Leon" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/10/01/Math-that-you-need-to-know-for-Deep-Neural-Networks/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/09/27/Visual-and-Rigorous-Proof-of-Universal-Approximation-Theorem-UAT/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/&text=Data Mining: Bayesian Classifiers"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/&title=Data Mining: Bayesian Classifiers"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/&is_video=false&description=Data Mining: Bayesian Classifiers"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Data Mining: Bayesian Classifiers&body=Check out this article: https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/&title=Data Mining: Bayesian Classifiers"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/&title=Data Mining: Bayesian Classifiers"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/&title=Data Mining: Bayesian Classifiers"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/&title=Data Mining: Bayesian Classifiers"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/&name=Data Mining: Bayesian Classifiers&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/&t=Data Mining: Bayesian Classifiers"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Bayesian Classifiers</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Using-bayes-theorem-for-classification"><span class="toc-number">1.1.</span> <span class="toc-text">Using bayes theorem for classification</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Estimate-probabilities-from-data"><span class="toc-number">1.1.1.</span> <span class="toc-text">Estimate probabilities from data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Issue-with-naive-bayes-classifier"><span class="toc-number">1.1.2.</span> <span class="toc-text">Issue with naive bayes classifier</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Naive-Bayes-Summary"><span class="toc-number">1.2.</span> <span class="toc-text">Naive Bayes (Summary)</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Data Mining: Bayesian Classifiers
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Leon</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-09-29T14:26:59.000Z" itemprop="datePublished">2020-09-29</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Bayesian-Classifier/" rel="tag">Bayesian Classifier</a>, <a class="tag-link-link" href="/tags/Data-Mining/" rel="tag">Data Mining</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>Acknowledgement: This course (CSCI 5523) is being offered by <a target="_blank" rel="noopener" href="https://www-users.cs.umn.edu/~kumar001/">Prof. Vipin Kumar</a> at the University of Minnesota in Fall 2020.</p>
+</blockquote>
+<h1>Bayesian Classifiers</h1>
+<p>Let’s recall what bayes theorem is from Intro to Stat.</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=P%28Y%20%7C%20X%29%20%3D%20%5Cfrac%7BP(X%20%7C%20Y)P(Y)%7D%7BP(X)%7D%0A" /></p><h2 id="Using-bayes-theorem-for-classification">Using bayes theorem for classification</h2>
+<p><img src="figure1.png" alt="figure1"></p>
+<p>If each attribute <img src="https://math.now.sh?inline=X_d" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is independent while being given a class attribute <img src="https://math.now.sh?inline=Y_j" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, we can have:</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=P%28X_1%2CX_2%2C...%2CX_d%7CY_j%29%3DP(X_1%7CY_j)P(X_2%7CY_j)...P(X_d%7CY_j)%0A" /></p><p>For instance:<br>
+<img src="figure2.png" alt="figure2"></p>
+<h3 id="Estimate-probabilities-from-data">Estimate probabilities from data</h3>
+<p><img src="figure4.png" alt="figure4"><br>
+While considering binary values are easy by counting, let’s look at what should we do with continues data.<br>
+<img src="figure3.png" alt="figure3"></p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=P%28X_i%7CY_j%29%3D%5Cfrac%7B1%7D%7B%5Csqrt%7B2%20%5Cpi%20%5Csigma_%7Bij%7D%5E2%7D%7De%5E-%5Cfrac%7B(X_i-%20%5Cmu_%7Bij%7D)%5E2%7D%7B2%20%5Csigma_%7Bij%7D%5E2%7D%0A" /></p><p>Still the sample dataset above, let’s apply this naive bayer classifier.</p>
+<ul>
+<li>given a test data point<br>
+<img src="figure5.png" alt="figure5"></li>
+<li>follow a decision tree<br>
+<img src="figure6.png" alt="figure6"></li>
+</ul>
+<h3 id="Issue-with-naive-bayes-classifier">Issue with naive bayes classifier</h3>
+<ol>
+<li>If the test data point has missing attribute, we might have the possibility to identify one class to be 0.</li>
+<li>If there is a missing data, we might not be able to classify as following:<br>
+<img src="figure7.png" alt="figure7"></li>
+</ol>
+<p>Therefore, we want to use other estimates of conditional probabilities than simple fraction.</p>
+<p>Original: <img src="https://math.now.sh?inline=P%28X_i%20%3D%20c%20%7C%20y%29%20%3D%20%5Cfrac%7Bn_c%7D%7Bn%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></p>
+<ul>
+<li><img src="https://math.now.sh?inline=n" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the number of training instances belonging to class y</li>
+<li><img src="https://math.now.sh?inline=n_c" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the number of instances with <img src="https://math.now.sh?inline=X_i%20%3D%20c" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> and <img src="https://math.now.sh?inline=Y%20%3D%20y" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br>
+Laplace Estimate: <img src="https://math.now.sh?inline=P%28X_i%20%3D%20c%20%7C%20y%29%20%3D%20%5Cfrac%7Bn_c%20%2B%201%7D%7Bn%20%2B%20v%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+<li><img src="https://math.now.sh?inline=v" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the total number of attribute values that <img src="https://math.now.sh?inline=X_i" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> can take<br>
+m - estimate: <img src="https://math.now.sh?inline=P%28X_i%20%3D%20c%20%7C%20y%29%20%3D%20%5Cfrac%7Bn_c%20%2B%20mp%7D%7Bn%20%2B%20m%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+<li><img src="https://math.now.sh?inline=p" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the initial estimate of <img src="https://math.now.sh?inline=P%28X_i%20%3D%20c%20%7C%20y%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> known apriori</li>
+<li><img src="https://math.now.sh?inline=m" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the hyper-parameter for our confidence in <img src="https://math.now.sh?inline=p" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+</ul>
+<h2 id="Naive-Bayes-Summary">Naive Bayes (Summary)</h2>
+<ul>
+<li>Robust to isolated noise points</li>
+<li>Handle missing values by ignoring the instance during probability estimate calculations</li>
+<li>Robust to irrelevant attributes (because irrelevant attributes will have the similar weights to classified label e.g: 50%, 50%)</li>
+<li><strong>Drawback</strong>: redundant and correlated attributes will violate class condition assumption
+<ul>
+<li>Use other techniques such as Bayesian Belief Networks (BBN)</li>
+</ul>
+</li>
+</ul>
+<p>A intuitive bad example:<br>
+<img src="figure8.png" alt="figure8"><br>
+No, we cannot use naive bayes because conditional independence of attributes is violated. For instance, if <img src="https://math.now.sh?inline=x%3D5" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, then <img src="https://math.now.sh?inline=y" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> can be either red or blue.</p>
+
+  </div>
+</article>
+
+
+  <!-- Gitalk start  -->
+
+  <!-- Link Gitalk files  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"/></script> 
+  <div id="gitalk-container"></div>     
+  <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+        // gitalk's main params
+        clientID: `3ce407f9c6ed6aaffdf8`,
+        clientSecret: `2c6bc0465d806a6dc4ee20c9b1a0043d7a6101fe`,
+        repo: `gaoxiangluo.github.io`,
+        owner: 'GaoxiangLuo',
+        admin: ['GaoxiangLuo'],
+        id: location.pathname.slice(0, 50),
+        distractionFreeMode: true,
+        enableHotKey: true,
+        language: `en`
+      });
+      gitalk.render('gitalk-container');
+  </script> 
+  <!-- Gitalk end -->
+
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Bayesian Classifiers</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Using-bayes-theorem-for-classification"><span class="toc-number">1.1.</span> <span class="toc-text">Using bayes theorem for classification</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Estimate-probabilities-from-data"><span class="toc-number">1.1.1.</span> <span class="toc-text">Estimate probabilities from data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Issue-with-naive-bayes-classifier"><span class="toc-number">1.1.2.</span> <span class="toc-text">Issue with naive bayes classifier</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Naive-Bayes-Summary"><span class="toc-number">1.2.</span> <span class="toc-text">Naive Bayes (Summary)</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/&text=Data Mining: Bayesian Classifiers"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/&title=Data Mining: Bayesian Classifiers"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/&is_video=false&description=Data Mining: Bayesian Classifiers"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Data Mining: Bayesian Classifiers&body=Check out this article: https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/&title=Data Mining: Bayesian Classifiers"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/&title=Data Mining: Bayesian Classifiers"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/&title=Data Mining: Bayesian Classifiers"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/&title=Data Mining: Bayesian Classifiers"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/&name=Data Mining: Bayesian Classifiers&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/&t=Data Mining: Bayesian Classifiers"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    Gaoxiang Luo
+  </div>
+  <!-- <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div> -->
+  <div class="busuanzi-count">
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span class="site-pv">
+      Page View <i class="fa fa-users"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+    <!-- <span class="site-uv">
+      Number of Visitors <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuansi_value_site_uv"></span>
+    </span> -->
+  </div>
+  <div class="Word-count">
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">10k</span>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-176745887-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":200,"height":400,"hOffset":5,"vOffset":-38},"mobile":{"show":false,"scale":0.2},"react":{"opacityDefault":0.8,"opacityOnHover":0.2},"log":false});</script></body>
+</html>

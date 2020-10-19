@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Acknowledgement: This course (CSCI 5523) is being offered by Prof. Vipin Kumar at the University of Minnesota in Fall 2020.  Lots of classification problems where the classes are skewed (more records">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data Mining: Imbalanced class problem">
+<meta property="og:url" content="https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/index.html">
+<meta property="og:site_name" content="Leon">
+<meta property="og:description" content="Acknowledgement: This course (CSCI 5523) is being offered by Prof. Vipin Kumar at the University of Minnesota in Fall 2020.  Lots of classification problems where the classes are skewed (more records">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/figure1.png">
+<meta property="og:image" content="https://math.now.sh?from=Accuracy%20%3D%20%5Cfrac%7BTP%2BTN%7D%7BTP%2BTN%2BFP%2BFN%7D%0A">
+<meta property="og:image" content="https://math.now.sh?from=ErrorRate%3D1-Accuracy%0A">
+<meta property="og:image" content="https://math.now.sh?from=Precision%28p%29%3D%20Positive%20%5C%2C%20Predictie%20%5C%2C%20Value%20%3D%20%5Cfrac%7BTP%7D%7BTP%2BFP%7D%0A">
+<meta property="og:image" content="https://math.now.sh?from=Recall%28r%29%3DSensitivity%20%3D%20%5Cfrac%7BTP%7D%7BTP%2BFN%7D%0A">
+<meta property="og:image" content="https://math.now.sh?from=F-measure%28F%29%20%3D%20%5Cfrac%7B2rp%7D%7Br%2Bp%7D%20%3D%20%5Cfrac%7B2TP%7D%7B2TP%2BFN%2BFP%7D%0A">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/figure2.png">
+<meta property="og:image" content="https://math.now.sh?from=Specificity%3DTN%20%5C%2C%20Rate%20%3D%20%5Cfrac%7BTN%7D%7BTN%2BFP%7D%0A">
+<meta property="og:image" content="https://math.now.sh?from=FP%20%5C%2C%20Rate%20%3D%20%5Calpha%20%3D%20%5Cfrac%7BFN%7D%7BFN%2BTP%7D%20%3D%201%20-%20Specificity%0A">
+<meta property="og:image" content="https://math.now.sh?inline=%5Calpha">
+<meta property="og:image" content="https://math.now.sh?from=FN%20%5C%2C%20Rate%20%3D%20%5Cbeta%20%3D%20%5Cfrac%7BFN%7D%7BFN%2BTP%7D%20%3D%201-%20Sensitivity%0A">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cbeta">
+<meta property="og:image" content="https://math.now.sh?from=Power%20%3D%20Sensitivity%20%3D%201%20-%20%5Cbeta%0A">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/figure3.png">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cfrac%7BTP%20Rate%7D%7BFP%20Rate%7D">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/figure4.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/figure5.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/figure6.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/figure7.png">
+<meta property="article:published_time" content="2020-10-07T00:43:25.000Z">
+<meta property="article:modified_time" content="2020-10-14T02:02:40.683Z">
+<meta property="article:author" content="Gaoxiang Luo">
+<meta property="article:tag" content="Data Mining">
+<meta property="article:tag" content="Confusion Matrix">
+<meta property="article:tag" content="Receiver operating characteristic">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/figure1.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Data Mining: Imbalanced class problem</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Leon" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/10/09/Overview-of-Support-Vector-Machine-SVM-and-Ensemble-Learning/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/10/03/Overview-of-K-Nearest-Neighbor-Classifiers-and-Rule-Based-Classifiers/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/&text=Data Mining: Imbalanced class problem"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/&title=Data Mining: Imbalanced class problem"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/&is_video=false&description=Data Mining: Imbalanced class problem"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Data Mining: Imbalanced class problem&body=Check out this article: https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/&title=Data Mining: Imbalanced class problem"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/&title=Data Mining: Imbalanced class problem"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/&title=Data Mining: Imbalanced class problem"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/&title=Data Mining: Imbalanced class problem"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/&name=Data Mining: Imbalanced class problem&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/&t=Data Mining: Imbalanced class problem"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenges"><span class="toc-number">1.</span> <span class="toc-text">Challenges</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Confusion-Matrix"><span class="toc-number">2.</span> <span class="toc-text">Confusion Matrix</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ROC-Receiver-Operating-Characteristic"><span class="toc-number">3.</span> <span class="toc-text">ROC (Receiver Operating Characteristic)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Using-ROC-for-Model-Comparison"><span class="toc-number">3.1.</span> <span class="toc-text">Using ROC for Model Comparison</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hot-to-construct-an-ROC-curve"><span class="toc-number">3.2.</span> <span class="toc-text">Hot to construct an ROC curve</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-to-build-classifier-with-imbalanced-training-set"><span class="toc-number">3.3.</span> <span class="toc-text">How to build classifier with imbalanced training set</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Data Mining: Imbalanced class problem
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Leon</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-10-07T00:43:25.000Z" itemprop="datePublished">2020-10-06</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Confusion-Matrix/" rel="tag">Confusion Matrix</a>, <a class="tag-link-link" href="/tags/Data-Mining/" rel="tag">Data Mining</a>, <a class="tag-link-link" href="/tags/Receiver-operating-characteristic/" rel="tag">Receiver operating characteristic</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>Acknowledgement: This course (CSCI 5523) is being offered by <a target="_blank" rel="noopener" href="https://www-users.cs.umn.edu/~kumar001/">Prof. Vipin Kumar</a> at the University of Minnesota in Fall 2020.</p>
+</blockquote>
+<p>Lots of classification problems where the classes are skewed (more records from one class than another)</p>
+<ul>
+<li>Credit card fraud</li>
+<li>Intrusion detection</li>
+<li>Defective products in manufacturing assembly line</li>
+</ul>
+<h2 id="Challenges">Challenges</h2>
+<ul>
+<li>Evaluation measures such as accuracy are not well-suited for imbalanced class.</li>
+<li>Detecting the rare class is like finding a needle in a haystack (classic parable haha)</li>
+</ul>
+<h2 id="Confusion-Matrix">Confusion Matrix</h2>
+<p><img src="figure1.png" alt="figure1"></p>
+<ul>
+<li>a: TP (true positive)</li>
+<li>b: FN (fasle negative)</li>
+<li>c: FP (false postiive)</li>
+<li>d: TN (true negative)</li>
+</ul>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=Accuracy%20%3D%20%5Cfrac%7BTP%2BTN%7D%7BTP%2BTN%2BFP%2BFN%7D%0A" /></p><p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=ErrorRate%3D1-Accuracy%0A" /></p><p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=Precision%28p%29%3D%20Positive%20%5C%2C%20Predictie%20%5C%2C%20Value%20%3D%20%5Cfrac%7BTP%7D%7BTP%2BFP%7D%0A" /></p><p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=Recall%28r%29%3DSensitivity%20%3D%20%5Cfrac%7BTP%7D%7BTP%2BFN%7D%0A" /></p><p>Recall is out of all the positive samples that are given, what fraction of them this classifier correctly classify. Sensitivity is often used in medical community.</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=F-measure%28F%29%20%3D%20%5Cfrac%7B2rp%7D%7Br%2Bp%7D%20%3D%20%5Cfrac%7B2TP%7D%7B2TP%2BFN%2BFP%7D%0A" /></p><p>Accuracy alone is not a sufficient way to evaluate models, so we introduce precision and recall, and then using F-measure to take both of them into account.</p>
+<p><img src="figure2.png" alt="figure2"><br>
+Let’s look at the example above. There isn’t really a one measure is better than another, because it depends on your situation particularly. For example, the first one here might be a bad idea for COVID testing, because the precision is only 50%, then the second one is favored.</p>
+<p>There are more measures of classification performance.</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=Specificity%3DTN%20%5C%2C%20Rate%20%3D%20%5Cfrac%7BTN%7D%7BTN%2BFP%7D%0A" /></p><p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=FP%20%5C%2C%20Rate%20%3D%20%5Calpha%20%3D%20%5Cfrac%7BFN%7D%7BFN%2BTP%7D%20%3D%201%20-%20Specificity%0A" /></p><p><img src="https://math.now.sh?inline=%5Calpha" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the probibility that we reject the null hypothesis when it is true. This is a Type I error or a false positive (FP).</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=FN%20%5C%2C%20Rate%20%3D%20%5Cbeta%20%3D%20%5Cfrac%7BFN%7D%7BFN%2BTP%7D%20%3D%201-%20Sensitivity%0A" /></p><p><img src="https://math.now.sh?inline=%5Cbeta" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the probability that we accept the null hypothesis when it is false. This is a Type II error or a false negative (FN).</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=Power%20%3D%20Sensitivity%20%3D%201%20-%20%5Cbeta%0A" /></p><p><img src="figure3.png" alt="figure3"><br>
+Let’s look at another example. These two cases are actually the same classifier. If we look at the actual class yes row, both case A and B give us 80% of right prediction. And if we look at actual class no row, both case A and B gives us 80% of right prediction too. In short, the <img src="https://math.now.sh?inline=%5Cfrac%7BTP%20Rate%7D%7BFP%20Rate%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the same for these two cases. The only difference here maybe the sample size, but they’re the same classifier. Notice that here the F-measures are different. This is an exmaple to show you that F-measeare can potentially fail us.</p>
+<h2 id="ROC-Receiver-Operating-Characteristic">ROC (Receiver Operating Characteristic)</h2>
+<p><img src="figure4.png" alt="figure4"><br>
+Every points sitting on the red curve, the TPR is higher than FRP.</p>
+<p>The coordinates on the graph is (TPR,FPR).</p>
+<ul>
+<li>(0,0): declare everything to be negative class</li>
+<li>(1,1): declare everything to be positive class</li>
+<li>(1,0): ideal</li>
+</ul>
+<h3 id="Using-ROC-for-Model-Comparison">Using ROC for Model Comparison</h3>
+<p><img src="figure5.png" alt="figure5"></p>
+<h3 id="Hot-to-construct-an-ROC-curve">Hot to construct an ROC curve</h3>
+<p><img src="figure6.png" alt="figure6"><br>
+In the image above, the score is the fraction of positive prediction and negative prediction in the leaf node (decision tree, for instance). This is a way to convert discrete ouput value to continuous value because we need continuous value to plot the ROC curve. The following is how it may look like:<br>
+<img src="figure7.png" alt="figure7"></p>
+<h3 id="How-to-build-classifier-with-imbalanced-training-set">How to build classifier with imbalanced training set</h3>
+<p>Modify the distribution of training data so that rare class is well-resented in training set.</p>
+<ul>
+<li>Undersample the majority class</li>
+<li>Oversample the rare class</li>
+</ul>
+
+  </div>
+</article>
+
+
+  <!-- Gitalk start  -->
+
+  <!-- Link Gitalk files  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"/></script> 
+  <div id="gitalk-container"></div>     
+  <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+        // gitalk's main params
+        clientID: `3ce407f9c6ed6aaffdf8`,
+        clientSecret: `2c6bc0465d806a6dc4ee20c9b1a0043d7a6101fe`,
+        repo: `gaoxiangluo.github.io`,
+        owner: 'GaoxiangLuo',
+        admin: ['GaoxiangLuo'],
+        id: location.pathname.slice(0, 50),
+        distractionFreeMode: true,
+        enableHotKey: true,
+        language: `en`
+      });
+      gitalk.render('gitalk-container');
+  </script> 
+  <!-- Gitalk end -->
+
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenges"><span class="toc-number">1.</span> <span class="toc-text">Challenges</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Confusion-Matrix"><span class="toc-number">2.</span> <span class="toc-text">Confusion Matrix</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ROC-Receiver-Operating-Characteristic"><span class="toc-number">3.</span> <span class="toc-text">ROC (Receiver Operating Characteristic)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Using-ROC-for-Model-Comparison"><span class="toc-number">3.1.</span> <span class="toc-text">Using ROC for Model Comparison</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hot-to-construct-an-ROC-curve"><span class="toc-number">3.2.</span> <span class="toc-text">Hot to construct an ROC curve</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-to-build-classifier-with-imbalanced-training-set"><span class="toc-number">3.3.</span> <span class="toc-text">How to build classifier with imbalanced training set</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/&text=Data Mining: Imbalanced class problem"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/&title=Data Mining: Imbalanced class problem"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/&is_video=false&description=Data Mining: Imbalanced class problem"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Data Mining: Imbalanced class problem&body=Check out this article: https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/&title=Data Mining: Imbalanced class problem"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/&title=Data Mining: Imbalanced class problem"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/&title=Data Mining: Imbalanced class problem"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/&title=Data Mining: Imbalanced class problem"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/&name=Data Mining: Imbalanced class problem&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2020/10/06/Data-Mining-Imbalanced-class-problem/&t=Data Mining: Imbalanced class problem"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    Gaoxiang Luo
+  </div>
+  <!-- <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div> -->
+  <div class="busuanzi-count">
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span class="site-pv">
+      Page View <i class="fa fa-users"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+    <!-- <span class="site-uv">
+      Number of Visitors <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuansi_value_site_uv"></span>
+    </span> -->
+  </div>
+  <div class="Word-count">
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">10k</span>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-176745887-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":200,"height":400,"hOffset":5,"vOffset":-38},"mobile":{"show":false,"scale":0.2},"react":{"opacityDefault":0.8,"opacityOnHover":0.2},"log":false});</script></body>
+</html>

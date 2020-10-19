@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Acknowledgement: This course (CSCI 8980) is being offered by Prof. Ju Sun at the University of Minnesota in Fall 2020. Pictures of slides are from the course.  Many deep learning techniques are about">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Numerical Optimization: Iterative Methods">
+<meta property="og:url" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/index.html">
+<meta property="og:site_name" content="Leon">
+<meta property="og:description" content="Acknowledgement: This course (CSCI 8980) is being offered by Prof. Ju Sun at the University of Minnesota in Fall 2020. Pictures of slides are from the course.  Many deep learning techniques are about">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://math.now.sh?from=min_xf%28x%29%0A">
+<meta property="og:image" content="https://math.now.sh?inline=O%28%5Cepsilon%5E%7B-n%7D%29">
+<meta property="og:image" content="https://math.now.sh?inline=f">
+<meta property="og:image" content="https://math.now.sh?inline=x_0">
+<meta property="og:image" content="https://math.now.sh?inline=x_0">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cnabla%20f%28x_0%29%20%3D%200">
+<meta property="og:image" content="https://math.now.sh?inline=x">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cnabla%20f%28x%29%20%3D%200">
+<meta property="og:image" content="https://math.now.sh?inline=f%28x%29">
+<meta property="og:image" content="https://math.now.sh?inline=x_0">
+<meta property="og:image" content="https://math.now.sh?inline=x_0">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cnabla%20f%28x_0%29%20%3D%200">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cnabla%5E2f%28x_0%29%5Csucceq%200">
+<meta property="og:image" content="https://math.now.sh?inline=x">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cnabla%20f%28x%29%20%3D%200">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cnabla%5E2f%28x_0%29%5Csucceq%200">
+<meta property="og:image" content="https://math.now.sh?from=f%28x%29%3D%5C%7Cy-Ax%5C%7C_2%5E2%5Ctext%7B%2C%20or%20%7Df(x%2Cy)%3Dx%5E2y%5E2-x%5E3y%2By%5E2-1)%0A">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/figure3.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/figure1.png">
+<meta property="og:image" content="https://math.now.sh?inline=d_k">
+<meta property="og:image" content="https://math.now.sh?inline=t_k">
+<meta property="og:image" content="https://math.now.sh?inline=t%3E0">
+<meta property="og:image" content="https://math.now.sh?inline=f%28x_k%2Btd_%7Bk%2B1%7D%29-f(x_k)%5Capprox%20t%20%5Clangle%20%5Cnabla%20f(x_k)%2Cd_%7Bk%2B1%7D%20%5Crangle">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/figure2.png">
+<meta property="og:image" content="https://math.now.sh?inline=d_k%20%3D%20-%5Cnabla%20f%28x_k%29">
+<meta property="og:image" content="https://math.now.sh?inline=x_%7Bk%2B1%7D%20%3D%20x_k%20-%20t%5Cnabla%20f%28x_k%29">
+<meta property="og:image" content="https://math.now.sh?from=%5Ctext%7Bcondition%20number%7D%3D%5Cfrac%7B%5Csigma_%7Bmax%7D%28A%29%7D%7B%5Csigma_%7Bmin%7D(A)%7D%0A">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/figure4.png">
+<meta property="og:image" content="https://math.now.sh?from=f%28x_k%2Btv%29-f(v)%20%5Capprox%20t%20%5Clangle%20%5Cnabla%20f(x_k)%2Cv%20%5Crangle%20%2B%20%5Cfrac%7B1%7D%7B2%7Dt%5E2%5Clangle%20v%2C%20%5Cnabla%5E2%20f(x_k)v%20%5Crangle%0A">
+<meta property="og:image" content="https://math.now.sh?from=v%20%3D%20-t%5E%7B-1%7D%20%5Cleft%5B%20%5Cnabla%5E2%20f%28x_k%29%20%5Cright%5D%5E%7B-1%7D%5Cnabla%20f(x_k)%0A">
+<meta property="og:image" content="https://math.now.sh?inline=d_k%3D%5Cleft%5B%5Cnabla%5E2%20f%28x_k%29%20%5Cright%5D%5E%7B-1%7D%20%5Cnabla%20f(x_k)">
+<meta property="og:image" content="https://math.now.sh?from=x_%7Bk%2B1%7D%20%3D%20x_k%20-t%5Cleft%5B%5Cnabla%5E2%20f%28x_k%29%20%5Cright%5D%5E%7B-1%7D%20%5Cnabla%20f(x_k)%0A">
+<meta property="og:image" content="https://math.now.sh?inline=t">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/figure5.png">
+<meta property="og:image" content="https://math.now.sh?from=x_%7Bk%2B1%7D%3Dx_k-f">
+<meta property="og:image" content="https://math.now.sh?inline=f%28x%29%3D0">
+<meta property="og:image" content="https://math.now.sh?from=x_%7Bk%2B1%7D%3Dx_k-%5Cleft%5B%20J_f%28x_n%29%5E%5Cdag%20f(x_n)%20%5Cright%5D%0A">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cnabla%20f%28x%29%3D0">
+<meta property="og:image" content="https://math.now.sh?from=x_%7Bk%2B1%7D%3Dx_k-%5Cleft%5B%5Cnabla%5E2%20f%28x_n%29%20%5Cright%5D%5E%7B-1%7D%20%5Cnabla%20f(x_n)%0A">
+<meta property="og:image" content="https://math.now.sh?inline=O%28n%5E3%29">
+<meta property="og:image" content="https://math.now.sh?inline=O%28n%29">
+<meta property="og:image" content="https://math.now.sh?from=v%20%3D%20-t%5E%7B-1%7D%20%5Cleft%5B%20%5Cnabla%5E2%20f%28x_k%29%20%5Cright%5D%5E%7B-1%7D%5Cnabla%20f(x_k)%0A">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cnabla%5E2%20f%28x_k%29">
+<meta property="og:image" content="https://math.now.sh?inline=-%5Cfrac%7B1%7D%7B2%7D%20%5Clangle%20%5Cnabla%20f%28x_k%29%2C%20%5Cleft%5B%5Cnabla%5E2%20f(x_k)%20%5Cright%5D%5E%7B-1%7D%5Cnabla%20f(x_k)%20%5Crangle">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cnabla%5E2f%28x_k%29">
+<meta property="og:image" content="https://math.now.sh?from=x_k%3Dx_%7Bk_1%7D%2Bt_kd_k%0A">
+<meta property="og:image" content="https://math.now.sh?inline=t">
+<meta property="og:image" content="https://math.now.sh?inline=k">
+<meta property="og:image" content="https://math.now.sh?from=f%28x_k%2Btd_k%29%3Df(x_k)%2Bt%20%5Clangle%20%5Cnabla%20f(x_k)%2Cd_k%20%5Crangle%20%2B%20o(t%5C%7Cd_k%5C%7C_2)%0A">
+<meta property="og:image" content="https://math.now.sh?inline=t">
+<meta property="og:image" content="https://math.now.sh?inline=t%20%5Clangle%20%5Cnabla%20f%28x_k%29%2Cd_k%20%5Crangle">
+<meta property="og:image" content="https://math.now.sh?inline=t">
+<meta property="og:image" content="https://math.now.sh?inline=t%5E*">
+<meta property="og:image" content="https://math.now.sh?inline=f%28x_k%2Bt%5E*d_k%29-f(x_k)%20%5Cgeq%20ct%5E*%20%5Clangle%20%5Cnabla%20f(x_k)%2Cd_k%20%5Crangle">
+<meta property="og:image" content="https://math.now.sh?inline=c%20%5Cin%20%280%2C1%29">
+<meta property="og:image" content="https://math.now.sh?inline=t%3D1">
+<meta property="og:image" content="https://math.now.sh?inline=t%3Dpt">
+<meta property="og:image" content="https://math.now.sh?inline=p%20%5Cin%20%280%2C1%29">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/figure6.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/figure7.png">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cepsilon_g%2C%5Cepsilon_H%2C%5Cepsilon_f%2C%5Cepsilon_v">
+<meta property="og:image" content="https://math.now.sh?inline=%5C%7C%5Cnabla%20f%28x_k%29%5C%7C_2%20%5Cleq%20%5Cepsilon_g">
+<meta property="og:image" content="https://math.now.sh?inline=%5C%7C%5Cnabla%20f%28x_k%29%5C%7C_2">
+<meta property="og:image" content="https://math.now.sh?inline=%5Clambda_%7Bmin%7D%20%28%5Cnabla%5E2%20f(x_k%29)%20%5Cgeq%20-%5Cepsilon_H">
+<meta property="og:image" content="https://math.now.sh?inline=%7Cf%28x_k%29-f(x_%7Bk-1%7D)%20%5Cleq%20%5Cepsilon_f">
+<meta property="og:image" content="https://math.now.sh?inline=%5C%7Cx_k-x_%7Bk-1%7D%5C%7C_2%20%5Cleq%20%5Cepsilon_v">
+<meta property="og:image" content="https://math.now.sh?inline=O%28n%29">
+<meta property="og:image" content="https://math.now.sh?inline=O%28n%5E3%29">
+<meta property="og:image" content="https://math.now.sh?from=x_%7Bk%2B1%7D%3Dx_k-%5Calpha_k%20%5Cnabla%20f%28x_k%29%20%2B%20%5Cbeta_k%20(%5Cunderbrace%7Bx_k-x_%7Bk-1%7D%7D_%5Ctext%7Bmomentum%7D)%20%5Ctext%7B%20%20due%20to%20Polyak%7D%0A">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/figure8.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/figure9.png">
+<meta property="og:image" content="https://math.now.sh?inline=O%28n%5E2%29">
+<meta property="og:image" content="https://math.now.sh?inline=O%28n%5E3%29">
+<meta property="og:image" content="https://math.now.sh?from=x_%7Bk%2B1%7D%20%3D%20x_k-t%20%5Cleft%5B%5Cnabla%5E2%20f%28x_k%29%20%5Cright%5D%5E%7B-1%7D%20%5Cnabla%20f(x_k)%0A">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cnabla%5E2%20f%28x_k%29">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cleft%5B%5Cnabla%5E2%20f%28x_k%29%20%5Cright%5D%5E%7B-1%7D">
+<meta property="og:image" content="https://math.now.sh?inline=H_k">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cnabla%5E2%20f%28x_k%29">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/figure10.png">
+<meta property="og:image" content="https://math.now.sh?inline=H_%7Bk%2B1%7D">
+<meta property="og:image" content="https://math.now.sh?inline=H_k%5E%7B-1%7D">
+<meta property="og:image" content="https://math.now.sh?inline=%5CDelta%20x_k">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/figure11.png">
+<meta property="og:image" content="https://math.now.sh?inline=O%28n%5E2%29">
+<meta property="og:image" content="https://math.now.sh?inline=O%28n%5E3%29">
+<meta property="og:image" content="https://math.now.sh?inline=O%28n%5E2%29">
+<meta property="og:image" content="https://math.now.sh?inline=H_%7Bk%2B1%7Ds%3Dy">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cnabla%20f">
+<meta property="og:image" content="https://math.now.sh?inline=s_k%5ETy_k%3E0">
+<meta property="og:image" content="https://math.now.sh?inline=H_%7Bk%2B1%7D%20%5Csucc%200">
+<meta property="og:image" content="https://math.now.sh?inline=H_k%20%5Csucc%200">
+<meta property="og:image" content="https://math.now.sh?inline=H_%7Bk%2B1%7D">
+<meta property="og:image" content="https://math.now.sh?inline=H_k">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/figure12.png">
+<meta property="og:image" content="https://math.now.sh?inline=O%28mn%29">
+<meta property="og:image" content="https://math.now.sh?inline=n">
+<meta property="og:image" content="https://math.now.sh?inline=f%28x_1%2C%5Cdots%2Cx_p%29">
+<meta property="og:image" content="https://math.now.sh?inline=x_1%20%5Cin%20R%5E%7Bn_1%7D%2C%20%5Cdots%2C%20x_p%20%5Cin%20R%5E%7Bn_p%7D">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/figure13.png">
+<meta property="og:image" content="https://math.now.sh?inline=n_1%3Dn_2%3D%5Cdots%3Dn_p">
+<meta property="og:image" content="https://math.now.sh?inline=min_%7BA%2CB%7D%20%5C%7CY-AB%5C%7C_F%5E2">
+<meta property="og:image" content="https://math.now.sh?inline=A">
+<meta property="og:image" content="https://math.now.sh?inline=min_x%20%5C%7Cy-Ax%5C%7C_2%5E2%2B%5Clambda%20%5C%7Cx%5C%7C_1">
+<meta property="og:image" content="https://math.now.sh?inline=y%3DAx%20%5Cleftrightarrow%20min_x%20%5Cfrac%7B1%7D%7B2%7Dx%5ETAx-b%5ETx%20%5Ctext%7B%20with%20%7D%20A%20%5Csucc%200">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/figure14.png">
+<meta property="og:image" content="https://math.now.sh?inline=n%3D2">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/figure15.png">
+<meta property="og:image" content="https://math.now.sh?inline=f%28x%2Bd%29%20%5Capprox%20f(x)%20%2B%20%5Clangle%20%5Cnabla%20f(x_k)%2Cd%20%5Crangle%20%2B%20%5Cfrac%7B1%7D%7B2%7D%5Clangle%20d%2C%5Cnabla%5E2%20f(x_k)d%20%5Crangle">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/figure16.png">
+<meta property="og:image" content="https://math.now.sh?inline=p_k%3D%5Cfrac%7Bf%28x_k%29-f(x_k%2Bd_k)%7D%7Bm_k(0)-m_k(d_k)%7D%3D%5Cfrac%7B%5Ctext%7Bactual%20decrease%7D%7D%7B%5Ctext%7Bmodel%20decrease%7D%7D">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/figure17.png">
+<meta property="og:image" content="https://math.now.sh?inline=m_k%28d%29%20%5Cdoteq%20f(x_k)%20%2B%20%5Clangle%20%5Cnabla%20f(x_k)%2Cd%20%5Crangle%20%2B%20%5Cfrac%7B1%7D%7B2%7D%5Clangle%20d%2CB_kd%20%5Crangle">
+<meta property="og:image" content="https://math.now.sh?inline=B_k%3D%5Cnabla%5E2%20f%28x_k%29">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cnabla%20f%28x_k%29%20%3D%200">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cleft%5B%5Cnabla%5E2%20f%28x_k%29%5Cright%5D%5E%7B-1%7D%20%5Cnabla%20f(x_k)">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cnabla%20f%28x_k%29%20%3D%200">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/figure18.png">
+<meta property="article:published_time" content="2020-10-17T15:57:34.000Z">
+<meta property="article:modified_time" content="2020-10-19T16:04:39.828Z">
+<meta property="article:author" content="Gaoxiang Luo">
+<meta property="article:tag" content="Numerical Optimization">
+<meta property="article:tag" content="Trust-region Method">
+<meta property="article:tag" content="Line-search Method">
+<meta property="article:tag" content="Newton&#39;s Method">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://math.now.sh?from=min_xf%28x%29%0A">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Numerical Optimization: Iterative Methods</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Leon" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/10/14/Association-Rules-Basic-Concept/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/&text=Numerical Optimization: Iterative Methods"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/&title=Numerical Optimization: Iterative Methods"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/&is_video=false&description=Numerical Optimization: Iterative Methods"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Numerical Optimization: Iterative Methods&body=Check out this article: https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/&title=Numerical Optimization: Iterative Methods"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/&title=Numerical Optimization: Iterative Methods"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/&title=Numerical Optimization: Iterative Methods"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/&title=Numerical Optimization: Iterative Methods"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/&name=Numerical Optimization: Iterative Methods&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/&t=Numerical Optimization: Iterative Methods"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Find-global-minimum"><span class="toc-number">1.</span> <span class="toc-text">Find global minimum</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Classic-line-search-methods"><span class="toc-number">2.</span> <span class="toc-text">Classic line-search methods</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#How-to-choose-a-search-direction"><span class="toc-number">2.1.</span> <span class="toc-text">How to choose a search direction?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Why-called-Newton%E2%80%99s-method"><span class="toc-number">2.2.</span> <span class="toc-text">Why called Newton’s method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Find-step-size"><span class="toc-number">2.3.</span> <span class="toc-text">Find step size</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Where-to-initialzie-start"><span class="toc-number">2.4.</span> <span class="toc-text">Where to initialzie&#x2F;start?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#When-to-stop"><span class="toc-number">2.5.</span> <span class="toc-text">When to stop?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Advanced-line-search-methods"><span class="toc-number">3.</span> <span class="toc-text">Advanced line-search methods</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Momentum-method"><span class="toc-number">3.1.</span> <span class="toc-text">Momentum method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quasi-Newton-methods"><span class="toc-number">3.2.</span> <span class="toc-text">Quasi-Newton methods</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BFGS-method"><span class="toc-number">3.2.1.</span> <span class="toc-text">BFGS method</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block-coordinate-descent"><span class="toc-number">3.3.</span> <span class="toc-text">Block coordinate descent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Conjugate-gradient-methods"><span class="toc-number">3.4.</span> <span class="toc-text">Conjugate gradient methods</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Trust-region-methods"><span class="toc-number">4.</span> <span class="toc-text">Trust-region methods</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Why-turst-region-method-TRM"><span class="toc-number">4.1.</span> <span class="toc-text">Why turst-region method (TRM)?</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Numerical Optimization: Iterative Methods
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Leon</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-10-17T15:57:34.000Z" itemprop="datePublished">2020-10-17</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Line-search-Method/" rel="tag">Line-search Method</a>, <a class="tag-link-link" href="/tags/Newton-s-Method/" rel="tag">Newton's Method</a>, <a class="tag-link-link" href="/tags/Numerical-Optimization/" rel="tag">Numerical Optimization</a>, <a class="tag-link-link" href="/tags/Trust-region-Method/" rel="tag">Trust-region Method</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>Acknowledgement: This course (CSCI 8980) is being offered by <a target="_blank" rel="noopener" href="https://sunju.org/">Prof. Ju Sun</a> at the University of Minnesota in Fall 2020. Pictures of slides are from the course.</p>
+</blockquote>
+<p>Many deep learning techniques are about solving optimization problems.</p>
+<h2 id="Find-global-minimum">Find global minimum</h2>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=min_xf%28x%29%0A" /></p><ul>
+<li>Grid search: incurs <img src="https://math.now.sh?inline=O%28%5Cepsilon%5E%7B-n%7D%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> cost</li>
+<li>Smarter search (using properties):
+<ul>
+<li>1st-order necessary condition: Assume <img src="https://math.now.sh?inline=f" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is 1st-order differentiable at <img src="https://math.now.sh?inline=x_0" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. If <img src="https://math.now.sh?inline=x_0" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is a local minimizer, then <img src="https://math.now.sh?inline=%5Cnabla%20f%28x_0%29%20%3D%200" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+<li><img src="https://math.now.sh?inline=x" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> with <img src="https://math.now.sh?inline=%5Cnabla%20f%28x%29%20%3D%200" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>: 1st-order stationary point (1OSP)</li>
+<li>2nd-order necessary condition: Assume <img src="https://math.now.sh?inline=f%28x%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is 2-order differentiable at <img src="https://math.now.sh?inline=x_0" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. If <img src="https://math.now.sh?inline=x_0" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is a local min, <img src="https://math.now.sh?inline=%5Cnabla%20f%28x_0%29%20%3D%200" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> and <img src="https://math.now.sh?inline=%5Cnabla%5E2f%28x_0%29%5Csucceq%200" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+<li><img src="https://math.now.sh?inline=x" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> with <img src="https://math.now.sh?inline=%5Cnabla%20f%28x%29%20%3D%200" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> and <img src="https://math.now.sh?inline=%5Cnabla%5E2f%28x_0%29%5Csucceq%200" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>: 2st-order stationary point (2OSP)</li>
+</ul>
+</li>
+</ul>
+<p>How to find 1OSP and 2OSP?</p>
+<ul>
+<li>Analytic method: find 1OSP’s using gradient first, then study them using Hessian, but this is only for simple functions. e.g.:</li>
+</ul>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=f%28x%29%3D%5C%7Cy-Ax%5C%7C_2%5E2%5Ctext%7B%2C%20or%20%7Df(x%2Cy)%3Dx%5E2y%5E2-x%5E3y%2By%5E2-1)%0A" /></p><ul>
+<li>Iterative methods: find 1OSP’s/2OSP’s by making consecutive small movements</li>
+</ul>
+<p><img src="figure3.png" alt="figure3"><br>
+Making consecutive small movements to reach the minimum is as the image above,but there are two questions:</p>
+<ul>
+<li>What direction to move?</li>
+<li>How far to move?</li>
+</ul>
+<p>Based on these two questions, there are two possibilities:</p>
+<ul>
+<li>Line-search methods: direction first, size second</li>
+<li>Trust-region mothods: size first, direction second</li>
+</ul>
+<h2 id="Classic-line-search-methods">Classic line-search methods</h2>
+<p><img src="figure1.png" alt="figuer1"><br>
+Four questions:</p>
+<ul>
+<li>How to choose direction <img src="https://math.now.sh?inline=d_k" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>?</li>
+<li>How to choose step size <img src="https://math.now.sh?inline=t_k" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>?</li>
+<li>Where to initialize?</li>
+<li>When to stop?</li>
+</ul>
+<h3 id="How-to-choose-a-search-direction">How to choose a search direction?</h3>
+<p>We want to decrease the function value toward global minimum. The intuitive way is to find a direction to decrease most rapidly, which is the gradient.<br>
+for any fixed <img src="https://math.now.sh?inline=t%3E0" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, using 1st order Taylor expansion<br>
+<img src="https://math.now.sh?inline=f%28x_k%2Btd_%7Bk%2B1%7D%29-f(x_k)%5Capprox%20t%20%5Clangle%20%5Cnabla%20f(x_k)%2Cd_%7Bk%2B1%7D%20%5Crangle" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br>
+<img src="figure2.png" alt="figure2"><br>
+If we set <img src="https://math.now.sh?inline=d_k%20%3D%20-%5Cnabla%20f%28x_k%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, then we get gradient/steepest descent: <img src="https://math.now.sh?inline=x_%7Bk%2B1%7D%20%3D%20x_k%20-%20t%5Cnabla%20f%28x_k%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></p>
+<p>For gradient descent, the convergence or the speed of movement depends on the shape of contour plot. That’s also what people call the conditioning (condition number) problem.</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=%5Ctext%7Bcondition%20number%7D%3D%5Cfrac%7B%5Csigma_%7Bmax%7D%28A%29%7D%7B%5Csigma_%7Bmin%7D(A)%7D%0A" /></p><p><img src="figure4.png" alt="figure4"><br>
+Curvature is related to Hessian, which is the direction that the gradient changes the fast. In graph, curvature is greater if the 3D graph is more squeezed in that area. Image putting a ball on a valley, the direction that it intends to fall toward has the largest curvature.</p>
+<p>In short, find a direction to descrease most rapidly is shortsighted, because it finds a direction which is best locally but not neccesarily globally. Therefore, to find a direction based on both gradient and Hessian is a better solution.</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=f%28x_k%2Btv%29-f(v)%20%5Capprox%20t%20%5Clangle%20%5Cnabla%20f(x_k)%2Cv%20%5Crangle%20%2B%20%5Cfrac%7B1%7D%7B2%7Dt%5E2%5Clangle%20v%2C%20%5Cnabla%5E2%20f(x_k)v%20%5Crangle%0A" /></p><p>minimizing the right side</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=v%20%3D%20-t%5E%7B-1%7D%20%5Cleft%5B%20%5Cnabla%5E2%20f%28x_k%29%20%5Cright%5D%5E%7B-1%7D%5Cnabla%20f(x_k)%0A" /></p><p>If we set <img src="https://math.now.sh?inline=d_k%3D%5Cleft%5B%5Cnabla%5E2%20f%28x_k%29%20%5Cright%5D%5E%7B-1%7D%20%5Cnabla%20f(x_k)" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, then we get the <strong>Newton’s method</strong>:</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=x_%7Bk%2B1%7D%20%3D%20x_k%20-t%5Cleft%5B%5Cnabla%5E2%20f%28x_k%29%20%5Cright%5D%5E%7B-1%7D%20%5Cnabla%20f(x_k)%0A" /></p><p>where <img src="https://math.now.sh?inline=t" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> can set to be 1.<br>
+From the image below, I hope you can be convinced that this is faster than gradient descient.<br>
+<img src="figure5.png" alt="figure5"></p>
+<h3 id="Why-called-Newton’s-method">Why called Newton’s method</h3>
+<p>Recall Newton’s method for root-finding in calculus:</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=x_%7Bk%2B1%7D%3Dx_k-f'%28x_n%29f(x_n)%0A" /></p><p>Newton’s method for solving nonlinear system <img src="https://math.now.sh?inline=f%28x%29%3D0" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>:</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=x_%7Bk%2B1%7D%3Dx_k-%5Cleft%5B%20J_f%28x_n%29%5E%5Cdag%20f(x_n)%20%5Cright%5D%0A" /></p><p>Newton’s method for solving <img src="https://math.now.sh?inline=%5Cnabla%20f%28x%29%3D0" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>:</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=x_%7Bk%2B1%7D%3Dx_k-%5Cleft%5B%5Cnabla%5E2%20f%28x_n%29%20%5Cright%5D%5E%7B-1%7D%20%5Cnabla%20f(x_n)%0A" /></p><p>Even though it seems like Newton’s method is faster just looking at the image above, but it costs <img src="https://math.now.sh?inline=O%28n%5E3%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> per step while gradient costs <img src="https://math.now.sh?inline=O%28n%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> per step. That’s why plain Newton never used for large-scale problem.</p>
+<p>There are also other problems with Newton’s method. For example, in</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=v%20%3D%20-t%5E%7B-1%7D%20%5Cleft%5B%20%5Cnabla%5E2%20f%28x_k%29%20%5Cright%5D%5E%7B-1%7D%5Cnabla%20f(x_k)%0A" /></p><ul>
+<li><img src="https://math.now.sh?inline=%5Cnabla%5E2%20f%28x_k%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> may be non-invertible</li>
+<li>the minimum value is <img src="https://math.now.sh?inline=-%5Cfrac%7B1%7D%7B2%7D%20%5Clangle%20%5Cnabla%20f%28x_k%29%2C%20%5Cleft%5B%5Cnabla%5E2%20f(x_k)%20%5Cright%5D%5E%7B-1%7D%5Cnabla%20f(x_k)%20%5Crangle" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. If <img src="https://math.now.sh?inline=%5Cnabla%5E2f%28x_k%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is not positive definite, the “minimum” may turn out to be “maximum” or somthing else.</li>
+</ul>
+<h3 id="Find-step-size">Find step size</h3>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=x_k%3Dx_%7Bk_1%7D%2Bt_kd_k%0A" /></p><ul>
+<li>Naive choice: sufficiently small constant <img src="https://math.now.sh?inline=t" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> for all <img src="https://math.now.sh?inline=k" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+<li>Robust and practical choice: back-tracking line search.</li>
+</ul>
+<p>Intuition for back-tracking line search:</p>
+<ul>
+<li>By taylor’s theorem</li>
+</ul>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=f%28x_k%2Btd_k%29%3Df(x_k)%2Bt%20%5Clangle%20%5Cnabla%20f(x_k)%2Cd_k%20%5Crangle%20%2B%20o(t%5C%7Cd_k%5C%7C_2)%0A" /></p><p>When <img src="https://math.now.sh?inline=t" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is sufficiently small, <img src="https://math.now.sh?inline=t%20%5Clangle%20%5Cnabla%20f%28x_k%29%2Cd_k%20%5Crangle" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> dictates the value descrese. But we also want <img src="https://math.now.sh?inline=t" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> to be as large as possible to make rapid progess</p>
+<ul>
+<li>Idea: find a large possible <img src="https://math.now.sh?inline=t%5E*" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> to make sure <img src="https://math.now.sh?inline=f%28x_k%2Bt%5E*d_k%29-f(x_k)%20%5Cgeq%20ct%5E*%20%5Clangle%20%5Cnabla%20f(x_k)%2Cd_k%20%5Crangle" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> (key condition) for a chosen parameter <img src="https://math.now.sh?inline=c%20%5Cin%20%280%2C1%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, and no less</li>
+<li>Details: start from <img src="https://math.now.sh?inline=t%3D1" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. if the key condition not satisfied, <img src="https://math.now.sh?inline=t%3Dpt" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> for a chosen parameter <img src="https://math.now.sh?inline=p%20%5Cin%20%280%2C1%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+</ul>
+<p>A widely implemented strategy in numerical optimization packages:<br>
+<img src="figure6.png" alt="figure6"></p>
+<h3 id="Where-to-initialzie-start">Where to initialzie/start?</h3>
+<p><img src="figure7.png" alt="figure7"></p>
+<ul>
+<li>Convex: most iterative methods converge to the global min no matter the initialization</li>
+<li>Nonconvex: initialization matters a lot. Common heuristics: random initialization, multiple independent runs</li>
+<li>Nonconvex: clever initialization is possible with certain assumptions on the data: <a target="_blank" rel="noopener" href="https://sunju.org/research/nonconvex/">https://sunju.org/research/nonconvex/</a></li>
+</ul>
+<h3 id="When-to-stop">When to stop?</h3>
+<p>Fix some positive tolerance values <img src="https://math.now.sh?inline=%5Cepsilon_g%2C%5Cepsilon_H%2C%5Cepsilon_f%2C%5Cepsilon_v" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. Possibilities:</p>
+<ul>
+<li><img src="https://math.now.sh?inline=%5C%7C%5Cnabla%20f%28x_k%29%5C%7C_2%20%5Cleq%20%5Cepsilon_g" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>m i.e., check 1st order cond</li>
+<li><img src="https://math.now.sh?inline=%5C%7C%5Cnabla%20f%28x_k%29%5C%7C_2" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> and <img src="https://math.now.sh?inline=%5Clambda_%7Bmin%7D%20%28%5Cnabla%5E2%20f(x_k%29)%20%5Cgeq%20-%5Cepsilon_H" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, i.e., check 2nd order cond</li>
+<li><img src="https://math.now.sh?inline=%7Cf%28x_k%29-f(x_%7Bk-1%7D)%20%5Cleq%20%5Cepsilon_f" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+<li><img src="https://math.now.sh?inline=%5C%7Cx_k-x_%7Bk-1%7D%5C%7C_2%20%5Cleq%20%5Cepsilon_v" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+</ul>
+<h2 id="Advanced-line-search-methods">Advanced line-search methods</h2>
+<h3 id="Momentum-method">Momentum method</h3>
+<p>Why momentum?</p>
+<ul>
+<li>Gradient Descent is cheap (<img src="https://math.now.sh?inline=O%28n%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> per step) but overall convergence sentitive to conditioning.</li>
+<li>Newton’s convergence is not sensitive to conditioning but expensive (<img src="https://math.now.sh?inline=O%28n%5E3%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> per step)</li>
+</ul>
+<p>In physics, a heavy object has a large innertia/momentum – resistance to change of velocity</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=x_%7Bk%2B1%7D%3Dx_k-%5Calpha_k%20%5Cnabla%20f%28x_k%29%20%2B%20%5Cbeta_k%20(%5Cunderbrace%7Bx_k-x_%7Bk-1%7D%7D_%5Ctext%7Bmomentum%7D)%20%5Ctext%7B%20%20due%20to%20Polyak%7D%0A" /></p><p><img src="figure8.png" alt="figure8"><br>
+This image illustrates the next step will be determined by the summing of gradient and velocity.<br>
+<img src="figure9.png" alt="figure9"></p>
+<h3 id="Quasi-Newton-methods">Quasi-Newton methods</h3>
+<p>Quasi-: seemingly; apparently but not really</p>
+<p>Newton’s method: cost <img src="https://math.now.sh?inline=O%28n%5E2%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> storage and <img src="https://math.now.sh?inline=O%28n%5E3%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> computation per step</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=x_%7Bk%2B1%7D%20%3D%20x_k-t%20%5Cleft%5B%5Cnabla%5E2%20f%28x_k%29%20%5Cright%5D%5E%7B-1%7D%20%5Cnabla%20f(x_k)%0A" /></p><p>Idea: approximate <img src="https://math.now.sh?inline=%5Cnabla%5E2%20f%28x_k%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> or <img src="https://math.now.sh?inline=%5Cleft%5B%5Cnabla%5E2%20f%28x_k%29%20%5Cright%5D%5E%7B-1%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> to allow efficient storage and computation – <strong>Quasi-Newton Methods</strong></p>
+<p>Choose <img src="https://math.now.sh?inline=H_k" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> to approxiamte <img src="https://math.now.sh?inline=%5Cnabla%5E2%20f%28x_k%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> so that</p>
+<ul>
+<li>avoid calculation of second derivative</li>
+<li>simplify matrix inversion, i.e., computing the search direction</li>
+</ul>
+<p><img src="figure10.png" alt="figure10"><br>
+credit: UCLA ECE236C</p>
+<ul>
+<li>Different variants differ on how to compute <img src="https://math.now.sh?inline=H_%7Bk%2B1%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+<li>Normally <img src="https://math.now.sh?inline=H_k%5E%7B-1%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> or its factorized version stored to simplify calculation of <img src="https://math.now.sh?inline=%5CDelta%20x_k" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+</ul>
+<h4 id="BFGS-method">BFGS method</h4>
+<p>Without being specified, when people say Quasi-Newton method, they usually refer to BFGS method, which is Broyden-Fletcher-Goldfarb-Shanno method.<br>
+<img src="figure11.png" alt="figure11"><br>
+credit: UCLA ECE236C</p>
+<p>Cost of update: <img src="https://math.now.sh?inline=O%28n%5E2%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> instead of <img src="https://math.now.sh?inline=O%28n%5E3%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> in Newton’s method<br>
+Cost of Storage: <img src="https://math.now.sh?inline=O%28n%5E2%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></p>
+<ul>
+<li>secant condition: <img src="https://math.now.sh?inline=H_%7Bk%2B1%7Ds%3Dy" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> (think of 1st Taylor expansuion to <img src="https://math.now.sh?inline=%5Cnabla%20f" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>)</li>
+<li>Curvature condition: <img src="https://math.now.sh?inline=s_k%5ETy_k%3E0" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> to ensure that <img src="https://math.now.sh?inline=H_%7Bk%2B1%7D%20%5Csucc%200" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> if <img src="https://math.now.sh?inline=H_k%20%5Csucc%200" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+<li><img src="https://math.now.sh?inline=H_%7Bk%2B1%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> and <img src="https://math.now.sh?inline=H_k" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> are close in an appropriate sense</li>
+</ul>
+<p><img src="figure12.png" alt="figure12"><br>
+This can be further improved by L-BFGS method, which reduce the cost of storage and update to <img src="https://math.now.sh?inline=O%28mn%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, which is linear in dimension <img src="https://math.now.sh?inline=n" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></p>
+<h3 id="Block-coordinate-descent">Block coordinate descent</h3>
+<p>If we have a function with many blocks of variables, then each time we only find the minimum of each block of variables.</p>
+<p>Consider a function <img src="https://math.now.sh?inline=f%28x_1%2C%5Cdots%2Cx_p%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> with <img src="https://math.now.sh?inline=x_1%20%5Cin%20R%5E%7Bn_1%7D%2C%20%5Cdots%2C%20x_p%20%5Cin%20R%5E%7Bn_p%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br>
+<img src="figure13.png" alt="figure13"></p>
+<ul>
+<li>Also called <strong>alternating direction/minimization methods</strong></li>
+<li>When <img src="https://math.now.sh?inline=n_1%3Dn_2%3D%5Cdots%3Dn_p" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, called <strong>coordinate descent</strong></li>
+<li>may work with constrained problems and non-differentiable problems (e.g., <img src="https://math.now.sh?inline=min_%7BA%2CB%7D%20%5C%7CY-AB%5C%7C_F%5E2" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> s.t. <img src="https://math.now.sh?inline=A" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> orthogonal, Lasso: <img src="https://math.now.sh?inline=min_x%20%5C%7Cy-Ax%5C%7C_2%5E2%2B%5Clambda%20%5C%7Cx%5C%7C_1" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>)</li>
+<li>maybe faster than gradient descent or Newton</li>
+<li>maybe simple and cheap</li>
+</ul>
+<h3 id="Conjugate-gradient-methods">Conjugate gradient methods</h3>
+<p>Solve linear equation <img src="https://math.now.sh?inline=y%3DAx%20%5Cleftrightarrow%20min_x%20%5Cfrac%7B1%7D%7B2%7Dx%5ETAx-b%5ETx%20%5Ctext%7B%20with%20%7D%20A%20%5Csucc%200" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br>
+If we apply coordinate descent:<br>
+<img src="figure14.png" alt="figure14"><br>
+The two graphs is the case of when <img src="https://math.now.sh?inline=n%3D2" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, that’s why in graph of the left-hand side it only takes two steps to find the minimum. We can generalize it to n-dimensional space, then it will need n steps to solve the problem.</p>
+<p><img src="figure15.png" alt="figure15"><br>
+Conjugate can be understood as orthogonal here, as you can see in the graph above, each step it’s going to a orthogonal direction of last direction.</p>
+<h2 id="Trust-region-methods">Trust-region methods</h2>
+<p>Size first, direction second</p>
+<p>Recall Taylor expansion <img src="https://math.now.sh?inline=f%28x%2Bd%29%20%5Capprox%20f(x)%20%2B%20%5Clangle%20%5Cnabla%20f(x_k)%2Cd%20%5Crangle%20%2B%20%5Cfrac%7B1%7D%7B2%7D%5Clangle%20d%2C%5Cnabla%5E2%20f(x_k)d%20%5Crangle" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></p>
+<p><img src="figure16.png" alt="figure16"></p>
+<p>To measure approximation quality: <img src="https://math.now.sh?inline=p_k%3D%5Cfrac%7Bf%28x_k%29-f(x_k%2Bd_k)%7D%7Bm_k(0)-m_k(d_k)%7D%3D%5Cfrac%7B%5Ctext%7Bactual%20decrease%7D%7D%7B%5Ctext%7Bmodel%20decrease%7D%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></p>
+<p><img src="figure17.png" alt="figuer17"></p>
+<h3 id="Why-turst-region-method-TRM">Why turst-region method (TRM)?</h3>
+<p>Why we want to consider this method which is quite different with other methods in style?</p>
+<p>Recall Taylor expansion <img src="https://math.now.sh?inline=m_k%28d%29%20%5Cdoteq%20f(x_k)%20%2B%20%5Clangle%20%5Cnabla%20f(x_k)%2Cd%20%5Crangle%20%2B%20%5Cfrac%7B1%7D%7B2%7D%5Clangle%20d%2CB_kd%20%5Crangle" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></p>
+<ul>
+<li>Take <img src="https://math.now.sh?inline=B_k%3D%5Cnabla%5E2%20f%28x_k%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+<li>Gradient descent: stop at <img src="https://math.now.sh?inline=%5Cnabla%20f%28x_k%29%20%3D%200" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br>
+Why newton’s method is a not a good idea on siatuation that gradient is zero?<br>
+<img src="https://math.now.sh?inline=%5Cleft%5B%5Cnabla%5E2%20f%28x_k%29%5Cright%5D%5E%7B-1%7D%20%5Cnabla%20f(x_k)" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> may be just stop at <img src="https://math.now.sh?inline=%5Cnabla%20f%28x_k%29%20%3D%200" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> or be ill-defined.</li>
+</ul>
+<p><img src="figure18.png" alt="figure18"></p>
+
+  </div>
+</article>
+
+
+  <!-- Gitalk start  -->
+
+  <!-- Link Gitalk files  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"/></script> 
+  <div id="gitalk-container"></div>     
+  <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+        // gitalk's main params
+        clientID: `3ce407f9c6ed6aaffdf8`,
+        clientSecret: `2c6bc0465d806a6dc4ee20c9b1a0043d7a6101fe`,
+        repo: `gaoxiangluo.github.io`,
+        owner: 'GaoxiangLuo',
+        admin: ['GaoxiangLuo'],
+        id: location.pathname.slice(0, 50),
+        distractionFreeMode: true,
+        enableHotKey: true,
+        language: `en`
+      });
+      gitalk.render('gitalk-container');
+  </script> 
+  <!-- Gitalk end -->
+
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Find-global-minimum"><span class="toc-number">1.</span> <span class="toc-text">Find global minimum</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Classic-line-search-methods"><span class="toc-number">2.</span> <span class="toc-text">Classic line-search methods</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#How-to-choose-a-search-direction"><span class="toc-number">2.1.</span> <span class="toc-text">How to choose a search direction?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Why-called-Newton%E2%80%99s-method"><span class="toc-number">2.2.</span> <span class="toc-text">Why called Newton’s method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Find-step-size"><span class="toc-number">2.3.</span> <span class="toc-text">Find step size</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Where-to-initialzie-start"><span class="toc-number">2.4.</span> <span class="toc-text">Where to initialzie&#x2F;start?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#When-to-stop"><span class="toc-number">2.5.</span> <span class="toc-text">When to stop?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Advanced-line-search-methods"><span class="toc-number">3.</span> <span class="toc-text">Advanced line-search methods</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Momentum-method"><span class="toc-number">3.1.</span> <span class="toc-text">Momentum method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quasi-Newton-methods"><span class="toc-number">3.2.</span> <span class="toc-text">Quasi-Newton methods</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BFGS-method"><span class="toc-number">3.2.1.</span> <span class="toc-text">BFGS method</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block-coordinate-descent"><span class="toc-number">3.3.</span> <span class="toc-text">Block coordinate descent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Conjugate-gradient-methods"><span class="toc-number">3.4.</span> <span class="toc-text">Conjugate gradient methods</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Trust-region-methods"><span class="toc-number">4.</span> <span class="toc-text">Trust-region methods</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Why-turst-region-method-TRM"><span class="toc-number">4.1.</span> <span class="toc-text">Why turst-region method (TRM)?</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/&text=Numerical Optimization: Iterative Methods"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/&title=Numerical Optimization: Iterative Methods"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/&is_video=false&description=Numerical Optimization: Iterative Methods"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Numerical Optimization: Iterative Methods&body=Check out this article: https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/&title=Numerical Optimization: Iterative Methods"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/&title=Numerical Optimization: Iterative Methods"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/&title=Numerical Optimization: Iterative Methods"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/&title=Numerical Optimization: Iterative Methods"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/&name=Numerical Optimization: Iterative Methods&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2020/10/17/Numerical-Optimization-Iterative-Methods/&t=Numerical Optimization: Iterative Methods"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    Gaoxiang Luo
+  </div>
+  <!-- <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div> -->
+  <div class="busuanzi-count">
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span class="site-pv">
+      Page View <i class="fa fa-users"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+    <!-- <span class="site-uv">
+      Number of Visitors <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuansi_value_site_uv"></span>
+    </span> -->
+  </div>
+  <div class="Word-count">
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">11.7k</span>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-176745887-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":200,"height":400,"hOffset":5,"vOffset":-38},"mobile":{"show":false,"scale":0.2},"react":{"opacityDefault":0.8,"opacityOnHover":0.2},"log":false});</script></body>
+</html>

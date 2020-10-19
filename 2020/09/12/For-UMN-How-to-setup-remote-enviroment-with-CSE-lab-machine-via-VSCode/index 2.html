@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="VSCode Setup with CSE Lab Machines on Your Own Computer Demo  Why should you consider this setup?  feel like working on CSE Lab Machines literally don’t have to install OCaml on your computer because">
+<meta property="og:type" content="article">
+<meta property="og:title" content="For UMN: How to setup remote enviroment with CSE lab machine via VSCode">
+<meta property="og:url" content="https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/index.html">
+<meta property="og:site_name" content="Leon">
+<meta property="og:description" content="VSCode Setup with CSE Lab Machines on Your Own Computer Demo  Why should you consider this setup?  feel like working on CSE Lab Machines literally don’t have to install OCaml on your computer because">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/Demo.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/step1.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/step2.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/step3.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/step4.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/step5.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/step6.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/step7.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/step8.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/step9.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/step10.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/step11.png">
+<meta property="article:published_time" content="2020-09-12T14:10:03.000Z">
+<meta property="article:modified_time" content="2020-09-28T05:16:41.185Z">
+<meta property="article:author" content="Gaoxiang Luo">
+<meta property="article:tag" content="How-to">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/Demo.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>For UMN: How to setup remote enviroment with CSE lab machine via VSCode</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Leon" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/09/20/Deep-Neural-Networks-DNNs-Overview/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/09/06/Robotics-Perception-study-note-week-1/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/&text=For UMN: How to setup remote enviroment with CSE lab machine via VSCode"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/&title=For UMN: How to setup remote enviroment with CSE lab machine via VSCode"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/&is_video=false&description=For UMN: How to setup remote enviroment with CSE lab machine via VSCode"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=For UMN: How to setup remote enviroment with CSE lab machine via VSCode&body=Check out this article: https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/&title=For UMN: How to setup remote enviroment with CSE lab machine via VSCode"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/&title=For UMN: How to setup remote enviroment with CSE lab machine via VSCode"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/&title=For UMN: How to setup remote enviroment with CSE lab machine via VSCode"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/&title=For UMN: How to setup remote enviroment with CSE lab machine via VSCode"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/&name=For UMN: How to setup remote enviroment with CSE lab machine via VSCode&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/&t=For UMN: How to setup remote enviroment with CSE lab machine via VSCode"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">VSCode Setup with CSE Lab Machines on Your Own Computer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo"><span class="toc-number">1.1.</span> <span class="toc-text">Demo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Why-should-you-consider-this-setup"><span class="toc-number">1.1.1.</span> <span class="toc-text">Why should you consider this setup?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tutorial"><span class="toc-number">1.2.</span> <span class="toc-text">Tutorial</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OCaml-Syntax-Highlighting-Enable"><span class="toc-number">1.2.1.</span> <span class="toc-text">OCaml Syntax Highlighting Enable</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        For UMN: How to setup remote enviroment with CSE lab machine via VSCode
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Leon</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-09-12T14:10:03.000Z" itemprop="datePublished">2020-09-12</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/How-to/" rel="tag">How-to</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1>VSCode Setup with CSE Lab Machines on Your Own Computer</h1>
+<h2 id="Demo">Demo</h2>
+<p><img src="Demo.png" alt="Demo"></p>
+<h3 id="Why-should-you-consider-this-setup">Why should you consider this setup?</h3>
+<ul>
+<li>feel like working on CSE Lab Machines literally</li>
+<li>don’t have to install <code>OCaml</code> on your computer because you’re using lab’s <code>OCaml</code></li>
+<li>graphical user interface with <code>OCaml</code> Syntax Highlighting</li>
+<li>faster than <code>vole</code> since it talks to server directly rather than transmitting through web browser</li>
+<li>can be used on <code>Linux</code>, <code>MacOS</code> and <code>Windows</code> because they all have <code>VSCode</code></li>
+<li>file transfer: drag you local file into CSE lab machine</li>
+</ul>
+<h2 id="Tutorial">Tutorial</h2>
+<p>This tutorial can help you to set up your remote enviroment graphically with CSE lab machines on your own computer.</p>
+<hr>
+<ol>
+<li>
+<p>Open <code>VSCode</code>, go to extension on the left nevigation bar and search <code>ssh</code><br>
+<img src="step1.png" alt="step1"></p>
+</li>
+<li>
+<p>Install <code>REMOTE - SSH</code>, click <code>SSH extension</code> icon on the left nevigation bar and click <code>connect</code><br>
+<img src="step2.png" alt="step2"></p>
+</li>
+<li>
+<p>On the pop-up command window, type in <code>ssh &lt;x500&gt;@&lt;cse lab machines&gt; -A</code>.<br>
+For instance, I will use:</p>
+<ul>
+<li><code>ssh luo00042@atlas.cselabs.umn.edu -A</code> ATLAS is a server machine which has 256G RAM! But sometimes if a student is running heavy-duty task on ATLAS, you may want to use another machine.</li>
+<li><code>ssh luo00042@csel-kh4250-03.cselabs.umn.edu -A</code></li>
+</ul>
+</li>
+</ol>
+<p><img src="step3.png" alt="step3"></p>
+<p><strong>Note:</strong> A list of CSE lab UNIX machines that you can remotely work on, you can find them <a target="_blank" rel="noopener" href="https://cseit.umn.edu/computer-classrooms/cse-labs-unix-machine-listings">here</a>.</p>
+<p><strong>Remember:</strong> Replace the <code>x500</code> with yours, not mine; and make sure to include the <code>-A</code> flag, otherwise you have to use VPN or be under university wifi to connect.</p>
+<ol start="4">
+<li>
+<p>Click to update ssh configuration so you don’t have to type the long ssh command every time.<br>
+<img src="step4.png" alt="step4"></p>
+</li>
+<li>
+<p>When it’s done, there will be a SSH target on the left. Click <code>connect</code><br>
+<img src="step5.png" alt="step5"></p>
+</li>
+<li>
+<p>A new window will pop up and there will be prompt that you need to enter your <code>x500</code> password.<br>
+<img src="step6.png" alt="step6"></p>
+</li>
+<li>
+<p>You are in CSE lab machine via SSH connection! Click <code>Open Folder</code>. Doesn’t it look familiar to you? That’s your CSE lab folder! Navigate to your own repo and click <code>OK</code><br>
+<img src="step7.png" alt="step7"></p>
+</li>
+<li>
+<p>That’s it! You can open a terminal within <code>VSCode</code>, and it will be under SSH connection as well!<br>
+<img src="step8.png" alt="step8"></p>
+</li>
+</ol>
+<h3 id="OCaml-Syntax-Highlighting-Enable">OCaml Syntax Highlighting Enable</h3>
+<ol start="9">
+<li>
+<p>This is how it looks before enabling <code>OCaml</code> syntax highlighting<br>
+<img src="step9.png" alt="step9"></p>
+</li>
+<li>
+<p>Go to extension on the left nevigation bar again and search <code>OCaml</code>. Install it, and reload the window.<br>
+<img src="step10.png" alt="step10"></p>
+</li>
+<li>
+<p>Now you <code>OCaml</code> code should be highlighted accoridng to the syntax.<br>
+<img src="step11.png" alt="step11"></p>
+</li>
+</ol>
+<p>Now you can edit your code <strong>on lab machine</strong>, save your code <strong>on lab machine</strong>, and test your code with terminal <strong>on lab machine</strong>!</p>
+<p><strong>Editor Note:</strong> While it’s easier to edit your code with a nice-looking IDE, it’s still good to pick up tools like emacs and vim. I hope you find this tutorial helpful to you!</p>
+
+  </div>
+</article>
+
+
+  <!-- Gitalk start  -->
+
+  <!-- Link Gitalk files  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"/></script> 
+  <div id="gitalk-container"></div>     
+  <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+        // gitalk's main params
+        clientID: `3ce407f9c6ed6aaffdf8`,
+        clientSecret: `2c6bc0465d806a6dc4ee20c9b1a0043d7a6101fe`,
+        repo: `gaoxiangluo.github.io`,
+        owner: 'GaoxiangLuo',
+        admin: ['GaoxiangLuo'],
+        id: location.pathname.slice(0, 50),
+        distractionFreeMode: true,
+        enableHotKey: true,
+        language: `en`
+      });
+      gitalk.render('gitalk-container');
+  </script> 
+  <!-- Gitalk end -->
+
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">VSCode Setup with CSE Lab Machines on Your Own Computer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo"><span class="toc-number">1.1.</span> <span class="toc-text">Demo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Why-should-you-consider-this-setup"><span class="toc-number">1.1.1.</span> <span class="toc-text">Why should you consider this setup?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tutorial"><span class="toc-number">1.2.</span> <span class="toc-text">Tutorial</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OCaml-Syntax-Highlighting-Enable"><span class="toc-number">1.2.1.</span> <span class="toc-text">OCaml Syntax Highlighting Enable</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/&text=For UMN: How to setup remote enviroment with CSE lab machine via VSCode"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/&title=For UMN: How to setup remote enviroment with CSE lab machine via VSCode"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/&is_video=false&description=For UMN: How to setup remote enviroment with CSE lab machine via VSCode"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=For UMN: How to setup remote enviroment with CSE lab machine via VSCode&body=Check out this article: https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/&title=For UMN: How to setup remote enviroment with CSE lab machine via VSCode"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/&title=For UMN: How to setup remote enviroment with CSE lab machine via VSCode"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/&title=For UMN: How to setup remote enviroment with CSE lab machine via VSCode"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/&title=For UMN: How to setup remote enviroment with CSE lab machine via VSCode"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/&name=For UMN: How to setup remote enviroment with CSE lab machine via VSCode&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2020/09/12/For-UMN-How-to-setup-remote-enviroment-with-CSE-lab-machine-via-VSCode/&t=For UMN: How to setup remote enviroment with CSE lab machine via VSCode"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    Gaoxiang Luo
+  </div>
+  <!-- <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div> -->
+  <div class="busuanzi-count">
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span class="site-pv">
+      Page View <i class="fa fa-users"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+    <!-- <span class="site-uv">
+      Number of Visitors <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuansi_value_site_uv"></span>
+    </span> -->
+  </div>
+  <div class="Word-count">
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">10k</span>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-176745887-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":200,"height":400,"hOffset":5,"vOffset":-38},"mobile":{"show":false,"scale":0.2},"react":{"opacityDefault":0.8,"opacityOnHover":0.2},"log":false});</script></body>
+</html>

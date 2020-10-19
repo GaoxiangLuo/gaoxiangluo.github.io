@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Acknowledgement: This course (CSCI 5523) is being offered by Prof. Vipin Kumar at the University of Minnesota in Fall 2020.  Association Rule: Basic Concept Association Rule Mining Given a set of tra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Association Rules: Basic Concept">
+<meta property="og:url" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/index.html">
+<meta property="og:site_name" content="Leon">
+<meta property="og:description" content="Acknowledgement: This course (CSCI 5523) is being offered by Prof. Vipin Kumar at the University of Minnesota in Fall 2020.  Association Rule: Basic Concept Association Rule Mining Given a set of tra">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://math.now.sh?inline=%5Csigma">
+<meta property="og:image" content="https://math.now.sh?inline=d">
+<meta property="og:image" content="https://math.now.sh?inline=2%5Ed">
+<meta property="og:image" content="https://math.now.sh?from=R%3D%5Csum_%7Bk%3D1%7D%5E%7Bd-1%7D%5Cleft%5B%20%7Bd%5Cchoose%20k%7D%20%5Ctimes%20%5Csum_%7Bj%3D1%7D%5E%7Bd-k%7D%20%7Bd-k%20%5Cchoose%20j%7D%20%5Cright%5D%3D3%5Ed-2%5E%7Bd-1%7D%2B1%0A">
+<meta property="og:image" content="https://math.now.sh?inline=M">
+<meta property="og:image" content="https://math.now.sh?inline=2%5EM">
+<meta property="og:image" content="https://math.now.sh?from=%5Cforall%20X%2C%20Y%20%3A%20%28X%20%5Csubseteq%20Y%29%20%5Cimplies%20s(X)%20%5Cgeq%20s(Y)%0A">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure1.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure2.png">
+<meta property="og:image" content="https://math.now.sh?inline=F_k">
+<meta property="og:image" content="https://math.now.sh?inline=L_k">
+<meta property="og:image" content="https://math.now.sh?inline=k%3D1">
+<meta property="og:image" content="https://math.now.sh?inline=F_1">
+<meta property="og:image" content="https://math.now.sh?inline=F_k">
+<meta property="og:image" content="https://math.now.sh?inline=L_%7Bk%2B1%7D">
+<meta property="og:image" content="https://math.now.sh?inline=F_k">
+<meta property="og:image" content="https://math.now.sh?inline=L_%7Bk%2B1%7D">
+<meta property="og:image" content="https://math.now.sh?inline=k">
+<meta property="og:image" content="https://math.now.sh?inline=L_%7Bk%2B1%7D">
+<meta property="og:image" content="https://math.now.sh?inline=L_%7Bk%2B1%7D">
+<meta property="og:image" content="https://math.now.sh?inline=F_%7Bk%2B1%7D">
+<meta property="og:image" content="https://math.now.sh?inline=L">
+<meta property="og:image" content="https://math.now.sh?inline=f%20%5Csubset%20L">
+<meta property="og:image" content="https://math.now.sh?inline=f%20%5Crightarrow%20L-f">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure3.png">
+<meta property="og:image" content="https://math.now.sh?inline=%7CL%7C%3Dk">
+<meta property="og:image" content="https://math.now.sh?inline=2%5Ek%20-%202">
+<meta property="og:image" content="https://math.now.sh?inline=L%20%5Crightarrow%20%5Cemptyset">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cemptyset%20%5Crightarrow%20L">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure4.png">
+<meta property="article:published_time" content="2020-10-14T15:54:37.000Z">
+<meta property="article:modified_time" content="2020-10-19T15:56:31.048Z">
+<meta property="article:author" content="Gaoxiang Luo">
+<meta property="article:tag" content="Association Rule">
+<meta property="article:tag" content="Apriori Algorithm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://math.now.sh?inline=%5Csigma">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Association Rules: Basic Concept</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Leon" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/10/17/Numerical-Optimization-Iterative-Methods/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/10/09/Overview-of-Support-Vector-Machine-SVM-and-Ensemble-Learning/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&text=Association Rules: Basic Concept"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&is_video=false&description=Association Rules: Basic Concept"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Association Rules: Basic Concept&body=Check out this article: https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&name=Association Rules: Basic Concept&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&t=Association Rules: Basic Concept"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Association Rule: Basic Concept</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Association-Rule-Mining"><span class="toc-number">1.1.</span> <span class="toc-text">Association Rule Mining</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Def-Frequent-Itemset"><span class="toc-number">1.1.1.</span> <span class="toc-text">Def: Frequent Itemset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Association-Rule-Mining-Task"><span class="toc-number">1.1.2.</span> <span class="toc-text">Association Rule Mining Task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apriori-Algorithm"><span class="toc-number">1.1.3.</span> <span class="toc-text">Apriori Algorithm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rule-Generation"><span class="toc-number">1.1.4.</span> <span class="toc-text">Rule Generation</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Association Rules: Basic Concept
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Leon</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-10-14T15:54:37.000Z" itemprop="datePublished">2020-10-14</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Apriori-Algorithm/" rel="tag">Apriori Algorithm</a>, <a class="tag-link-link" href="/tags/Association-Rule/" rel="tag">Association Rule</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>Acknowledgement: This course (CSCI 5523) is being offered by <a target="_blank" rel="noopener" href="https://www-users.cs.umn.edu/~kumar001/">Prof. Vipin Kumar</a> at the University of Minnesota in Fall 2020.</p>
+</blockquote>
+<h1>Association Rule: Basic Concept</h1>
+<h2 id="Association-Rule-Mining">Association Rule Mining</h2>
+<p>Given a set of transactions, find rules that predict the occurence of an item based on the occurrenes of other items in the transaction.</p>
+<p>Example of Association Rules (Implication means co-occurrence, not causality)</p>
+<ul>
+<li>{Diaper} =&gt; {Beer}</li>
+<li>{Milk, Bread} =&gt; {Eggs, Coke}</li>
+<li>{Beer, Bread} =&gt; {Milk}</li>
+</ul>
+<h3 id="Def-Frequent-Itemset">Def: Frequent Itemset</h3>
+<p>An <strong>itemset</strong> is a collection of one or more items such as {Milk, Bread, Diaper}, and we use <strong>k-itemset</strong> to represent an itemset that contains k items. Also, we introduce a terminology called <strong>support count</strong> (frequency of occurrrence of an itemset) and <strong>support</strong> (fraction of transactions that contain an itemset). For instance, if this itemset {Milk, Bread, Diaper} shows up twice in transactions, then we can say <img src="https://math.now.sh?inline=%5Csigma" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>({Milk, Bread, Diaper})=2 and s({Milk, Bread, Diaper})=2/5. Finally, a <strong>frequent itemset</strong> is an itemset whose support is greater than or equal to a minsup threshold. Other than support, another rule evaluation metrics is <strong>confidence</strong>, which measures how often items in Y appear in transactions that contain X. For exmaple, {Milk, Diaper} =&gt; {Beer}, when X = {Milk, Diaper}, and Y = {Beer}.</p>
+<h3 id="Association-Rule-Mining-Task">Association Rule Mining Task</h3>
+<p>Given a set of transactions T, the goal of association rule mining is to find all rules having</p>
+<ul>
+<li>support &gt;= minsup threshold</li>
+<li>confidence &gt;= minconf threshold</li>
+</ul>
+<p>Brute-force approach:</p>
+<ol>
+<li>List all possible association rules</li>
+<li>Compute the support and confidence for each rule</li>
+<li>Prune rules that fail the minsup and minconf thresholds</li>
+</ol>
+<p><strong>But this is computationally prohibitive!</strong> Because given <img src="https://math.now.sh?inline=d" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> unique items, the total number of itemsets is <img src="https://math.now.sh?inline=2%5Ed" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, so the total number of possible association rules:</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=R%3D%5Csum_%7Bk%3D1%7D%5E%7Bd-1%7D%5Cleft%5B%20%7Bd%5Cchoose%20k%7D%20%5Ctimes%20%5Csum_%7Bj%3D1%7D%5E%7Bd-k%7D%20%7Bd-k%20%5Cchoose%20j%7D%20%5Cright%5D%3D3%5Ed-2%5E%7Bd-1%7D%2B1%0A" /></p><p>e.g.: if d=6, R=602 rules.</p>
+<p>Therefore, we need to think of a less computational way. Since each item can be either yes or no in a transaction, if we have <img src="https://math.now.sh?inline=M" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> items, then the possible candidates for a transection is <img src="https://math.now.sh?inline=2%5EM" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. We can reduce the number of candidates by <strong>Apriori principle: if an itemset is frequent, then all of tis subsets must also be frequent.</strong></p>
+<p>Apriori principle holds due to the following property of the support measure:</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=%5Cforall%20X%2C%20Y%20%3A%20%28X%20%5Csubseteq%20Y%29%20%5Cimplies%20s(X)%20%5Cgeq%20s(Y)%0A" /></p><ul>
+<li>Support of an itemset never exceeds the support of its subsets</li>
+<li>This is known as the anti-monotone property of support</li>
+</ul>
+<p><img src="figure1.png" alt="figure1"><br>
+In this image, once we found AB is infrequenat, then we can prune any supersets, because if AB is found infrequent already, then any itemset containing more items involving AB would be infrequent too.</p>
+<p><img src="figure2.png" alt="figure2"><br>
+Another illustration is as the image above. If we’ve already known that Coke and Eggs are infrequent in 1-itemsets, then we we don’t need to generate candidates involving Coke or Eggs in 2-itemsets, 3-itemsets, etc. Meanwhile, since {Bread, Beer} and {Milk, Beer} are infrequent 2-itermsets, then we don’t need to generate canidates involving {Bread, Beer} and {Milk, Beer}.</p>
+<h3 id="Apriori-Algorithm">Apriori Algorithm</h3>
+<p><img src="https://math.now.sh?inline=F_k" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>: frequent k-itemsets<br>
+<img src="https://math.now.sh?inline=L_k" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>: candidate k-itemsets</p>
+<ol>
+<li>let <img src="https://math.now.sh?inline=k%3D1" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+<li>Generate <img src="https://math.now.sh?inline=F_1" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> = {frequent 1-itemsets}</li>
+<li>Repeat until <img src="https://math.now.sh?inline=F_k" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is empty
+<ol>
+<li>Candidate Generation: Generate <img src="https://math.now.sh?inline=L_%7Bk%2B1%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> from <img src="https://math.now.sh?inline=F_k" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+<li>Candidate Pruning: Prune candidate itemsets in <img src="https://math.now.sh?inline=L_%7Bk%2B1%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> containing subsets of length <img src="https://math.now.sh?inline=k" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> that are infrequent</li>
+<li>Support Counting: Count the support of each candidate in <img src="https://math.now.sh?inline=L_%7Bk%2B1%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> by scanning the DB</li>
+<li>Candidate Elimination: Eliminate candidates in <img src="https://math.now.sh?inline=L_%7Bk%2B1%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> that are infrequent, leaving only those that are frequent =&gt; <img src="https://math.now.sh?inline=F_%7Bk%2B1%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+</ol>
+</li>
+</ol>
+<h3 id="Rule-Generation">Rule Generation</h3>
+<p>Given a frequent itemset <img src="https://math.now.sh?inline=L" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, find all non-empty subsets <img src="https://math.now.sh?inline=f%20%5Csubset%20L" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> such that <img src="https://math.now.sh?inline=f%20%5Crightarrow%20L-f" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> satisfies the minimum confidence requirement<br>
+<img src="figure3.png" alt="figure3"><br>
+If <img src="https://math.now.sh?inline=%7CL%7C%3Dk" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, then there are <img src="https://math.now.sh?inline=2%5Ek%20-%202" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> candidate association rules (ignoring <img src="https://math.now.sh?inline=L%20%5Crightarrow%20%5Cemptyset" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> and <img src="https://math.now.sh?inline=%5Cemptyset%20%5Crightarrow%20L" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>)</p>
+<p>In general, confidence does not have an anti-monotone property, but confidence of rules generated from the same itemset has an anti-monotone property. For example, suppose {A,B,C,D} is a frequent 4-itemset:$$c(ABC \rightarrow D \geq c(AB \rightarrow CD) \geq c(A \rightarrow BCD)$$<br>
+If we found a low confidence rule, then we can pruned the following rules as the image shown below:<br>
+<img src="figure4.png" alt="figure4"></p>
+
+  </div>
+</article>
+
+
+  <!-- Gitalk start  -->
+
+  <!-- Link Gitalk files  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"/></script> 
+  <div id="gitalk-container"></div>     
+  <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+        // gitalk's main params
+        clientID: `3ce407f9c6ed6aaffdf8`,
+        clientSecret: `2c6bc0465d806a6dc4ee20c9b1a0043d7a6101fe`,
+        repo: `gaoxiangluo.github.io`,
+        owner: 'GaoxiangLuo',
+        admin: ['GaoxiangLuo'],
+        id: location.pathname.slice(0, 50),
+        distractionFreeMode: true,
+        enableHotKey: true,
+        language: `en`
+      });
+      gitalk.render('gitalk-container');
+  </script> 
+  <!-- Gitalk end -->
+
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Association Rule: Basic Concept</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Association-Rule-Mining"><span class="toc-number">1.1.</span> <span class="toc-text">Association Rule Mining</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Def-Frequent-Itemset"><span class="toc-number">1.1.1.</span> <span class="toc-text">Def: Frequent Itemset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Association-Rule-Mining-Task"><span class="toc-number">1.1.2.</span> <span class="toc-text">Association Rule Mining Task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apriori-Algorithm"><span class="toc-number">1.1.3.</span> <span class="toc-text">Apriori Algorithm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rule-Generation"><span class="toc-number">1.1.4.</span> <span class="toc-text">Rule Generation</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&text=Association Rules: Basic Concept"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&is_video=false&description=Association Rules: Basic Concept"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Association Rules: Basic Concept&body=Check out this article: https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&name=Association Rules: Basic Concept&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&t=Association Rules: Basic Concept"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    Gaoxiang Luo
+  </div>
+  <!-- <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div> -->
+  <div class="busuanzi-count">
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span class="site-pv">
+      Page View <i class="fa fa-users"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+    <!-- <span class="site-uv">
+      Number of Visitors <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuansi_value_site_uv"></span>
+    </span> -->
+  </div>
+  <div class="Word-count">
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">11.7k</span>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-176745887-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":200,"height":400,"hOffset":5,"vOffset":-38},"mobile":{"show":false,"scale":0.2},"react":{"opacityDefault":0.8,"opacityOnHover":0.2},"log":false});</script></body>
+</html>
