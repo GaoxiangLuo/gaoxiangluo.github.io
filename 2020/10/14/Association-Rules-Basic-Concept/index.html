@@ -43,8 +43,13 @@
 <meta property="og:image" content="https://math.now.sh?inline=L%20%5Crightarrow%20%5Cemptyset">
 <meta property="og:image" content="https://math.now.sh?inline=%5Cemptyset%20%5Crightarrow%20L">
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure4.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure5.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure6.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure7.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure8.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure9.png">
 <meta property="article:published_time" content="2020-10-14T15:54:37.000Z">
-<meta property="article:modified_time" content="2020-10-19T15:56:31.048Z">
+<meta property="article:modified_time" content="2020-10-19T22:47:41.261Z">
 <meta property="article:author" content="Gaoxiang Luo">
 <meta property="article:tag" content="Association Rule">
 <meta property="article:tag" content="Apriori Algorithm">
@@ -145,7 +150,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Association Rule: Basic Concept</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Association-Rule-Mining"><span class="toc-number">1.1.</span> <span class="toc-text">Association Rule Mining</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Def-Frequent-Itemset"><span class="toc-number">1.1.1.</span> <span class="toc-text">Def: Frequent Itemset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Association-Rule-Mining-Task"><span class="toc-number">1.1.2.</span> <span class="toc-text">Association Rule Mining Task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apriori-Algorithm"><span class="toc-number">1.1.3.</span> <span class="toc-text">Apriori Algorithm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rule-Generation"><span class="toc-number">1.1.4.</span> <span class="toc-text">Rule Generation</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Association Rule: Basic Concept</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Association-Rule-Mining"><span class="toc-number">1.1.</span> <span class="toc-text">Association Rule Mining</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Def-Frequent-Itemset"><span class="toc-number">1.1.1.</span> <span class="toc-text">Def: Frequent Itemset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Association-Rule-Mining-Task"><span class="toc-number">1.1.2.</span> <span class="toc-text">Association Rule Mining Task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apriori-Algorithm"><span class="toc-number">1.1.3.</span> <span class="toc-text">Apriori Algorithm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rule-Generation"><span class="toc-number">1.1.4.</span> <span class="toc-text">Rule Generation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Algorithms-and-Complexity"><span class="toc-number">1.2.</span> <span class="toc-text">Algorithms and Complexity</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Maximal-Frequent-Itemset"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">Maximal Frequent Itemset</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Closed-Itemset"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">Closed Itemset</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -170,6 +175,8 @@
     <div class="postdate">
       
         <time datetime="2020-10-14T15:54:37.000Z" itemprop="datePublished">2020-10-14</time>
+        
+        (Updated: <time datetime="2020-10-19T22:47:41.261Z" itemprop="dateModified">2020-10-19</time>)
         
       
     </div>
@@ -249,6 +256,44 @@ If <img src="https://math.now.sh?inline=%7CL%7C%3Dk" style="filter: opacity(100%
 <p>In general, confidence does not have an anti-monotone property, but confidence of rules generated from the same itemset has an anti-monotone property. For example, suppose {A,B,C,D} is a frequent 4-itemset:$$c(ABC \rightarrow D \geq c(AB \rightarrow CD) \geq c(A \rightarrow BCD)$$<br>
 If we found a low confidence rule, then we can pruned the following rules as the image shown below:<br>
 <img src="figure4.png" alt="figure4"></p>
+<h2 id="Algorithms-and-Complexity">Algorithms and Complexity</h2>
+<p>Choice of minimum support threshold</p>
+<ul>
+<li>If you lower the support threshold, there will be more frequent itemsets.</li>
+<li>This may increase the number of candidates and max length of frequent itemsets.</li>
+</ul>
+<p>Dimensionality (number of items) of the dataset</p>
+<ul>
+<li>More space is needed to store support count of itemsets</li>
+<li>If number of requent itemsets also increases, both computation and I/O costs may also increase</li>
+</ul>
+<p>Size of database</p>
+<ul>
+<li>Run time of algorithm increases with number of transactions</li>
+</ul>
+<p>Average transaction width</p>
+<ul>
+<li>Transaction width increases the max length of frequent itemsets</li>
+<li>Number of subsets in a transaction increases with its width, increasing computation time for support counting.</li>
+</ul>
+<p><img src="figure5.png" alt="figure5"></p>
+<h4 id="Maximal-Frequent-Itemset">Maximal Frequent Itemset</h4>
+<p>An itemset is maximal frequent if it is frequent and none of its immediate supersets is frequent.<br>
+<img src="figure6.png" alt="figure6"></p>
+<h4 id="Closed-Itemset">Closed Itemset</h4>
+<p>An itemset X is closed if none of its immediate supersets has the same support as the itemset X.<br>
+X is not closed if at least one of its immediate supersets has support count as X.</p>
+<p><img src="figure7.png" alt="figure7"><br>
+In this example, if we look at {B} = 5, and we observe that none of {A,B},{B,C},{B,D}'s support is equal with {B} = 5, then we can say {B} is a closed itemset.</p>
+<p>Another example:<br>
+<img src="figure8.png" alt="figure8"><br>
+In this example, those red digits are transaction ID of the table in the top-left corner. First, if the support of an itemset’s supersets are all less than this itemset, then this itemset is a closed itemset (in grey). Second, according to the minimum support given (in this case, 2), we can say every node with more than or equal to 2 red digits are frequent. Third, among those grey nodes (closed), we can find those maximal frequent itemset and mark them in blue ring.</p>
+<p>Question: Is any maximal itemsets also close itemsets?</p>
+<ul>
+<li>Yes, because every subsets’ support should be less them this itemset itself, then this itemset is also closed.</li>
+</ul>
+<p>This Venn graph also shows the relationship between these concepts that mentioned above.<br>
+<img src="figure9.png" alt="figure9"></p>
 
   </div>
 </article>
@@ -300,7 +345,7 @@ If we found a low confidence rule, then we can pruned the following rules as the
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Association Rule: Basic Concept</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Association-Rule-Mining"><span class="toc-number">1.1.</span> <span class="toc-text">Association Rule Mining</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Def-Frequent-Itemset"><span class="toc-number">1.1.1.</span> <span class="toc-text">Def: Frequent Itemset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Association-Rule-Mining-Task"><span class="toc-number">1.1.2.</span> <span class="toc-text">Association Rule Mining Task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apriori-Algorithm"><span class="toc-number">1.1.3.</span> <span class="toc-text">Apriori Algorithm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rule-Generation"><span class="toc-number">1.1.4.</span> <span class="toc-text">Rule Generation</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Association Rule: Basic Concept</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Association-Rule-Mining"><span class="toc-number">1.1.</span> <span class="toc-text">Association Rule Mining</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Def-Frequent-Itemset"><span class="toc-number">1.1.1.</span> <span class="toc-text">Def: Frequent Itemset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Association-Rule-Mining-Task"><span class="toc-number">1.1.2.</span> <span class="toc-text">Association Rule Mining Task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apriori-Algorithm"><span class="toc-number">1.1.3.</span> <span class="toc-text">Apriori Algorithm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rule-Generation"><span class="toc-number">1.1.4.</span> <span class="toc-text">Rule Generation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Algorithms-and-Complexity"><span class="toc-number">1.2.</span> <span class="toc-text">Algorithms and Complexity</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Maximal-Frequent-Itemset"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">Maximal Frequent Itemset</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Closed-Itemset"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">Closed Itemset</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -367,7 +412,7 @@ If we found a low confidence rule, then we can pruned the following rules as the
     </span> -->
   </div>
   <div class="Word-count">
-    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">11.7k</span>
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">12.1k</span>
   </div>
 </footer>
 
