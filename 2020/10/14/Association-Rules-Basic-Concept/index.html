@@ -48,8 +48,37 @@
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure7.png">
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure8.png">
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure9.png">
+<meta property="og:image" content="https://math.now.sh?inline=X%20%5Crightarrow%20Y">
+<meta property="og:image" content="https://math.now.sh?inline=%5C%7BX%2CY%5C%7D">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure10.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure11.png">
+<meta property="og:image" content="https://math.now.sh?inline=Confidence%5Capprox%20P%28coffee%20%7C%20Tea%29%3D%5Cfrac%7B150%7D%7B200%7D%3D0.75">
+<meta property="og:image" content="https://math.now.sh?inline=Confidence%20%3E%2050%5C%25">
+<meta property="og:image" content="https://math.now.sh?inline=P%28coffee%29%3D0.8">
+<meta property="og:image" content="https://math.now.sh?inline=P%28Coffee%20%7C%20Tea%29%3D%5Cfrac%7B650%7D%7B800%7D%3D0.8125">
+<meta property="og:image" content="https://math.now.sh?inline=Confidence%5Capprox%20P%28Honey%20%7C%20Tea%29%3D%5Cfrac%7B100%7D%7B200%7D%3D0.50">
+<meta property="og:image" content="https://math.now.sh?inline=Confidence%20%3D%2050%5C%25">
+<meta property="og:image" content="https://math.now.sh?inline=Confidence%20%28X%20%5Crightarrow%20Y%29%20%3D%20Support%20(Y)">
+<meta property="og:image" content="https://math.now.sh?inline=P%28Y%7CX%29%3DP(Y)">
+<meta property="og:image" content="https://math.now.sh?inline=P%28X%2CY%29%3DP(X)%5Ctimes%20P(Y)">
+<meta property="og:image" content="https://math.now.sh?inline=P%28X%2CY%29%20%3E%20P(X)%20x%20P(Y)">
+<meta property="og:image" content="https://math.now.sh?inline=P%28X%2CY%29%20%3C%20P(X)%20x%20P(Y)">
+<meta property="og:image" content="https://math.now.sh?inline=Lift%20%3D%20%5Cfrac%7BP%28Y%7CX%29%7D%7BP(Y)%7D">
+<meta property="og:image" content="https://math.now.sh?inline=Interest%20%3D%20%5Cfrac%7BP%28X%2CY%29%7D%7BP(X)P(Y)%7D">
+<meta property="og:image" content="https://math.now.sh?inline=PS%3DP%28X%2CY%29-P(X)P(Y)">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cphi-coefficient%3D%5Cfrac%7BP%28X%2CY%29-P(X)P(Y)%7D%7B%5Csqrt%7BP(X)%5B1-P(X)%5DP(Y)%5B1-P(Y)%5D%7D%7D">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure11.png">
+<meta property="og:image" content="https://math.now.sh?inline=Confidence%3DP%28Coffee%7CTea%29%3D0.75">
+<meta property="og:image" content="https://math.now.sh?inline=P%28Coffee%29%3D0.8">
+<meta property="og:image" content="https://math.now.sh?inline=Interest%20%3D%20%5Cfrac%7B0.15%7D%7B0.2%5Ctimes%200.8%7D%3D0.9375">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure13.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure14.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure15.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure16.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure17.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure18.png">
 <meta property="article:published_time" content="2020-10-14T15:54:37.000Z">
-<meta property="article:modified_time" content="2020-10-19T22:47:41.261Z">
+<meta property="article:modified_time" content="2020-10-27T15:03:19.793Z">
 <meta property="article:author" content="Gaoxiang Luo">
 <meta property="article:tag" content="Association Rule">
 <meta property="article:tag" content="Apriori Algorithm">
@@ -150,7 +179,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Association Rule: Basic Concept</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Association-Rule-Mining"><span class="toc-number">1.1.</span> <span class="toc-text">Association Rule Mining</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Def-Frequent-Itemset"><span class="toc-number">1.1.1.</span> <span class="toc-text">Def: Frequent Itemset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Association-Rule-Mining-Task"><span class="toc-number">1.1.2.</span> <span class="toc-text">Association Rule Mining Task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apriori-Algorithm"><span class="toc-number">1.1.3.</span> <span class="toc-text">Apriori Algorithm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rule-Generation"><span class="toc-number">1.1.4.</span> <span class="toc-text">Rule Generation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Algorithms-and-Complexity"><span class="toc-number">1.2.</span> <span class="toc-text">Algorithms and Complexity</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Maximal-Frequent-Itemset"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">Maximal Frequent Itemset</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Closed-Itemset"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">Closed Itemset</span></a></li></ol></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Association Rule: Basic Concept</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Association-Rule-Mining"><span class="toc-number">1.1.</span> <span class="toc-text">Association Rule Mining</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Def-Frequent-Itemset"><span class="toc-number">1.1.1.</span> <span class="toc-text">Def: Frequent Itemset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Association-Rule-Mining-Task"><span class="toc-number">1.1.2.</span> <span class="toc-text">Association Rule Mining Task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apriori-Algorithm"><span class="toc-number">1.1.3.</span> <span class="toc-text">Apriori Algorithm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rule-Generation"><span class="toc-number">1.1.4.</span> <span class="toc-text">Rule Generation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Algorithms-and-Complexity"><span class="toc-number">1.2.</span> <span class="toc-text">Algorithms and Complexity</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Maximal-Frequent-Itemset"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">Maximal Frequent Itemset</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Closed-Itemset"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">Closed Itemset</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pattern-Evaluation"><span class="toc-number">1.3.</span> <span class="toc-text">Pattern Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Statistical-Relationship-between-X-and-Y"><span class="toc-number">1.3.1.</span> <span class="toc-text">Statistical Relationship between X and Y</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Measures-that-take-into-account-statistical-dependence"><span class="toc-number">1.3.2.</span> <span class="toc-text">Measures that take into account statistical dependence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Simpson%E2%80%99s-Paradox"><span class="toc-number">1.3.3.</span> <span class="toc-text">Simpson’s Paradox</span></a></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -176,7 +205,7 @@
       
         <time datetime="2020-10-14T15:54:37.000Z" itemprop="datePublished">2020-10-14</time>
         
-        (Updated: <time datetime="2020-10-19T22:47:41.261Z" itemprop="dateModified">2020-10-19</time>)
+        (Updated: <time datetime="2020-10-27T15:03:19.793Z" itemprop="dateModified">2020-10-27</time>)
         
       
     </div>
@@ -294,6 +323,79 @@ In this example, those red digits are transaction ID of the table in the top-lef
 </ul>
 <p>This Venn graph also shows the relationship between these concepts that mentioned above.<br>
 <img src="figure9.png" alt="figure9"></p>
+<h2 id="Pattern-Evaluation">Pattern Evaluation</h2>
+<p>We’re convinced that association rule algorithms can produce large number of rules. In order to evaluate it, we need some interestingness measures that can be used to prune/rank the patterns, since in the original formulation, only support &amp; confidence are the only measures used.</p>
+<p>Given <img src="https://math.now.sh?inline=X%20%5Crightarrow%20Y" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> or <img src="https://math.now.sh?inline=%5C%7BX%2CY%5C%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, information needed to compute interestingness can be obtained from a contingency table<br>
+<img src="figure10.png" alt="figure10"><br>
+Havint this table, I’m able to construct all the measures such as support, confidence, Gini, entropy, etc.</p>
+<p>Let’s look at the drawback of confidence:<br>
+<img src="figure11.png" alt="figure11"><br>
+<strong>Association Rule: Tea -&gt; Coffee</strong><br>
+<img src="https://math.now.sh?inline=Confidence%5Capprox%20P%28coffee%20%7C%20Tea%29%3D%5Cfrac%7B150%7D%7B200%7D%3D0.75" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br>
+<img src="https://math.now.sh?inline=Confidence%20%3E%2050%5C%25" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, meaning people who drink tea are more likely to drink coffee than not drink coffee, so rule seems reasonable. However, there is something wrong here with this rule, because we only that people who drink tea is unlikely to drink coffee. What’s wrong here?<br>
+<img src="https://math.now.sh?inline=P%28coffee%29%3D0.8" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, which means knowing that a person drinks tea reduces the probability that the person drinks coffee!<br>
+Note that <img src="https://math.now.sh?inline=P%28Coffee%20%7C%20Tea%29%3D%5Cfrac%7B650%7D%7B800%7D%3D0.8125" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br>
+Let’s look at another example:<br>
+<strong>Association Rule: Tea -&gt; Honey</strong><br>
+<img src="https://math.now.sh?inline=Confidence%5Capprox%20P%28Honey%20%7C%20Tea%29%3D%5Cfrac%7B100%7D%7B200%7D%3D0.50" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br>
+<img src="https://math.now.sh?inline=Confidence%20%3D%2050%5C%25" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, whichi may mean that drinking rea has little influence whether honey is used or not. So rule seems uninteresting.</p>
+<p>Then, what kind of rules do we really want?</p>
+<ul>
+<li>Confidence (X-&gt;Y) should be sufficiently high
+<ul>
+<li>To ensure that people who buy X will more likely buy Y than not buy Y</li>
+</ul>
+</li>
+<li><strong>Confidence (X-&gt;Y) &gt; Support(Y)</strong>
+<ul>
+<li>otherwise, rule will be misleading because having item X actually reduces the chance of having item Y in the same transaction</li>
+</ul>
+</li>
+</ul>
+<h3 id="Statistical-Relationship-between-X-and-Y">Statistical Relationship between X and Y</h3>
+<p>The criterion: <img src="https://math.now.sh?inline=Confidence%20%28X%20%5Crightarrow%20Y%29%20%3D%20Support%20(Y)" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is equivalent to</p>
+<ul>
+<li><img src="https://math.now.sh?inline=P%28Y%7CX%29%3DP(Y)" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+<li><img src="https://math.now.sh?inline=P%28X%2CY%29%3DP(X)%5Ctimes%20P(Y)" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> (X and Y are independent)
+<ul>
+<li>If <img src="https://math.now.sh?inline=P%28X%2CY%29%20%3E%20P(X)%20x%20P(Y)" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>: X and Y are positively correlated</li>
+<li>If <img src="https://math.now.sh?inline=P%28X%2CY%29%20%3C%20P(X)%20x%20P(Y)" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>: X and Y are negatively correlated</li>
+</ul>
+</li>
+</ul>
+<h3 id="Measures-that-take-into-account-statistical-dependence">Measures that take into account statistical dependence</h3>
+<p><img src="https://math.now.sh?inline=Lift%20%3D%20%5Cfrac%7BP%28Y%7CX%29%7D%7BP(Y)%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br>
+<img src="https://math.now.sh?inline=Interest%20%3D%20%5Cfrac%7BP%28X%2CY%29%7D%7BP(X)P(Y)%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br>
+<img src="https://math.now.sh?inline=PS%3DP%28X%2CY%29-P(X)P(Y)" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br>
+<img src="https://math.now.sh?inline=%5Cphi-coefficient%3D%5Cfrac%7BP%28X%2CY%29-P(X)P(Y)%7D%7B%5Csqrt%7BP(X)%5B1-P(X)%5DP(Y)%5B1-P(Y)%5D%7D%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></p>
+<p>Now if we look at the coffee-tea example:<br>
+<img src="figure11.png" alt="figure11"><br>
+<img src="https://math.now.sh?inline=Confidence%3DP%28Coffee%7CTea%29%3D0.75" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, but <img src="https://math.now.sh?inline=P%28Coffee%29%3D0.8" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. This implies that:<br>
+<img src="https://math.now.sh?inline=Interest%20%3D%20%5Cfrac%7B0.15%7D%7B0.2%5Ctimes%200.8%7D%3D0.9375" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>(&lt;1, therefore is negativelyt accociated)</p>
+<p>There are more measures:<br>
+<img src="figure13.png" alt="figure13"><br>
+Then, how do we compare different measures?<br>
+<img src="figure14.png" alt="figure14"><br>
+These measures are so different, how do we choose which one to use?</p>
+<p>Let’s discover some properties</p>
+<ul>
+<li>Property under Inversion Operation<br>
+Some measures won’t change due to inversion operation. E.g., Correlation won’t change due to inversion operation.<br>
+<img src="figure15.png" alt="figure15"></li>
+<li>Property under Null Addition<br>
+<img src="figure16.png" alt="figure16"><br>
+Cosine, Jaccard, All-confidence, condifence won’t change, they’re invariant measures due to Null addition. But some measures will change such as correlation, Interest/Lift, odds ratio, etc.</li>
+<li>Property under Row/Column Scaling<br>
+<img src="figure17.png" alt="figure17"><br>
+Mosteller: underlying associations hould be independent of the relative number of male and female students in the samples.</li>
+</ul>
+<p>In a table:<br>
+<img src="figure18.png" alt="figure18"></p>
+<h3 id="Simpson’s-Paradox">Simpson’s Paradox</h3>
+<p>Observed relationship in data may be influenced by the presence of other confounding factors (hidden cariables),i.e., hidden variables may cause the observed relationship to disappear or reverse its direction. So, proper stratification is needed to avoid generating spurious patterns.</p>
+<p>For example, say we have two hospitals where hospital A has 80% of recovery rate from COVID, and hospital B has 90% of recovery rate from COVID. Which hospital is better?<br>
+Let’s further look at the recovery rate of different age group by a age threshold. It turns out that Hospital A has 50% of recovery rate on older population, and Hospital B has 30% of recovery rate on older population. Meanshilw, Hospital A has 99% of recovery rate on younder population while Hospital B’s is 98%.<br>
+Hospital A has both higher recovery rate than Hospital B in terms of old and yound population, but why the overall recovery is lower than the Hospital B? This is the simpson’s paradox.</p>
 
   </div>
 </article>
@@ -345,7 +447,7 @@ In this example, those red digits are transaction ID of the table in the top-lef
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Association Rule: Basic Concept</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Association-Rule-Mining"><span class="toc-number">1.1.</span> <span class="toc-text">Association Rule Mining</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Def-Frequent-Itemset"><span class="toc-number">1.1.1.</span> <span class="toc-text">Def: Frequent Itemset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Association-Rule-Mining-Task"><span class="toc-number">1.1.2.</span> <span class="toc-text">Association Rule Mining Task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apriori-Algorithm"><span class="toc-number">1.1.3.</span> <span class="toc-text">Apriori Algorithm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rule-Generation"><span class="toc-number">1.1.4.</span> <span class="toc-text">Rule Generation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Algorithms-and-Complexity"><span class="toc-number">1.2.</span> <span class="toc-text">Algorithms and Complexity</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Maximal-Frequent-Itemset"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">Maximal Frequent Itemset</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Closed-Itemset"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">Closed Itemset</span></a></li></ol></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Association Rule: Basic Concept</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Association-Rule-Mining"><span class="toc-number">1.1.</span> <span class="toc-text">Association Rule Mining</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Def-Frequent-Itemset"><span class="toc-number">1.1.1.</span> <span class="toc-text">Def: Frequent Itemset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Association-Rule-Mining-Task"><span class="toc-number">1.1.2.</span> <span class="toc-text">Association Rule Mining Task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apriori-Algorithm"><span class="toc-number">1.1.3.</span> <span class="toc-text">Apriori Algorithm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rule-Generation"><span class="toc-number">1.1.4.</span> <span class="toc-text">Rule Generation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Algorithms-and-Complexity"><span class="toc-number">1.2.</span> <span class="toc-text">Algorithms and Complexity</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Maximal-Frequent-Itemset"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">Maximal Frequent Itemset</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Closed-Itemset"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">Closed Itemset</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pattern-Evaluation"><span class="toc-number">1.3.</span> <span class="toc-text">Pattern Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Statistical-Relationship-between-X-and-Y"><span class="toc-number">1.3.1.</span> <span class="toc-text">Statistical Relationship between X and Y</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Measures-that-take-into-account-statistical-dependence"><span class="toc-number">1.3.2.</span> <span class="toc-text">Measures that take into account statistical dependence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Simpson%E2%80%99s-Paradox"><span class="toc-number">1.3.3.</span> <span class="toc-text">Simpson’s Paradox</span></a></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -412,7 +514,7 @@ In this example, those red digits are transaction ID of the table in the top-lef
     </span> -->
   </div>
   <div class="Word-count">
-    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">12.9k</span>
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">14.7k</span>
   </div>
 </footer>
 
