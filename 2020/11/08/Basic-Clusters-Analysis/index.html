@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Acknowledgement: This course (CSCI 5523) is being offered by Prof. Vipin Kumar at the University of Minnesota in Fall 2020.  Cluter Analyusis is to find groups of objects such that the objects in a g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Basic Clusters Analysis">
+<meta property="og:url" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/index.html">
+<meta property="og:site_name" content="Leon">
+<meta property="og:description" content="Acknowledgement: This course (CSCI 5523) is being offered by Prof. Vipin Kumar at the University of Minnesota in Fall 2020.  Cluter Analyusis is to find groups of objects such that the objects in a g">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure1.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure2.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure4.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure5.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure6.png">
+<meta property="og:image" content="https://math.now.sh?inline=O%28n*K*I*d%29">
+<meta property="og:image" content="https://math.now.sh?inline=n">
+<meta property="og:image" content="https://math.now.sh?inline=K">
+<meta property="og:image" content="https://math.now.sh?inline=I">
+<meta property="og:image" content="https://math.now.sh?inline=d">
+<meta property="og:image" content="https://math.now.sh?from=SSE%3D%5Csum_%7Bi%3D1%7D%5EK%5Csum_%7BX%5Cin%20C_i%7Ddist%5E2%28m_i%2Cx%29%0A">
+<meta property="og:image" content="https://math.now.sh?inline=x">
+<meta property="og:image" content="https://math.now.sh?inline=C_i">
+<meta property="og:image" content="https://math.now.sh?inline=m_i">
+<meta property="og:image" content="https://math.now.sh?inline=C_i">
+<meta property="og:image" content="https://math.now.sh?inline=m_i">
+<meta property="og:image" content="https://math.now.sh?from=P%3D%5Cfrac%7B%5Ctext%7Bnumber%20of%20ways%20to%20select%20one%20centroid%20from%20each%20cluster%7D%7D%7B%5Ctext%7Bnumber%20of%20ways%20to%20select%20K%20centroids%7D%7D%3D%20%5Cfrac%7BK!n%5EK%7D%7B%28Kn%29%5EK%7D%3D%5Cfrac%7BK!%7D%7BK%5EK%7D%0A">
+<meta property="og:image" content="https://math.now.sh?inline=K%3D10">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cfrac%7B10!%7D%7B10%5E%7B10%7D%7D%3D0.00036">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure7.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure8.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure9.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure12.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure10.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure13.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure11.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure14.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure15.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure16.png">
+<meta property="article:published_time" content="2020-11-09T05:49:30.000Z">
+<meta property="article:modified_time" content="2020-11-13T07:53:39.271Z">
+<meta property="article:author" content="Gaoxiang Luo">
+<meta property="article:tag" content="K-means">
+<meta property="article:tag" content="Hierarchical Clustering">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure1.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Basic Clusters Analysis</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Leon" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/11/01/Association-Rules-Advanced-Concept/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/&text=Basic Clusters Analysis"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/&title=Basic Clusters Analysis"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/&is_video=false&description=Basic Clusters Analysis"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Basic Clusters Analysis&body=Check out this article: https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/&title=Basic Clusters Analysis"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/&title=Basic Clusters Analysis"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/&title=Basic Clusters Analysis"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/&title=Basic Clusters Analysis"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/&name=Basic Clusters Analysis&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/&t=Basic Clusters Analysis"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Type-of-clusters"><span class="toc-number">1.</span> <span class="toc-text">Type of clusters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Clustering-Algorithms"><span class="toc-number">2.</span> <span class="toc-text">Clustering Algorithms</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#K-means-and-its-variant"><span class="toc-number">2.1.</span> <span class="toc-text">K-means and its variant</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-evaluate-K-means-Cluster"><span class="toc-number">2.1.1.</span> <span class="toc-text">How to evaluate K-means Cluster?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-optimize-K-means-Cluster"><span class="toc-number">2.1.2.</span> <span class="toc-text">How to optimize K-means Cluster?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-handle-empty-cluster"><span class="toc-number">2.1.3.</span> <span class="toc-text">How to handle empty cluster?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-update-centers-incrementally"><span class="toc-number">2.1.4.</span> <span class="toc-text">How to update centers incrementally?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Limitations-of-K-means"><span class="toc-number">2.1.5.</span> <span class="toc-text">Limitations of K-means</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hierarchical-Clustering"><span class="toc-number">2.2.</span> <span class="toc-text">Hierarchical Clustering</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Basic Clusters Analysis
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Leon</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-11-09T05:49:30.000Z" itemprop="datePublished">2020-11-08</time>
+        
+        (Updated: <time datetime="2020-11-13T07:53:39.271Z" itemprop="dateModified">2020-11-13</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Hierarchical-Clustering/" rel="tag">Hierarchical Clustering</a>, <a class="tag-link-link" href="/tags/K-means/" rel="tag">K-means</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>Acknowledgement: This course (CSCI 5523) is being offered by <a target="_blank" rel="noopener" href="https://www-users.cs.umn.edu/~kumar001/">Prof. Vipin Kumar</a> at the University of Minnesota in Fall 2020.</p>
+</blockquote>
+<p>Cluter Analyusis is to find groups of objects such that the objects in a group will be similiar to one another and different from the objects in other groups. It’s often used to understanding data sets by grouping related data together, or reduce the size of large data sets. Note that simple segmentation such as sorting by last name, results of a query and supervised classification are not cluster analysis.</p>
+<p>A clustering is a set of clusters. In general, there are two types of clusterings – Partitional Clustering and Hierarchical Clustering as following shown:<br>
+<img src="figure1.png" alt="figure1"><br>
+<img src="figure2.png" alt="figure2"><br>
+Not only this, there are also other distrinction between sets of clusters.</p>
+<ul>
+<li>Exclusive vs Non-exclusive<br>
+In non-exclusive clusterings, points may belong to multiple clusters.</li>
+<li>Fuzzy vs Non-fuzzy<br>
+In fuzzy clustring, a point belongs to every cluster with some weight between 0 and 1; weight must sum to 1.</li>
+<li>Partial vs Complete<br>
+In some cases, we only want cluster some of the data.</li>
+<li>Heterogeneous vs Homogeneous<br>
+Cluters of widely different sizes, shapes, and densities.</li>
+</ul>
+<h2 id="Type-of-clusters">Type of clusters</h2>
+<ul>
+<li>Well-separated Clusters: a cluster is a set of points such that any point in a cluster is closer (or more similiar) to every other point in the cluster than to any point not in the cluster.</li>
+<li>Center-based Clusters: A cluster is a set of objects such that an object in a cluster is closer to the “center” of a cluster, than to the center of any other cluster. Often, the center of a cluster is a <strong>centroid</strong>, the average of all the points in the cluster, or a <strong>medoid</strong>, the most “representative” point of a cluster.</li>
+<li>Contiguous Clusters (Nearest neighbor or Transitive): a cluster is a set of points such that a point in a cluster is closer (or more similiar) to one or more other points in the cluster than to any point not in the cluster.<br>
+<img src="figure4.png" alt="figure4"></li>
+<li>Density-based Clusters: a cluster is a dense region of points, which is separated by low-density regions, from other regions of high density. It’s used when the clusters are irregular or intertwined, and when noise and outliers are present.<br>
+<img src="figure5.png" alt="figure5"></li>
+</ul>
+<h2 id="Clustering-Algorithms">Clustering Algorithms</h2>
+<h3 id="K-means-and-its-variant">K-means and its variant</h3>
+<p><img src="figure6.png" alt="figure6"><br>
+The idea of K-means is not difficult to understand. First, we pick randomly K points as initial center and assign all points to their closest center respectively. Then recompute the center of each cluster since we have more than a single initial point in a cluster now.  We repeat this process until the centers don’t change. K-means is a partitional clustering approach, and intially K must be specified.</p>
+<p>Furthermore, the initial centroids are oftren chosen randomly and if you choose a different intial centroid, you might end up with a different set of clusters. The centroid is (typically) the mean of the points in the cluster. How close each data point to a centroid can be measured by Euclidean distance, cosine similarity, correlation, etc. K-means will converge for common similarity measures mentioned above. Most of the convergence happens in the first few iterations, and often the stopping condition is changed to “Util relatively few points change clusters” rather than “no change…” Note that the complexity of K-means is <img src="https://math.now.sh?inline=O%28n*K*I*d%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> where <img src="https://math.now.sh?inline=n" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the number of points, <img src="https://math.now.sh?inline=K" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the number of clusters, <img src="https://math.now.sh?inline=I" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the number of iterations, and <img src="https://math.now.sh?inline=d" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the number of attributes.</p>
+<h4 id="How-to-evaluate-K-means-Cluster">How to evaluate K-means Cluster?</h4>
+<p>The most common measure is Sum of Squared Error (SSE), which is summing up the error - the distance to the neareast cluster at each point.</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=SSE%3D%5Csum_%7Bi%3D1%7D%5EK%5Csum_%7BX%5Cin%20C_i%7Ddist%5E2%28m_i%2Cx%29%0A" /></p><p>where <img src="https://math.now.sh?inline=x" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is a data point in cluster <img src="https://math.now.sh?inline=C_i" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> and <img src="https://math.now.sh?inline=m_i" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is a representative point for cluster <img src="https://math.now.sh?inline=C_i" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> (can show that <img src="https://math.now.sh?inline=m_i" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> corresponds to the center (mean) of the cluster). If we’re given two sets of clusters, we prefer the one with the smallest error. Note that a way to reduce SSE is to increase K, the number of cluster, but a good clustering with smaller K can have a lower SSE than a poor clustering with higher K.</p>
+<h4 id="How-to-optimize-K-means-Cluster">How to optimize K-means Cluster?</h4>
+<p>The choice of initial points are important. If there are K ‘real’ clusters then the chance of selecting one centroid from each cluster is relatively small. If the clusters are the same size with ‘real’ clusters, then</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=P%3D%5Cfrac%7B%5Ctext%7Bnumber%20of%20ways%20to%20select%20one%20centroid%20from%20each%20cluster%7D%7D%7B%5Ctext%7Bnumber%20of%20ways%20to%20select%20K%20centroids%7D%7D%3D%20%5Cfrac%7BK!n%5EK%7D%7B%28Kn%29%5EK%7D%3D%5Cfrac%7BK!%7D%7BK%5EK%7D%0A" /></p><p>For example, if <img src="https://math.now.sh?inline=K%3D10" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, the probability is around <img src="https://math.now.sh?inline=%5Cfrac%7B10!%7D%7B10%5E%7B10%7D%7D%3D0.00036" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. Sometimes the initial centroids will readjust themselves in ‘right’ way but sometimes they don’t. Let’s take a look at some bad clutering examples with K-means:<br>
+<img src="figure7.png" alt="figure7"><br>
+The 1st, 3rd, 4th colomn have two clusters (black plus sign) with two ‘real’ clusters, so they perform normally. However, the 2nd colomn has only one cluster and the 5th colomn has three clusters when they both have two ‘real’ clusters. From iteration 1-4, we can see that it stops at a akward position and doesn’t correctly classify. So what do people normally do to solve initial centroids probloms?</p>
+<ul>
+<li>Multiple runs: helps, but probability is not in your side, so not helpful in the scenario above.</li>
+<li>Sample and use hierarchical clustering to determine initial centroids.</li>
+<li>Use some strategy to select the k initial centroids and then select among these initial centroids.<br>
+Example: select most widely separated</li>
+<li>Bisecting K-means: Not as susceptible to initilization issues.</li>
+</ul>
+<p>Since this is an intro class, we didn’t go into details of above solutions.<br>
+Additioanlly, people also perform pre-processing and post processing to improve the performance of K-means.</p>
+<ul>
+<li>
+<p>Pre-processing</p>
+<ul>
+<li>Normalize the data</li>
+<li>Eliminate outliers</li>
+</ul>
+</li>
+<li>
+<p>Post-processing</p>
+<ul>
+<li>Eliminate empty clusters and small clusters that may represent outliers</li>
+<li>Split ‘loose’ clusters, i.e., clusters with relatively high SSE</li>
+<li>Merge clusters that are ‘close’ and that have relatively low SSE</li>
+<li>These steps can be used multiple times duiring the clustering process</li>
+</ul>
+</li>
+</ul>
+<h4 id="How-to-handle-empty-cluster">How to handle empty cluster?</h4>
+<p>Let’s see an example that empty cluster can happen:<br>
+<img src="figure8.png" alt="figure8"><br>
+Basic K-means algorithm can yield empty clusters, then how can we handle it?</p>
+<ul>
+<li>Choose the point that contributes most to SSE, and make it a new centroid.</li>
+<li>Choose a point from the cluster with the highest SSE, and make it a new centroid.</li>
+<li>If there are several empty clusters, the above can be repeated several times.</li>
+</ul>
+<h4 id="How-to-update-centers-incrementally">How to update centers incrementally?</h4>
+<p>In the basic K-means algorithm, centroids are updated after all points are assigned to a centroid. An alternative way is to update the centroid after each assignment (incremental approach), then each assignment updates zero or two centroids. It’s more expensive, and introduces an order dependency, but it never get an empty cluster.</p>
+<h4 id="Limitations-of-K-means">Limitations of K-means</h4>
+<p>K means has problems when clusters are of differing sizes, densities or non-globular shapes. Also, K-means has problems when the data contains outliers.</p>
+<ul>
+<li>Differing sizes<br>
+<img src="figure9.png" alt="figure9"><br>
+One solution is to use many clusters, but eventually need to put some clusters together to match ground truth.<br>
+<img src="figure12.png" alt="figure12"></li>
+<li>Differing densities<br>
+<img src="figure10.png" alt="figure10"><br>
+Again, increasing number of clusters can solve this situation.<br>
+<img src="figure13.png" alt="figure13"></li>
+<li>Non-globular shapes<br>
+<img src="figure11.png" alt="figure11"><br>
+Same solution: use more clusters<br>
+<img src="figure14.png" alt="figure14"></li>
+</ul>
+<h3 id="Hierarchical-Clustering">Hierarchical Clustering</h3>
+<p>It produces a set of nested clusters organized as a hierarchical tree, and it can be visualized as a dendrogram, which is a tree like diagram below that records the sequences of merges or splits.<br>
+<img src="figure15.png" alt="figure15"><br>
+The stengths of Hierarchical Clustering is that we do not have to assume any particular number of clusters because any desired number of clusters can be obtained by ‘cutting’ the dendrogram at the proper level. Also, those clusters gained may correspond to meaningful taxnomies such as animal kingdom, phylogeny reconstruction in biological sciences.<br>
+It’s not difficult to image there are two mian types of hierarchical clustering. The first one is agglomerative, which is starting with the points as individual clusters, then at each step merge the closest pair of cluster until only one cluster (or k clusters) left. The second one is divisive, which starts with an all-inclusive cluster, then at each step split a cluster until each cluster contains an individual point (or there are k clusters). The basic algorithm is straightforward as below:<br>
+<img src="figure16.png" alt="figure16"></p>
+<hr>
+<div style="text-align: right"> To be continued... </div>
+  </div>
+</article>
+
+
+  <!-- Gitalk start  -->
+
+  <!-- Link Gitalk files  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"/></script> 
+  <div id="gitalk-container"></div>     
+  <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+        // gitalk's main params
+        clientID: `3ce407f9c6ed6aaffdf8`,
+        clientSecret: `2c6bc0465d806a6dc4ee20c9b1a0043d7a6101fe`,
+        repo: `gaoxiangluo.github.io`,
+        owner: 'GaoxiangLuo',
+        admin: ['GaoxiangLuo'],
+        id: location.pathname.slice(0, 50),
+        distractionFreeMode: true,
+        enableHotKey: true,
+        language: `en`
+      });
+      gitalk.render('gitalk-container');
+  </script> 
+  <!-- Gitalk end -->
+
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Type-of-clusters"><span class="toc-number">1.</span> <span class="toc-text">Type of clusters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Clustering-Algorithms"><span class="toc-number">2.</span> <span class="toc-text">Clustering Algorithms</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#K-means-and-its-variant"><span class="toc-number">2.1.</span> <span class="toc-text">K-means and its variant</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-evaluate-K-means-Cluster"><span class="toc-number">2.1.1.</span> <span class="toc-text">How to evaluate K-means Cluster?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-optimize-K-means-Cluster"><span class="toc-number">2.1.2.</span> <span class="toc-text">How to optimize K-means Cluster?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-handle-empty-cluster"><span class="toc-number">2.1.3.</span> <span class="toc-text">How to handle empty cluster?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-update-centers-incrementally"><span class="toc-number">2.1.4.</span> <span class="toc-text">How to update centers incrementally?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Limitations-of-K-means"><span class="toc-number">2.1.5.</span> <span class="toc-text">Limitations of K-means</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hierarchical-Clustering"><span class="toc-number">2.2.</span> <span class="toc-text">Hierarchical Clustering</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/&text=Basic Clusters Analysis"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/&title=Basic Clusters Analysis"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/&is_video=false&description=Basic Clusters Analysis"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Basic Clusters Analysis&body=Check out this article: https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/&title=Basic Clusters Analysis"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/&title=Basic Clusters Analysis"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/&title=Basic Clusters Analysis"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/&title=Basic Clusters Analysis"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/&name=Basic Clusters Analysis&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/&t=Basic Clusters Analysis"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    Gaoxiang Luo
+  </div>
+  <!-- <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div> -->
+  <div class="busuanzi-count">
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span class="site-pv">
+      Page View <i class="fa fa-users"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+    <!-- <span class="site-uv">
+      Number of Visitors <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuansi_value_site_uv"></span>
+    </span> -->
+  </div>
+  <div class="Word-count">
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">16.8k</span>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-176745887-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":200,"height":400,"hOffset":5,"vOffset":-38},"mobile":{"show":false,"scale":0.2},"react":{"opacityDefault":0.8,"opacityOnHover":0.2},"log":false});</script></body>
+</html>
