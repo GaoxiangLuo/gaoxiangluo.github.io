@@ -57,7 +57,7 @@
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/27/Basic-Methods-of-Training-Deep-Neural-Networks-DNNs/figure10.png">
 <meta property="og:image" content="https://math.now.sh?inline=%5Capprox">
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/27/Basic-Methods-of-Training-Deep-Neural-Networks-DNNs/figure13.png">
-<meta property="og:image" content="https://math.now.sh?from=%5Csum_k%3D%5Cinfty%2C%20%5Cquad%20%5Csum_%7Bk%7Dt_k%5E2%3C%5Cinfty%0A">
+<meta property="og:image" content="https://math.now.sh?from=%5Csum_%7Bk%7Dt_k%3D%5Cinfty%2C%20%5Cquad%20%5Csum_%7Bk%7Dt_k%5E2%3C%5Cinfty%0A">
 <meta property="og:image" content="https://math.now.sh?inline=%5Cfrac%7Bstep%20size%7D%7BLR%20%5Ctext%7B%28learning%20rate%29%7D%7D">
 <meta property="og:image" content="https://math.now.sh?inline=%5Cfrac%7B1%7D%7Bt%7D">
 <meta property="og:image" content="https://math.now.sh?inline=t_k%3D%5Cfrac%7B%5Calpha%7D%7B1%2B%5Cbeta%20k%7D">
@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://math.now.sh?inline=%5Cnabla%20f%28w%29">
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/27/Basic-Methods-of-Training-Deep-Neural-Networks-DNNs/figure18.png">
 <meta property="article:published_time" content="2020-10-27T15:05:02.000Z">
-<meta property="article:modified_time" content="2020-11-13T07:52:51.603Z">
+<meta property="article:modified_time" content="2020-11-15T23:41:56.334Z">
 <meta property="article:author" content="Gaoxiang Luo">
 <meta property="article:tag" content="Deep Neural Network">
 <meta property="article:tag" content="Stochastic Gradient Descent">
@@ -228,7 +228,7 @@
       
         <time datetime="2020-10-27T15:05:02.000Z" itemprop="datePublished">2020-10-27</time>
         
-        (Updated: <time datetime="2020-11-13T07:52:51.603Z" itemprop="dateModified">2020-11-13</time>)
+        (Updated: <time datetime="2020-11-15T23:41:56.334Z" itemprop="dateModified">2020-11-15</time>)
         
       
     </div>
@@ -338,7 +338,7 @@ Having observed that SGD converges to the same value as GD, but why it seems lik
 <img src="figure13.png" alt="figure13"></p>
 <h3 id="Step-Size-Learning-Rate-LR-for-SGD">Step Size (Learning Rate (LR)) for SGD</h3>
 <p>Classical theory for SGD on convex problems requires</p>
-<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=%5Csum_k%3D%5Cinfty%2C%20%5Cquad%20%5Csum_%7Bk%7Dt_k%5E2%3C%5Cinfty%0A" /></p><p>Practical implementation: diminishing <img src="https://math.now.sh?inline=%5Cfrac%7Bstep%20size%7D%7BLR%20%5Ctext%7B%28learning%20rate%29%7D%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, e.g.:</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=%5Csum_%7Bk%7Dt_k%3D%5Cinfty%2C%20%5Cquad%20%5Csum_%7Bk%7Dt_k%5E2%3C%5Cinfty%0A" /></p><p>Practical implementation: diminishing <img src="https://math.now.sh?inline=%5Cfrac%7Bstep%20size%7D%7BLR%20%5Ctext%7B%28learning%20rate%29%7D%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, e.g.:</p>
 <ul>
 <li><img src="https://math.now.sh?inline=%5Cfrac%7B1%7D%7Bt%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> delay: <img src="https://math.now.sh?inline=t_k%3D%5Cfrac%7B%5Calpha%7D%7B1%2B%5Cbeta%20k%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, <img src="https://math.now.sh?inline=%5Calpha%2C%5Cbeta" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>: tunable parameters, <img src="https://math.now.sh?inline=k" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>: iteration index</li>
 <li>exponential delay: <img src="https://math.now.sh?inline=t_k%20%3D%20%5Calpha%20e%5E%7B-%5Cbeta%20k%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, <img src="https://math.now.sh?inline=%5Calpha%2C%5Cbeta" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>: tunable parameters, <img src="https://math.now.sh?inline=k" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>: iteration index</li>
@@ -353,7 +353,7 @@ Having observed that SGD converges to the same value as GD, but why it seems lik
 <h3 id="Why-SGD-with-adaptive-learning-rate">Why SGD with adaptive learning rate?</h3>
 <p>One great complain of SGD is that if the conditioning of the function is not good, i.e., if you have a coutour plot that every time you take a step the direction is almost orthogonal with last step, SGD is sturggling a lot in moving.<br>
 <img src="figure14.png" alt="figure14"><br>
-Even if we can deal with it by Newton’s method, Quasi-Newton’s method and momentum methods, it’s still expensive. Here is a idea: if decompising your gradient direction to coordinate directions, e.g., x-direction and y-direction, if the magnitude of coordinate directions have very different values, it will have really bad effect on optimization. The solution is that if the gradient toward a certian coordinate direction is always large, I can divide the component of that direction by a large number, so that I can reduce the magnitude toward that direction. In other words, I want to amplify coordinate direction where gradient is always small, and I want to surpress cooprdinate direction where gradient is always large. How to do that?</p>
+Even if we can deal with it by Newton’s method, Quasi-Newton’s method and momentum methods, it’s still expensive. Here is a idea: if decompiosing your gradient direction to coordinate directions, e.g., x-direction and y-direction, if the magnitude of coordinate directions have very different values, it will have really bad effect on optimization. The solution is that if the gradient toward a certian coordinate direction is always large, I can divide the component of that direction by a large number, so that I can reduce the magnitude toward that direction. In other words, I want to amplify coordinate direction where gradient is always small, and I want to surpress cooprdinate direction where gradient is always large. How to do that?</p>
 <h4 id="Method-1-Adagrad">Method 1: Adagrad</h4>
 <p>Adagrad: divide <img src="https://math.now.sh?inline=g_i" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> by historic gradient magnitudes in the <img src="https://math.now.sh?inline=i%5E%7Bth%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> coordinate. If the historic gradient is small, then I divide <img src="https://math.now.sh?inline=g_i" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> by it I will get a larger value; vice versa.</p>
 <p>At the <img src="https://math.now.sh?inline=%28k%2B1%29%5E%7Bth%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> iteration, for all <img src="https://math.now.sh?inline=i" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>:</p>
@@ -533,7 +533,7 @@ Consider the linear model $\mb W^T\mb x_{i} \leftrightarrow \mb y_{i}$ with coor
     </span> -->
   </div>
   <div class="Word-count">
-    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">16.8k</span>
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">18k</span>
   </div>
 </footer>
 

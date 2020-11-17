@@ -42,8 +42,32 @@
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure14.png">
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure15.png">
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure16.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure17.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure18.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure19.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure20.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure21.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure22.png">
+<meta property="og:image" content="https://math.now.sh?inline=O%28N%5E2%29">
+<meta property="og:image" content="https://math.now.sh?inline=N">
+<meta property="og:image" content="https://math.now.sh?inline=O%28N%5E3%29">
+<meta property="og:image" content="https://math.now.sh?inline=N">
+<meta property="og:image" content="https://math.now.sh?inline=N%5E2">
+<meta property="og:image" content="https://math.now.sh?inline=O%28Nlog(N%29)">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure23.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure24.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure25.png">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cfrac%7Bn%28n-1%29%7D%7B2%7D">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure26.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure27.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure28.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure29.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure30.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure31.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure32.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/11/08/Basic-Clusters-Analysis/figure33.png">
 <meta property="article:published_time" content="2020-11-09T05:49:30.000Z">
-<meta property="article:modified_time" content="2020-11-13T07:53:39.271Z">
+<meta property="article:modified_time" content="2020-11-17T06:53:07.184Z">
 <meta property="article:author" content="Gaoxiang Luo">
 <meta property="article:tag" content="K-means">
 <meta property="article:tag" content="Hierarchical Clustering">
@@ -142,7 +166,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Type-of-clusters"><span class="toc-number">1.</span> <span class="toc-text">Type of clusters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Clustering-Algorithms"><span class="toc-number">2.</span> <span class="toc-text">Clustering Algorithms</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#K-means-and-its-variant"><span class="toc-number">2.1.</span> <span class="toc-text">K-means and its variant</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-evaluate-K-means-Cluster"><span class="toc-number">2.1.1.</span> <span class="toc-text">How to evaluate K-means Cluster?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-optimize-K-means-Cluster"><span class="toc-number">2.1.2.</span> <span class="toc-text">How to optimize K-means Cluster?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-handle-empty-cluster"><span class="toc-number">2.1.3.</span> <span class="toc-text">How to handle empty cluster?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-update-centers-incrementally"><span class="toc-number">2.1.4.</span> <span class="toc-text">How to update centers incrementally?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Limitations-of-K-means"><span class="toc-number">2.1.5.</span> <span class="toc-text">Limitations of K-means</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hierarchical-Clustering"><span class="toc-number">2.2.</span> <span class="toc-text">Hierarchical Clustering</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Type-of-clusters"><span class="toc-number">1.</span> <span class="toc-text">Type of clusters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Clustering-Algorithms"><span class="toc-number">2.</span> <span class="toc-text">Clustering Algorithms</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#K-means-and-its-variant"><span class="toc-number">2.1.</span> <span class="toc-text">K-means and its variant</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-evaluate-K-means-Cluster"><span class="toc-number">2.1.1.</span> <span class="toc-text">How to evaluate K-means Cluster?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-optimize-K-means-Cluster"><span class="toc-number">2.1.2.</span> <span class="toc-text">How to optimize K-means Cluster?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-handle-empty-cluster"><span class="toc-number">2.1.3.</span> <span class="toc-text">How to handle empty cluster?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-update-centers-incrementally"><span class="toc-number">2.1.4.</span> <span class="toc-text">How to update centers incrementally?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Limitations-of-K-means"><span class="toc-number">2.1.5.</span> <span class="toc-text">Limitations of K-means</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hierarchical-Clustering"><span class="toc-number">2.2.</span> <span class="toc-text">Hierarchical Clustering</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-define-Inter-Cluster-Similarity"><span class="toc-number">2.2.1.</span> <span class="toc-text">How to define Inter-Cluster Similarity?</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#MIN"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">MIN</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#MAX"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">MAX</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Group-Average"><span class="toc-number">2.2.1.3.</span> <span class="toc-text">Group Average</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Ward%E2%80%99s-Method"><span class="toc-number">2.2.1.4.</span> <span class="toc-text">Ward’s Method</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-of-Hierarchical-Clustering"><span class="toc-number">2.2.2.</span> <span class="toc-text">Summary of Hierarchical Clustering</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Density-Based-Clustering-DBSCAN"><span class="toc-number">2.3.</span> <span class="toc-text">Density Based Clustering (DBSCAN)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-determine-Eps-and-MinPts"><span class="toc-number">2.3.1.</span> <span class="toc-text">How to determine Eps and MinPts?</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cluster-Validity"><span class="toc-number">3.</span> <span class="toc-text">Cluster Validity</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Different-aspects-of-cluster-validation"><span class="toc-number">3.1.</span> <span class="toc-text">Different aspects of cluster validation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Measure-cluster-validity-via-correlation"><span class="toc-number">3.2.</span> <span class="toc-text">Measure cluster validity via correlation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Use-similarity-matrix-for-cluster-validation"><span class="toc-number">3.3.</span> <span class="toc-text">Use similarity matrix for cluster validation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Internal-Measures-SSE-Sum-of-Square-Error"><span class="toc-number">3.4.</span> <span class="toc-text">Internal Measures: SSE (Sum of Square Error)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stastical-Framework-of-Cluster-Validity"><span class="toc-number">3.5.</span> <span class="toc-text">Stastical Framework of Cluster Validity</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -168,7 +192,7 @@
       
         <time datetime="2020-11-09T05:49:30.000Z" itemprop="datePublished">2020-11-08</time>
         
-        (Updated: <time datetime="2020-11-13T07:53:39.271Z" itemprop="dateModified">2020-11-13</time>)
+        (Updated: <time datetime="2020-11-17T06:53:07.184Z" itemprop="dateModified">2020-11-17</time>)
         
       
     </div>
@@ -288,7 +312,100 @@ Same solution: use more clusters<br>
 The stengths of Hierarchical Clustering is that we do not have to assume any particular number of clusters because any desired number of clusters can be obtained by ‘cutting’ the dendrogram at the proper level. Also, those clusters gained may correspond to meaningful taxnomies such as animal kingdom, phylogeny reconstruction in biological sciences.<br>
 It’s not difficult to image there are two mian types of hierarchical clustering. The first one is agglomerative, which is starting with the points as individual clusters, then at each step merge the closest pair of cluster until only one cluster (or k clusters) left. The second one is divisive, which starts with an all-inclusive cluster, then at each step split a cluster until each cluster contains an individual point (or there are k clusters). The basic algorithm is straightforward as below:<br>
 <img src="figure16.png" alt="figure16"></p>
+<h4 id="How-to-define-Inter-Cluster-Similarity">How to define Inter-Cluster Similarity?</h4>
+<p>There are in general 4 ways to do it, which are MIN, MAX, Group Average Distance Between Centroids and other methods driven by an objective function.</p>
+<h5 id="MIN">MIN</h5>
+<p>The proximity of two Cluster is based on the two closest points in the different clusters. It’s determined by one pair of points, i.e., by one link in the proximity graph.<br>
+<img src="figure17.png" alt="figure17"><br>
+The stength of MIN is that it can handle non-elliptical shapes.<br>
+<img src="figure18.png" alt="figure18"><br>
+The limitation of MIN is that it’s sensetive to noise and outliers.<br>
+<img src="figure19.png" alt="figure18"></p>
+<h5 id="MAX">MAX</h5>
+<p>The proximity of two clusters is based on the two most distant points in the different clusters.<br>
+<img src="figure20.png" alt="figuer20"><br>
+The stength of MAX is that it’s less susceptible to noise and ouliers. The limitation of MAX is that it tends to break large clusters and biased towards globular clusters as following:<br>
+<img src="figure21.png" alt="figure21"><br>
+If you’re looking for a globular clusters, MAX is a good choice; but if you’re looking at arbitrary shape clusters, mean is a better choice.</p>
+<h5 id="Group-Average">Group Average</h5>
+<p>The proximity of two clusters is the average of pairwise proximity between points in the two clusters.<br>
+<img src="figure22.png" alt="figure22"><br>
+The stength of Group Average is that it’s also less susceptible to noise and outliers, while its limitation is that is biased towards glubular clusters. Group Average is more robust than single link like MIN and MAX.</p>
+<h5 id="Ward’s-Method">Ward’s Method</h5>
+<p>Similarity of two clusters is based on the increase in squared error when two clusters are merged. This is similiar to Group Average if distance between points is distance squared. Its strength is that it’s less susceptible to noise and outliers and its limitation is that it biased towards globular clusters. One of its applciation is to initialize K-means in Hierarchical analogue of K-means.</p>
+<h4 id="Summary-of-Hierarchical-Clustering">Summary of Hierarchical Clustering</h4>
+<p>Time and Space Requirements</p>
+<ul>
+<li><img src="https://math.now.sh?inline=O%28N%5E2%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> space since it uses the proximity matrix. <img src="https://math.now.sh?inline=N" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the number of points.</li>
+<li><img src="https://math.now.sh?inline=O%28N%5E3%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> time in many cases. There are <img src="https://math.now.sh?inline=N" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> steps and at each step the size, <img src="https://math.now.sh?inline=N%5E2" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, proximity matrix must be updated and searched. The Complexity can be reduce to <img src="https://math.now.sh?inline=O%28Nlog(N%29)" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> time with some cleverness.</li>
+</ul>
+<p>Problems and Limitations:</p>
+<ul>
+<li>Once a decision is made to combine two clusters, it cannot be undone.</li>
+<li>No global objective function is directly minimized.</li>
+<li>Different schemes have problems with one or more of the following:
+<ul>
+<li>Sensitive to noise and outliers</li>
+<li>Difficulty handing clusters of diferent sizes and non-globular shapes</li>
+<li>Breaking large clusters</li>
+</ul>
+</li>
+</ul>
+<h3 id="Density-Based-Clustering-DBSCAN">Density Based Clustering (DBSCAN)</h3>
+<p>Clusters are regions of high density that are separated from one another by regions on low density.</p>
+<p>DBSCAN is a density-based algorithm. We define density as number of points within a specified radius (Eps). If a point has at least a specified number of points (MinPts) within Eps, then it’s a <strong>core point</strong>. If a point is not a core point but is in the neighborhood of a core point, then it’s a <strong>border point</strong>. If a point is neither a core point or a border point, then it’s a noise point.</p>
+<p>There is a verbal DBSCAN algorithm:</p>
+<ol>
+<li>Label all points as core, border, or noise points.</li>
+<li>Eliminate noise points.</li>
+<li>Put an edge between all core points within a distance Eps of each other.</li>
+<li>Make each group of connected core points into a separate cluster.</li>
+<li>Assign each border point to one of the clusters of its associated core points.</li>
+</ol>
+<p>DBSCAN works well since it’s resistant to noise and can handle clusters of different shapes and sizes as the image following:<br>
+<img src="figure23.png" alt="figure23"><br>
+DBSCAN doesn’t work well if the situation is as following:<br>
+<img src="figure24.png" alt="fiture24"></p>
+<h4 id="How-to-determine-Eps-and-MinPts">How to determine Eps and MinPts?</h4>
+<p><img src="figure25.png" alt="figure25"><br>
+The idea is to plot a graph of sorted distance of every point to its kth nearest neighbors. In the graph above, we can see that Eps=10 might be a good choice, because that’s where the “elbow” happens. For instance, as in the graph, ask the question of how far is your 4th neighbor for each point among 3000 points, and plot a graph</p>
+<h2 id="Cluster-Validity">Cluster Validity</h2>
+<p>How to evaluate the “goodness” of the resulting clusters? “Clusters are in the eye of beholder”, then why do we want to evaluate them while we can tell just by looking at them?</p>
+<ul>
+<li>To avoid finding patterns in noise</li>
+<li>To compare clustering algorithms</li>
+<li>To compare two sets of clusters</li>
+<li>To compare two clusters</li>
+</ul>
+<h3 id="Different-aspects-of-cluster-validation">Different aspects of cluster validation</h3>
+<ol>
+<li>Determing the clustering tendency of a set of data, i.e., distinguishing whether non-random structure actually exists in the data.</li>
+<li>Comparing the results of a cluster analysis to externally knonw results, e.g., to externally given class labels.</li>
+<li>Ecaluating how well the results of a cluster analysis fit the data without reference to external information, i.e., use only the data.</li>
+<li>Comparing the results of two different sets of clusters (generated for the same data) to determine which is better.</li>
+</ol>
+<h3 id="Measure-cluster-validity-via-correlation">Measure cluster validity via correlation</h3>
+<p>Suppose we have two matrices. One is proximity matrix and another is ideal similarity matrix, where one row and one colomn for each data point, and an entry is 1 if the associated pair of points belong to the same cluster; otherwise, an entry is 0. Now we need to compute the correlation between the two matrices. Since the matrices are symmetric, only the correlation between <img src="https://math.now.sh?inline=%5Cfrac%7Bn%28n-1%29%7D%7B2%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> entries needs to be calculated. High magnitude of correlation indicates that points that belong to the same cluster are close to each other.</p>
+<p>There is a example as following:<br>
+<img src="figure26.png" alt="figure26"><br>
+The left one is much more clustered than the right one, so the Correlation of the left one is close to -1.</p>
+<h3 id="Use-similarity-matrix-for-cluster-validation">Use similarity matrix for cluster validation</h3>
+<p>First, let’s look at the similarity matrix of a good clustering example:<br>
+<img src="figure27.png" alt="figure27"></p>
+<p>Second, let’s look at how three clusters behave differently on random data that are not so crisp.<br>
+<img src="figure28.png" alt="figure28"><br>
+<img src="figure29.png" alt="figure29"><br>
+<img src="figure30.png" alt="figure30"><br>
+Intuitively, from the three images above we can see that they’re not performing well and K-means performs slightly better than the other two. Now let’s look at a visual proof of DBSCAN working well at density cluster with arbitrary shapes.<br>
+<img src="figure31.png" alt="figure31"></p>
+<h3 id="Internal-Measures-SSE-Sum-of-Square-Error">Internal Measures: SSE (Sum of Square Error)</h3>
+<p>Internal Index is used to measure the goodness of a clustering structure without respects to external information. SSE is good for comparing two clusterings or two clusters, and it can be used to estimate the number of clusters. For instance, as the images below, we know that the groud truth of clusters shall be 10. On the curve, after K &gt; 10, the graph becomes very flat, which implies that K=10 is a good choice for the number of clusters because the ‘elbow’ happens here.<br>
+<img src="figure32.png" alt="figure32"></p>
+<h3 id="Stastical-Framework-of-Cluster-Validity">Stastical Framework of Cluster Validity</h3>
+<p><img src="figure33.png" alt="figure33"><br>
+Let’s look at the image above. We assume that we know the SSE on the left-hand side of the image is 0.005, then on the right-hand side of the image is a plot of a random distribution, which has a SSE around 0.022, so we know any clusterings that has a SSE lower than 0.022 is better, because 0.022 is the SSE of random data points.</p>
 <hr>
+<p>I will make some GIF to visually illustrate clusterings during the winter break.</p>
 <div style="text-align: right"> To be continued... </div>
   </div>
 </article>
@@ -340,7 +457,7 @@ It’s not difficult to image there are two mian types of hierarchical clusterin
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Type-of-clusters"><span class="toc-number">1.</span> <span class="toc-text">Type of clusters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Clustering-Algorithms"><span class="toc-number">2.</span> <span class="toc-text">Clustering Algorithms</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#K-means-and-its-variant"><span class="toc-number">2.1.</span> <span class="toc-text">K-means and its variant</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-evaluate-K-means-Cluster"><span class="toc-number">2.1.1.</span> <span class="toc-text">How to evaluate K-means Cluster?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-optimize-K-means-Cluster"><span class="toc-number">2.1.2.</span> <span class="toc-text">How to optimize K-means Cluster?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-handle-empty-cluster"><span class="toc-number">2.1.3.</span> <span class="toc-text">How to handle empty cluster?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-update-centers-incrementally"><span class="toc-number">2.1.4.</span> <span class="toc-text">How to update centers incrementally?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Limitations-of-K-means"><span class="toc-number">2.1.5.</span> <span class="toc-text">Limitations of K-means</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hierarchical-Clustering"><span class="toc-number">2.2.</span> <span class="toc-text">Hierarchical Clustering</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Type-of-clusters"><span class="toc-number">1.</span> <span class="toc-text">Type of clusters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Clustering-Algorithms"><span class="toc-number">2.</span> <span class="toc-text">Clustering Algorithms</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#K-means-and-its-variant"><span class="toc-number">2.1.</span> <span class="toc-text">K-means and its variant</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-evaluate-K-means-Cluster"><span class="toc-number">2.1.1.</span> <span class="toc-text">How to evaluate K-means Cluster?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-optimize-K-means-Cluster"><span class="toc-number">2.1.2.</span> <span class="toc-text">How to optimize K-means Cluster?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-handle-empty-cluster"><span class="toc-number">2.1.3.</span> <span class="toc-text">How to handle empty cluster?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-update-centers-incrementally"><span class="toc-number">2.1.4.</span> <span class="toc-text">How to update centers incrementally?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Limitations-of-K-means"><span class="toc-number">2.1.5.</span> <span class="toc-text">Limitations of K-means</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hierarchical-Clustering"><span class="toc-number">2.2.</span> <span class="toc-text">Hierarchical Clustering</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-define-Inter-Cluster-Similarity"><span class="toc-number">2.2.1.</span> <span class="toc-text">How to define Inter-Cluster Similarity?</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#MIN"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">MIN</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#MAX"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">MAX</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Group-Average"><span class="toc-number">2.2.1.3.</span> <span class="toc-text">Group Average</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Ward%E2%80%99s-Method"><span class="toc-number">2.2.1.4.</span> <span class="toc-text">Ward’s Method</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-of-Hierarchical-Clustering"><span class="toc-number">2.2.2.</span> <span class="toc-text">Summary of Hierarchical Clustering</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Density-Based-Clustering-DBSCAN"><span class="toc-number">2.3.</span> <span class="toc-text">Density Based Clustering (DBSCAN)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-determine-Eps-and-MinPts"><span class="toc-number">2.3.1.</span> <span class="toc-text">How to determine Eps and MinPts?</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cluster-Validity"><span class="toc-number">3.</span> <span class="toc-text">Cluster Validity</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Different-aspects-of-cluster-validation"><span class="toc-number">3.1.</span> <span class="toc-text">Different aspects of cluster validation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Measure-cluster-validity-via-correlation"><span class="toc-number">3.2.</span> <span class="toc-text">Measure cluster validity via correlation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Use-similarity-matrix-for-cluster-validation"><span class="toc-number">3.3.</span> <span class="toc-text">Use similarity matrix for cluster validation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Internal-Measures-SSE-Sum-of-Square-Error"><span class="toc-number">3.4.</span> <span class="toc-text">Internal Measures: SSE (Sum of Square Error)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stastical-Framework-of-Cluster-Validity"><span class="toc-number">3.5.</span> <span class="toc-text">Stastical Framework of Cluster Validity</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -407,7 +524,7 @@ It’s not difficult to image there are two mian types of hierarchical clusterin
     </span> -->
   </div>
   <div class="Word-count">
-    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">16.8k</span>
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">18k</span>
   </div>
 </footer>
 
