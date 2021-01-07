@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Acknowledgement: This survey is one of the assignments I’ve done in the course CSCI 8980 offered by Prof. Ju Sun at the University of Minnesota in Fall 2020.  Abstract In this survey, we aim to provi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Survey of Deep Semantic Segmentation on Computed Tomography">
+<meta property="og:url" content="https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/index.html">
+<meta property="og:site_name" content="Leon">
+<meta property="og:description" content="Acknowledgement: This survey is one of the assignments I’ve done in the course CSCI 8980 offered by Prof. Ju Sun at the University of Minnesota in Fall 2020.  Abstract In this survey, we aim to provi">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/figure1.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/table1.png">
+<meta property="og:image" content="https://math.now.sh?inline=2%5E%7B16%7D">
+<meta property="og:image" content="https://math.now.sh?inline=2%5E8">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/figure2.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/figure3.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/figure4.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/figure5.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/figure6.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/figure7.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/figure8.png">
+<meta property="og:image" content="https://math.now.sh?from=WCE%28p%2C%5Chat%7Bp%7D%29%3D-(%5Cbeta%20p%20%5Clog(%5Chat%7Bp%7D)%2B(1-p)%5Clog(1-%5Chat%7Bp%7D))%0A">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cbeta%20%3E%201">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cbeta%20%3C%201">
+<meta property="og:image" content="https://math.now.sh?from=BCE%28p%2C%5Chat%7Bp%7D%29%3D-(%5Cbeta%20p%20%5Clog(%5Chat%7Bp%7D)%2B(1-%5Cbeta)(1-p)%5Clog(1-%5Chat%7Bp%7D))%0A">
+<meta property="og:image" content="https://math.now.sh?from=BCE%28p%2C%5Chat%7Bp%7D%29%2Bw_0%20%5Ccdot%20exp%5Cleft(-%5Cfrac%7B((d_1(x)%2Bd_2(x))%5E2%7D%7B2%20%5Csigma%5E2%7D%5Cright)%0A">
+<meta property="og:image" content="https://math.now.sh?inline=%281-%5Chat%7Bp%7D%29%5E%7B%5Cgamma%7D">
+<meta property="og:image" content="https://math.now.sh?from=FL%28p%2C%5Chat%7Bp%7D%29%3D-(%5Calpha(1-%5Chat%7Bp%7D)%5E%7B%5Cgamma%7Dp%5Clog(%5Chat%7Bp%7D)%2B(1-%5Calpha)%5Chat%7Bp%7D%5E%7B%5Cgamma%7D(1-p)%5Clog(1-%5Chat%7Bp%7D))%0A">
+<meta property="og:image" content="https://math.now.sh?inline=%5Calpha">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cgamma">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cgamma%20%3D%200">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cgamma%20%3D%200">
+<meta property="og:image" content="https://math.now.sh?inline=%5Calpha%20%3D%200.5">
+<meta property="og:image" content="https://math.now.sh?from=IoU%3D%5Cfrac%7BTP%7D%7BTP%2BFP%2BFN%7D%3D%5Cfrac%7B%7CX%20%5Cbigcap%20Y%7C%7D%7B%7CX%7C%2B%7CY%7C-%7CX%20%5Cbigcap%20Y%7C%7D%0A">
+<meta property="og:image" content="https://math.now.sh?inline=X">
+<meta property="og:image" content="https://math.now.sh?inline=Y">
+<meta property="og:image" content="https://math.now.sh?inline=%5Clbrack%200%2C1%20%5Crbrack">
+<meta property="og:image" content="https://math.now.sh?inline=IoU">
+<meta property="og:image" content="https://math.now.sh?inline=%7CX%20%5Cbigcap%20Y%7C">
+<meta property="og:image" content="https://math.now.sh?inline=DC%20%5Cgeq%20IoU">
+<meta property="og:image" content="https://math.now.sh?inline=%5Clbrack%200%2C1%20%5Crbrack">
+<meta property="og:image" content="https://math.now.sh?from=DC%20%3D%20%5Cfrac%7B2TP%7D%7B2TP%2BFP%2BFN%7D%3D%5Cfrac%7B2%7CX%20%5Cbigcap%20Y%7C%7D%7B%7CX%7C%20%2B%20%7CY%7C%7D%0A">
+<meta property="og:image" content="https://math.now.sh?from=DL%20%3D%201%20-%20DC%20%3D%201%20-%20%5Cfrac%7B2%7CX%20%5Cbigcap%20Y%7C%7D%7B%7CX%7C%20%2B%20%7CY%7C%7D%20%3D%201%20-%20%5Cfrac%7B2%20%5Clangle%20p%2C%20%5Chat%7Bp%7D%20%5Crangle%7D%7B%5C%7Cp%5C%7C_1%2B%5C%7C%5Chat%7Bp%7D%5C%7C_1%7D%0A">
+<meta property="og:image" content="https://math.now.sh?inline=%5Clangle%20p%2C%20%5Chat%7Bp%7D%20%5Crangle">
+<meta property="og:image" content="https://math.now.sh?inline=0">
+<meta property="og:image" content="https://math.now.sh?inline=%5C%7C%5Ccdot%5C%7C_1">
+<meta property="og:image" content="https://math.now.sh?inline=%5C%7C%5Ccdot%5C%7C_2">
+<meta property="og:image" content="https://math.now.sh?from=TL%28p%2C%5Chat%7Bp%7D%29%3D%5Cfrac%7B%5Clangle%20p%20%2C%20%5Chat%7Bp%7D%5Crangle%7D%7B%5Clangle%20p%20%2C%20%5Chat%7Bp%7D%5Crangle%20%2B%20%5Cbeta(1-p%2C%20%5Chat%7Bp%7D)%2B(1-%5Cbeta)(p%2C1-%5Chat%7Bp%7D)%7D%0A">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cbeta%20%3D%200.5">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/figure9.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/reference1.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/reference2.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/reference3.png">
+<meta property="article:published_time" content="2021-01-07T06:01:01.000Z">
+<meta property="article:modified_time" content="2021-01-07T06:01:17.288Z">
+<meta property="article:author" content="Gaoxiang Luo">
+<meta property="article:tag" content="Neural Network">
+<meta property="article:tag" content="Segmentation">
+<meta property="article:tag" content="Computed Tomography (CT)">
+<meta property="article:tag" content="Loss Function">
+<meta property="article:tag" content="Survey">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/figure1.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>A Survey of Deep Semantic Segmentation on Computed Tomography</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Leon" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2021/01/06/Convolutional-Neural-Network-CNN-Overview/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/&text=A Survey of Deep Semantic Segmentation on Computed Tomography"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/&title=A Survey of Deep Semantic Segmentation on Computed Tomography"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/&is_video=false&description=A Survey of Deep Semantic Segmentation on Computed Tomography"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=A Survey of Deep Semantic Segmentation on Computed Tomography&body=Check out this article: https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/&title=A Survey of Deep Semantic Segmentation on Computed Tomography"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/&title=A Survey of Deep Semantic Segmentation on Computed Tomography"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/&title=A Survey of Deep Semantic Segmentation on Computed Tomography"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/&title=A Survey of Deep Semantic Segmentation on Computed Tomography"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/&name=A Survey of Deep Semantic Segmentation on Computed Tomography&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/&t=A Survey of Deep Semantic Segmentation on Computed Tomography"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">CT Imaging Data</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Coordinate-Systems"><span class="toc-number">3.1.</span> <span class="toc-text">Coordinate Systems</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DICOM"><span class="toc-number">3.2.</span> <span class="toc-text">DICOM</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">Network Architecture Progression</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Fully-Convolutional-Network-FCN"><span class="toc-number">4.1.</span> <span class="toc-text">Fully Convolutional Network (FCN)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Encoder-decoder-Network"><span class="toc-number">4.2.</span> <span class="toc-text">Encoder-decoder Network</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SegNet"><span class="toc-number">4.2.1.</span> <span class="toc-text">SegNet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#U-Net-V-Net"><span class="toc-number">4.2.2.</span> <span class="toc-text">U-Net&#x2F;V-Net</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FC-DenseNet"><span class="toc-number">4.2.3.</span> <span class="toc-text">FC-DenseNet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DeepLabs"><span class="toc-number">4.2.4.</span> <span class="toc-text">DeepLabs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PSPNet"><span class="toc-number">4.2.5.</span> <span class="toc-text">PSPNet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DRINet"><span class="toc-number">4.2.6.</span> <span class="toc-text">DRINet</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">Loss Function Progession</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Based-on-Distance"><span class="toc-number">5.1.</span> <span class="toc-text">Based on Distance</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Weight-Cross-Entropy-WCE"><span class="toc-number">5.1.1.</span> <span class="toc-text">Weight Cross Entropy (WCE)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Balanced-Cross-Entropy-BCE"><span class="toc-number">5.1.2.</span> <span class="toc-text">Balanced Cross Entropy (BCE)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Focal-Loss"><span class="toc-number">5.1.3.</span> <span class="toc-text">Focal Loss</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Based-on-Overlap-Measure"><span class="toc-number">5.2.</span> <span class="toc-text">Based on Overlap Measure</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dice-Loss-DL"><span class="toc-number">5.3.</span> <span class="toc-text">Dice Loss (DL)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tversky-Loss-TL"><span class="toc-number">5.4.</span> <span class="toc-text">Tversky Loss (TL)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Combo-Loss"><span class="toc-number">5.5.</span> <span class="toc-text">Combo Loss</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">Challenges and Future Directions</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">References</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        A Survey of Deep Semantic Segmentation on Computed Tomography
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Leon</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-07T06:01:01.000Z" itemprop="datePublished">2021-01-07</time>
+        
+        (Updated: <time datetime="2021-01-07T06:01:17.288Z" itemprop="dateModified">2021-01-07</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Computed-Tomography-CT/" rel="tag">Computed Tomography (CT)</a>, <a class="tag-link-link" href="/tags/Loss-Function/" rel="tag">Loss Function</a>, <a class="tag-link-link" href="/tags/Neural-Network/" rel="tag">Neural Network</a>, <a class="tag-link-link" href="/tags/Segmentation/" rel="tag">Segmentation</a>, <a class="tag-link-link" href="/tags/Survey/" rel="tag">Survey</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>Acknowledgement: This survey is one of the assignments I’ve done in the course CSCI 8980 offered by <a target="_blank" rel="noopener" href="https://sunju.org/">Prof. Ju Sun</a> at the University of Minnesota in Fall 2020.</p>
+</blockquote>
+<h1>Abstract</h1>
+<p>In this survey, we aim to provide a thorough overview of recent studies in semantic segmentation on medical imaging analysis, especially on Computed Tomography (CT). We mainly point out the intuitive novelty of architectural design of each neural network popular in the field, as well as the loss functions used in mainstream researches. Further, we introduce the particular image format in CT, discuss some challenges and present potential future directions that are promising for semantic segmentation in medical imaging.</p>
+<h1>Introduction</h1>
+<p>Semantic Segmentation has been one of the most important tasks within deep learning community, and many papers have shown that Deep Neural Networks (DNNs) are sufficient to gain a relatively good performance based on natural images. Lateef and Ruichek (2019) in their survey summarized many neural network designs, datasets, and methods for semantic segmentation of natural images. Guo et al. (2017) provided a review on deep-learning-based semantic segmentation and mainly focused on literature of fully convolutional networks (FCNs) and weakly supervised methods.</p>
+<p>In recent years, medical computer vision has been one of the most critical areas in active scientific research. Within medical domain, medical imaging analysis with semantic segmentation can be used to improve radiological diagnostics by human-machine interaction, radiotherapy, etc. Taghannaki et al. (2019) provided a high-level review of the adoption of methods and architectural networks for medical imaging segmentation from natural imaging segmentation. Hesamian et al. (2019) listed out the state-of-the-art (SOTA) architectural designs of DNNs in medical imaging segmentation, and covered some practical training tricks. In this survey, we’re contributing to explain the intuitive of architectural design of each novel component module to the existing convolutional neural networks (CNNs), as well as the basic understanding of most commonly used loss functions.</p>
+<h1>CT Imaging Data</h1>
+<p>Before we dive into deep learning techniques, we have to be familiar with the coordinate systems that are being used in medical imaging including CT scans, and how to prepare them to fit into DNNs as inputs.</p>
+<h2 id="Coordinate-Systems">Coordinate Systems</h2>
+<p>In most of the medical imaging applications, there are three commonly used coordinate systems, which are world, anatomical and medical image coordinate systems (see Figure 1). The world coordinate system is the cartesian coordinate system in which the medical imaging modality is positioned. Each modality has its own world coordinate system, including different CT scanners.<br>
+<img src="figure1.png" alt="figure1"></p>
+<p>The most frequent coordinate system involving in medical imaging conversation among doctors, radiologists, and deep learning scientists is the anatomical coordinate system, which is also called patient coordinate system. It includes axial, sagittal, coronal planes to describe the standard anatomical position of a human. Furthermore, the 3D position is defined along anatomical axes of anterior-posterior (front-back), left-right and inferior-superior. For example, the axial plane practically refers to the slices you can see along with inferior-superior axis when looking down. For clinical consistency, a slice near to the head is as superior, while a slice near to the feet is as inferior. The sagittal plane is what you see from left to right, from which you can see the ears of patients, and coronal plane travers from anterior to posterior of the patients, or vice versa. In practice, there are two  different anatomical coordinate system named LPS and RAS, where LPS is used by DICOM and ITK toolkit of Python, and RAS is used by other medical softwares such as 3D slicer.<br>
+<img src="table1.png" alt="table1"><br>
+The medical image coordinate system is what we’re familiar with as voxel space, which is also the coordinate system of ideal input for most of the deep neural networks. Notably, the pixel depth of each slice can fall in the range of 0 to <img src="https://math.now.sh?inline=2%5E%7B16%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, compared with 0 to <img src="https://math.now.sh?inline=2%5E8" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> in many natural imaging datasets.</p>
+<h2 id="DICOM">DICOM</h2>
+<p>DICOM is a medical format which is successfully integrated in medical imaging modalities manufactured by different vendors, and it has been naturally becoming the industry standard. It not only stores the medical image data but also meta-data of a patient, which includes demographic information (e.g., name, age, gender), acquisition data (e.g., type of modality used and its setting) and the context of imaging study (e.g., patient’s historical record) according to the article posted by Adaloglou (2020). DICOM is meanwhile a network protocol, which makes it easier to share information within hospital networks, but that’s out of the scope of this survey. We’re mostly interested in knowing our data and how to process them in order to fit into the training model.</p>
+<p>Currently, due to variety of modalities there is not a universal tool that can load the imaging part of DICOM into an 3D Numpy array. However, there are two Python tools named dcm2nixx and Pydicom that can help us to manipulate DICOM folders and convert DICOM files into Nifty (.nii) data, from which we can use a Python library called Nibabel to load nifty data into 3D Numpy array. Nifty format is also used in the dataset of many medical imaging challenges nowadays. However, the preprocessing requires lots of labors because the real-world medical data are often messy. For instance, each folder may only contain one DICOM file which is only a 2D CT slice of a CT volume, and exams of different modalities are likely to fall into different folders.</p>
+<h1>Network Architecture Progression</h1>
+<h2 id="Fully-Convolutional-Network-FCN">Fully Convolutional Network (FCN)</h2>
+<p>Long et al. (2014) proposed the Fully Convolutional Network (FCN), which was one of the first neural networks that brought out a new way of looking at semantic segmentation problems. Before FCN, people generally used combining convolutional layers and fully connected layers to construct the network, but apparently it doesn’t fully make use of contextual spatial information of images. Long et al. (2014) proposed replacing fully connected layers with all convolutional layers (see Figure 2), with the strategies of up-sampling (transposed convolution) and feature fusion. The outputs of FCNs are directly predicted masks, and it greatly improves both testing accuracy and training efficiency in semantic segmentation problems. Christ et al. (2016) achieves Dice score over 94% for liver with computation time below 100 second per CT volume with a Cascaded FCN in MICCAI 2016.<br>
+<img src="figure2.png" alt="figure2"></p>
+<h2 id="Encoder-decoder-Network">Encoder-decoder Network</h2>
+<h3 id="SegNet">SegNet</h3>
+<p>SegNet proposed by Badrinarayanan et al. (2015) is similar with FCN in design, but is different in up-sampling techniques. FCNs perform feature fusion in the output after transposed convolution in decoder with the corresponding feature map with the same size in encoder, while the decoder of SegNet uses the pooling indices (see Figure 3) computed during max-pooling of encoder to perform non-linear up-sampling. SegNet was adopted by Almotairi et al. (2020) in liver tumor CT scans, and the work detects most part of the tumor, with an accuracy  above 86%.<br>
+<img src="figure3.png" alt="figure3"></p>
+<h3 id="U-Net-V-Net">U-Net/V-Net</h3>
+<p>U-Net proposed by Ronneberger et al. (2015) were designed for biomedical image segmentation. Today, U-Net and its variations have been widely used within computer vision community for segmentation tasks, due to its outstanding performance. The novelty of U-Net is the skip-connection design (see Figure 4), which performs feature concatenation comparing to FCNs with feature fusion (feature addition). Skip-connections increases the accuracy of the model and resolves some gradient vanishing problems. A recent work of 3D variant of U-net named FracNet by Jin et al. (2020) achieves 92.9% sensitivity and an average false positive of 5.27 on rib fracture detection on CT volumes directly. Notably, the architectural design of V-Net proposed by Milletari et al. (2016) is merely the 3D version of U-Net with more skip-connections, usage of volumetric image as input, and optimization of Dice metrics.<br>
+<img src="figure4.png" alt="figure4"></p>
+<h3 id="FC-DenseNet">FC-DenseNet</h3>
+<p>Jegou et al. (2016) proposed Fully Convolutional DenseNet, which is also called Tiramisu by the author. The overall network architecture is based on U-Net, but with dense blocks used in DenseNet by Huang et al. (2016). By replacing convolution operations with dense blocks, it further deals with vanishing-gradient problem, strengthens feature propagation, and encourages feature reuse (see Figure 5). Even though the input of a dense block is not concatenated with its output in up-sampling path due to computational constraints, some information that is lost due to pooling operation can be passed by skip-connections from the down-sampling path. To my best knowledge, there hasn’t been much work of using FC-DenseNet on medical imaging segmentation of CT except Kolarik et al. (2019), but the experiment they performed was only on a small dataset with 10 CT scans.<br>
+<img src="figure5.png" alt="figure5"></p>
+<h3 id="DeepLabs">DeepLabs</h3>
+<p>DeepLabV1 by Chen et al. (2016) used deep convolutional neural network followed by a fully connected Conditional Random Field (CRF) as post-processing to refine the segmentation result. DeepLabV2 by the same group proposed atrous spatial pyramid pooling (ASPP) to capture the image context at multiple scales. DeepLabV3 added convolution of kernel size of 1x1 and employed global average pooling in order to avoid losing spatial dimensions during down-sampling. DeepLabV3+ (see Figure 6), as the latest version, added encoder-decoder architecture to expend DeepLabV3. Notably, DeepLabV3/V3+ gives up CRF because deep neural network has refined the segmentation result along object boundary. Since DeepLabV3+ reached SOTA performance, today people like to use it as comparison for segmentation tasks. Zhou et al. (2020) has come up with a variant of atrous convolution and achieved improved accuracy and less trainable parameters than DeepLabV3+ on right ventricle, left ventricle and aorta segmentation in CT imaging.<br>
+<img src="figure6.png" alt="figure6"></p>
+<h3 id="PSPNet">PSPNet</h3>
+<p>Zhao et al. (2016) proposed Pyramid Scene Parsing Network (PSPNet), and its novel pyramid pooling module (see Figure 7) can effectively generate sub-region feature maps on multiple scales in order to capture global context. Yang et al. (2018) combined pyramid pooling model and FCN in kidney and renal tumor segmentation of CT imaging, and their 3D_FCN_PPM network outperformed 2D PSPNet and 3D U-Net.<br>
+<img src="figure7.png" alt="figure7"></p>
+<h3 id="DRINet">DRINet</h3>
+<p>To revolve vanishing-gradient problem existing in 3D U-Net and meanwhile make the network deep and wide, Chen et al. (2018) proposed Dense Residual Inception Net (DRINet). The gradient propagation was improved by both dense connections and residual connections, where residual blocks can aggregate feature maps from different branches and dense blocks can reuse previous feature maps and alleviate vanishing-gradient problems. In experiment, DRINet outperformed 3D FCNs in 2D CT slices of Cerebrospinal Fluid (CSF) segmentation.<br>
+<img src="figure8.png" alt="figure8"></p>
+<p><strong>More Network Architectures</strong> Other than the basic architectural designs mentioned earlier in imaging segmentation domain, there are other innovative designs to improve performance as well. A good amount of papers in recent years such as Lian et al. (2018), Li et al. (2019), Nie et al. (2018) have attempted the attention-based medical imaging segmentation models. Furthermore, Khosravan et al. (2019) and Jin et al. (2018) have leveraged the concept of Generative Adversarial Network (GAN) to medical imaging segmentation in CT scans.</p>
+<h1>Loss Function Progession</h1>
+<h2 id="Based-on-Distance">Based on Distance</h2>
+<h3 id="Weight-Cross-Entropy-WCE">Weight Cross Entropy (WCE)</h3>
+<p>Cross Entropy is pixel-wise and examines each pixel individually, but it could be problematic when it comes to medical imaging due to class imbalanced problems. Therefore, Weight Cross Entropy was born to counteract a class imbalanced by introducing weights to loss function.</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=WCE%28p%2C%5Chat%7Bp%7D%29%3D-(%5Cbeta%20p%20%5Clog(%5Chat%7Bp%7D)%2B(1-p)%5Clog(1-%5Chat%7Bp%7D))%0A" /></p><h3 id="Balanced-Cross-Entropy-BCE">Balanced Cross Entropy (BCE)</h3>
+<p>In WCE, we can set <img src="https://math.now.sh?inline=%5Cbeta%20%3E%201" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> to decrease false negative, or set <img src="https://math.now.sh?inline=%5Cbeta%20%3C%201" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> to decrease false positive. In order to weight negative pixels as well, BCE discussed by Xie and Tu (2015) can be used.</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=BCE%28p%2C%5Chat%7Bp%7D%29%3D-(%5Cbeta%20p%20%5Clog(%5Chat%7Bp%7D)%2B(1-%5Cbeta)(1-p)%5Clog(1-%5Chat%7Bp%7D))%0A" /></p><p>In the U-Net paper by Ronneberger et al. (2015), they added a distance learning function into BCE, to enforce the model to pick up the notion of distance, so that it has a better segmentation behavior even though two objects are close in images.</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=BCE%28p%2C%5Chat%7Bp%7D%29%2Bw_0%20%5Ccdot%20exp%5Cleft(-%5Cfrac%7B((d_1(x)%2Bd_2(x))%5E2%7D%7B2%20%5Csigma%5E2%7D%5Cright)%0A" /></p><h3 id="Focal-Loss">Focal Loss</h3>
+<p>To decrease the contribution of easily-segmented example and have the model focus on difficultly-segmented example, Lin et al. (2017) introduced Focal Loss by further improving BCE with additional term <img src="https://math.now.sh?inline=%281-%5Chat%7Bp%7D%29%5E%7B%5Cgamma%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>.</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=FL%28p%2C%5Chat%7Bp%7D%29%3D-(%5Calpha(1-%5Chat%7Bp%7D)%5E%7B%5Cgamma%7Dp%5Clog(%5Chat%7Bp%7D)%2B(1-%5Calpha)%5Chat%7Bp%7D%5E%7B%5Cgamma%7D(1-p)%5Clog(1-%5Chat%7Bp%7D))%0A" /></p><p>With larger <img src="https://math.now.sh?inline=%5Calpha" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, the contribution of the number of corresponding class to the loss function is higher; with larger <img src="https://math.now.sh?inline=%5Cgamma" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, the contribution of difficultly-segmented samples to the loss function is higher. When <img src="https://math.now.sh?inline=%5Cgamma%20%3D%200" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, it’s equivalent to BCE. When <img src="https://math.now.sh?inline=%5Cgamma%20%3D%200" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> and <img src="https://math.now.sh?inline=%5Calpha%20%3D%200.5" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, it’s equivalent to CE.</p>
+<h2 id="Based-on-Overlap-Measure">Based on Overlap Measure</h2>
+<p>The most common way to measure overlap is by Intersection over Union (IoU).</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=IoU%3D%5Cfrac%7BTP%7D%7BTP%2BFP%2BFN%7D%3D%5Cfrac%7B%7CX%20%5Cbigcap%20Y%7C%7D%7B%7CX%7C%2B%7CY%7C-%7CX%20%5Cbigcap%20Y%7C%7D%0A" /></p><p>where <img src="https://math.now.sh?inline=X" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> and <img src="https://math.now.sh?inline=Y" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> stand for predicted voxel-wise predicted label and groud truth respectively. This is the most straightforward overlap measure, and it has a range of <img src="https://math.now.sh?inline=%5Clbrack%200%2C1%20%5Crbrack" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. If the <img src="https://math.now.sh?inline=IoU" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is closer to 1, then our prediction is closer to ground truth.</p>
+<h2 id="Dice-Loss-DL">Dice Loss (DL)</h2>
+<p>In order to understand Dice Loss, one firstly have to understand Dice Coefficient (DC). DC is equivalent to F1-Score, and can be understood as adding <img src="https://math.now.sh?inline=%7CX%20%5Cbigcap%20Y%7C" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> to both denominator and numerator of Iou, so <img src="https://math.now.sh?inline=DC%20%5Cgeq%20IoU" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> and they’re positively correlated. Similarly, the range of DC is also <img src="https://math.now.sh?inline=%5Clbrack%200%2C1%20%5Crbrack" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. Its expression is</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=DC%20%3D%20%5Cfrac%7B2TP%7D%7B2TP%2BFP%2BFN%7D%3D%5Cfrac%7B2%7CX%20%5Cbigcap%20Y%7C%7D%7B%7CX%7C%20%2B%20%7CY%7C%7D%0A" /></p><p>So, it can be used to design DL as</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=DL%20%3D%201%20-%20DC%20%3D%201%20-%20%5Cfrac%7B2%7CX%20%5Cbigcap%20Y%7C%7D%7B%7CX%7C%20%2B%20%7CY%7C%7D%20%3D%201%20-%20%5Cfrac%7B2%20%5Clangle%20p%2C%20%5Chat%7Bp%7D%20%5Crangle%7D%7B%5C%7Cp%5C%7C_1%2B%5C%7C%5Chat%7Bp%7D%5C%7C_1%7D%0A" /></p><p><img src="https://math.now.sh?inline=%5Clangle%20p%2C%20%5Chat%7Bp%7D%20%5Crangle" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> represents the dot product between prediction volume and groud truth volume of each channel, which can effectively reset all voxels that are not in target mask to <img src="https://math.now.sh?inline=0" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> due to binary segmentation; <img src="https://math.now.sh?inline=%5C%7C%5Ccdot%5C%7C_1" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is L1 norm, which is the sum of absolute value of each element in tensor. In order to simplify computation, it can be replaced by L2 norm <img src="https://math.now.sh?inline=%5C%7C%5Ccdot%5C%7C_2" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. Dice Loss were proposed in V-Net by Milletari et al. (2016), and it worked well for imbalanced class problem.</p>
+<h2 id="Tversky-Loss-TL">Tversky Loss (TL)</h2>
+<p>Tversky Loss by Salehi et al. (2017) is the generalization version of Dice Loss. In order to balance the influence of FP and FN toward loss function, TL added weights as following</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=TL%28p%2C%5Chat%7Bp%7D%29%3D%5Cfrac%7B%5Clangle%20p%20%2C%20%5Chat%7Bp%7D%5Crangle%7D%7B%5Clangle%20p%20%2C%20%5Chat%7Bp%7D%5Crangle%20%2B%20%5Cbeta(1-p%2C%20%5Chat%7Bp%7D)%2B(1-%5Cbeta)(p%2C1-%5Chat%7Bp%7D)%7D%0A" /></p><p>Notably, if <img src="https://math.now.sh?inline=%5Cbeta%20%3D%200.5" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, then it’s equivalent to Dice Loss.</p>
+<h2 id="Combo-Loss">Combo Loss</h2>
+<p>Taghanaki et al. (2018) found the risk of using solely distance-based or IoU-based loss function, and introduced Combo Loss. In practices of CT imaging segmentation, it’s commonly seen that people like to use combo loss, because it’s more stable. If the foreground (object in medical domain) is too small and the background is dominating, then using focal loss or combo loss is more likely to guarantee good performance (see Figure 9), because as the IoU decreases (more false positives and false negatives) only focal loss and combo loss  are monotone increasing, compared to the wave curves on other loss functions.<br>
+<img src="figure9.png" alt="figure9"></p>
+<p><strong>More Optimization Functions</strong> Other than the most commonly seen loss functions above for segmentation, there also are some other optimization functions for particular needs. Wong et al. (2018) introduced Exponential Logarithmic Loss which combines Exponential Logarithmic Dice Loss and Weight Exponential Cross Entropy to handle object-size imbalanced problems. Zhu et al. (2018) introduced Conservative Loss which aims to penalize the extreme cases and embrace the moderate cases in order to achieve good generalization. In short, there are three categories to optimize loss functions, which can be adapted to particular segmentation tasks depending on the needs. They’re weighting the objective loss function, optimizing the segmentation metrics, and adding regularization terms to the loss function.</p>
+<h1>Challenges and Future Directions</h1>
+<p>Since there are different imaging modalities and each may involves different levels of artifacts, as well as the fact that datasets of medical imaging are very limited, a promising direction is to work on transfer learning of pre-trained model in natural images and apply it in medical imaging segmentation. Raghu et al. (2019) in Google are proactively putting effort on this.</p>
+<p>One can aim to creating large medical imaging datasets for segmentation benchmarks, so that researchers can accurately compare performance over different models. Yang et al. (2020) created MedMNIST that covers the primary data modalities in medical imaging analysis, which has great educational value and more accessible to general public; however, the size of each image (28 x 28) is doubtful for machines to learn the patterns of various diseases.</p>
+<p>Many convolution-based neural networks are capable to extract features, but often miss small objects or edge information of big objects. If one tends to improve architectural design, this may be a promising direction; however, due to the improvement of Elsken et al. (2018), even the architectural designs might be carried out by the machines in the future.</p>
+<p>Many studies including Drozdzal et al. (2017) have shown that pre-processing could be a key to improve the performance of segmentation network. In practices, most of the time deep learning scientist are trying to enhance the characteristics of the lesion areas according to the goal of the segmentation task. Moreover, the pre-processing could even be achieved by another neural network to build a multitask model (i.e., first detect then segment), and this is shown by Ke et al. (2019) and He et al. (2018).</p>
+<p><strong>More Directions</strong> It’s known that there are always class imbalanced problem and shortage of data in medical imaging domain, so one could focus on the Generative Adversarial Networks (GANs) for image synthesis, in order to fill out the dataset, and the studies of Chartsias et al. (2017) and Zhang et al. (2019) have shown that with the Magnetic Resonance Imaging (MRI) data synthesized from CT data it improve the segmentation performance of the models. There are also many times we may only have a few labels or annotated data, because having several radiologists to create an excellently annotated dataset with voting is not feasible in many cases, so one can develop a weakly supervised model like Amyar et al. (2020) and Kervadec et al. (2019)'s work. Notably, this direction is more likely to propose a good generalization over various segmentation targets.</p>
+<h1>Conclusion</h1>
+<p>This paper summarizes most of the intuitive useful modules/blocks of network architecture using in semantic segmentation, and for each of them provides a recent deployment in 3D CT imaging segmentation studies. Also, it gives a bird’s-eye view of some potential promising future directions to address certain challenges existing in medical imaging relatde to CT scans.</p>
+<h1>References</h1>
+<blockquote>
+<p>The paper was written in LaTex, so here are some screenshots of the references.<br>
+<img src="reference1.png" alt="reference1"><br>
+<img src="reference2.png" alt="reference2"><br>
+<img src="reference3.png" alt="reference3"></p>
+</blockquote>
+
+  </div>
+</article>
+
+
+  <!-- Gitalk start  -->
+
+  <!-- Link Gitalk files  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"/></script> 
+  <div id="gitalk-container"></div>     
+  <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+        // gitalk's main params
+        clientID: `3ce407f9c6ed6aaffdf8`,
+        clientSecret: `2c6bc0465d806a6dc4ee20c9b1a0043d7a6101fe`,
+        repo: `gaoxiangluo.github.io`,
+        owner: 'GaoxiangLuo',
+        admin: ['GaoxiangLuo'],
+        id: location.pathname.slice(0, 50),
+        distractionFreeMode: true,
+        enableHotKey: true,
+        language: `en`
+      });
+      gitalk.render('gitalk-container');
+  </script> 
+  <!-- Gitalk end -->
+
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">CT Imaging Data</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Coordinate-Systems"><span class="toc-number">3.1.</span> <span class="toc-text">Coordinate Systems</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DICOM"><span class="toc-number">3.2.</span> <span class="toc-text">DICOM</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">Network Architecture Progression</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Fully-Convolutional-Network-FCN"><span class="toc-number">4.1.</span> <span class="toc-text">Fully Convolutional Network (FCN)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Encoder-decoder-Network"><span class="toc-number">4.2.</span> <span class="toc-text">Encoder-decoder Network</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SegNet"><span class="toc-number">4.2.1.</span> <span class="toc-text">SegNet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#U-Net-V-Net"><span class="toc-number">4.2.2.</span> <span class="toc-text">U-Net&#x2F;V-Net</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FC-DenseNet"><span class="toc-number">4.2.3.</span> <span class="toc-text">FC-DenseNet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DeepLabs"><span class="toc-number">4.2.4.</span> <span class="toc-text">DeepLabs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PSPNet"><span class="toc-number">4.2.5.</span> <span class="toc-text">PSPNet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DRINet"><span class="toc-number">4.2.6.</span> <span class="toc-text">DRINet</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">Loss Function Progession</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Based-on-Distance"><span class="toc-number">5.1.</span> <span class="toc-text">Based on Distance</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Weight-Cross-Entropy-WCE"><span class="toc-number">5.1.1.</span> <span class="toc-text">Weight Cross Entropy (WCE)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Balanced-Cross-Entropy-BCE"><span class="toc-number">5.1.2.</span> <span class="toc-text">Balanced Cross Entropy (BCE)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Focal-Loss"><span class="toc-number">5.1.3.</span> <span class="toc-text">Focal Loss</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Based-on-Overlap-Measure"><span class="toc-number">5.2.</span> <span class="toc-text">Based on Overlap Measure</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dice-Loss-DL"><span class="toc-number">5.3.</span> <span class="toc-text">Dice Loss (DL)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tversky-Loss-TL"><span class="toc-number">5.4.</span> <span class="toc-text">Tversky Loss (TL)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Combo-Loss"><span class="toc-number">5.5.</span> <span class="toc-text">Combo Loss</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">Challenges and Future Directions</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">References</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/&text=A Survey of Deep Semantic Segmentation on Computed Tomography"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/&title=A Survey of Deep Semantic Segmentation on Computed Tomography"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/&is_video=false&description=A Survey of Deep Semantic Segmentation on Computed Tomography"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=A Survey of Deep Semantic Segmentation on Computed Tomography&body=Check out this article: https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/&title=A Survey of Deep Semantic Segmentation on Computed Tomography"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/&title=A Survey of Deep Semantic Segmentation on Computed Tomography"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/&title=A Survey of Deep Semantic Segmentation on Computed Tomography"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/&title=A Survey of Deep Semantic Segmentation on Computed Tomography"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/&name=A Survey of Deep Semantic Segmentation on Computed Tomography&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/&t=A Survey of Deep Semantic Segmentation on Computed Tomography"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    Gaoxiang Luo
+  </div>
+  <!-- <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div> -->
+  <div class="busuanzi-count">
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span class="site-pv">
+      Page View <i class="fa fa-users"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+    <!-- <span class="site-uv">
+      Number of Visitors <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuansi_value_site_uv"></span>
+    </span> -->
+  </div>
+  <div class="Word-count">
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">23k</span>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-176745887-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":200,"height":400,"hOffset":5,"vOffset":-38},"mobile":{"show":false,"scale":0.2},"react":{"opacityDefault":0.8,"opacityOnHover":0.2},"log":false});</script></body>
+</html>
