@@ -60,9 +60,9 @@
     
     
     
-    <category term="Association Rule" scheme="https://gaoxiangluo.github.io/tags/Association-Rule/"/>
-    
     <category term="Sequential Rules Mining" scheme="https://gaoxiangluo.github.io/tags/Sequential-Rules-Mining/"/>
+    
+    <category term="Association Rule" scheme="https://gaoxiangluo.github.io/tags/Association-Rule/"/>
     
   </entry>
   
