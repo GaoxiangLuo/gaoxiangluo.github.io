@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Acknowledgement: This course (CSCI 8980) is being offered by Prof. Ju Sun at the University of Minnesota in Fall 2020. Pictures of slides are from the course.  Recap of CNN We didn’t talk about scatt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Recurrent Neural Network (RNN): Overview">
+<meta property="og:url" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/index.html">
+<meta property="og:site_name" content="Leon">
+<meta property="og:description" content="Acknowledgement: This course (CSCI 8980) is being offered by Prof. Ju Sun at the University of Minnesota in Fall 2020. Pictures of slides are from the course.  Recap of CNN We didn’t talk about scatt">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure7.png">
+<meta property="og:image" content="https://math.now.sh?inline=x_0%20%5Crightarrow%20x_1%20%5Crightarrow%20x_2%20%5Crightarrow%20%5Cdots%20%5Crightarrow%20x_%7Bn-1%7D">
+<meta property="og:image" content="https://math.now.sh?inline=h">
+<meta property="og:image" content="https://math.now.sh?from=h_t%20%3D%20f_W%28h_%7Bt-1%7D%2Cx_t%29%20%5Cquad%20%5Ctext%7Bwhere%20we">
+<meta property="og:image" content="https://math.now.sh?from=y_t%3Dg_V%28h_t%29%20%5Cquad%20%5Ctext%7Bwhere%20we">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure1.png">
+<meta property="og:image" content="https://math.now.sh?from=h_t%20%3Dtanh%28W_hh_%7Bt-1%7D%2BW_xx_t%29%20%5C%5C%20y_t%3DV_yh_t%0A">
+<meta property="og:image" content="https://math.now.sh?inline=W_h%2CW_x%2CV_y">
+<meta property="og:image" content="https://math.now.sh?inline=h_%7Bt-1%7D">
+<meta property="og:image" content="https://math.now.sh?inline=x_t">
+<meta property="og:image" content="https://math.now.sh?inline=x%5E%7B%281%29%7D%2C%5Cdots%2Cx%5E%7B(t)%7D">
+<meta property="og:image" content="https://math.now.sh?from=%5Cmathbb%20P%20%5Clbrack%20x%5E%7B%28t%2B1%29%7D%20%7C%20x%5E%7B(t)%7D%2C%20%5Cdots%2C%20x%5E%7B(1)%7D%20%5Crbrack%0A">
+<meta property="og:image" content="https://math.now.sh?inline=x%5E%7Bt%2B1%7D">
+<meta property="og:image" content="https://math.now.sh?inline=%5C%7Bw_1%2C%5Cdots%2C%20w_N%20%5C%7D">
+<meta property="og:image" content="https://math.now.sh?inline=x%5E%7B%281%29%7D%2C%5Cdots%2Cx%5E%7B(T)%7D">
+<meta property="og:image" content="https://math.now.sh?from=%5Cmathbb%20P%20%5Clbrack%20x%5E%7B%281%29%7D%2C%20%5Cdots%2C%20x%5E%7B(T)%7D%20%5Crbrack%20%3D%20%5Cprod_%7Bt%3D1%7D%5ET%20%5Cmathbb%20P%20%5Clbrack%20x%5E%7B(t)%7D%7C%20x%5E%7B(t-1)%7D%2C%20%5Cdots%2C%20x%5E%7B(1)%7D%20%5Crbrack%20%0A">
+<meta property="og:image" content="https://math.now.sh?from=I%20%5Crightarrow%20%5B1%2C0%2C0%2C0%2C...%5D%2C%20you%20%5Crightarrow%20%5B0%2C1%2C0%2C0%2C...%5D%2Cwe%20%5Crightarrow%20%5B0%2C0%2C1%2C0%2C...%5D%2C...%0A">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure8.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure3.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure4.png">
+<meta property="og:image" content="https://math.now.sh?from=%5Cmathcal%20T%20%3D%20x%5E%7B%281%29%7D%20%5Crightarrow%20%5Ccdots%20%5Crightarrow%20x%5E%7B(T)%7D%20%5Cquad%20%5Ctext%7B(e.g.%2C%20a%20sentence%2C%20a%20document%2C%20etc)%7D%0A">
+<meta property="og:image" content="https://math.now.sh?inline=T">
+<meta property="og:image" content="https://math.now.sh?inline=%5Chat%7By%7D%5E%7B%28t%29%7D">
+<meta property="og:image" content="https://math.now.sh?inline=t">
+<meta property="og:image" content="https://math.now.sh?inline=%5Chat%7By%7D%5E%7B%28t%29%7D">
+<meta property="og:image" content="https://math.now.sh?inline=y%5E%7B%28t%29%7D">
+<meta property="og:image" content="https://math.now.sh?inline=x%5E%7B%28t%2B1%29%7D">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure5.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure6.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure9.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure10.png">
+<meta property="og:image" content="https://math.now.sh?inline=h%5E%7B%280%29%7D">
+<meta property="og:image" content="https://math.now.sh?inline=y%5E%7B%28t%29%7D">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure11.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure12.png">
+<meta property="og:image" content="https://math.now.sh?inline=x_t">
+<meta property="og:image" content="https://math.now.sh?inline=h_%7Bt-1%7D">
+<meta property="og:image" content="https://math.now.sh?inline=h_t">
+<meta property="og:image" content="https://math.now.sh?inline=W">
+<meta property="og:image" content="https://math.now.sh?inline=L">
+<meta property="og:image" content="https://math.now.sh?inline=L_1%2C%20L_2%2C%20%5Cdots%29">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure13.png">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cprod_%7Bk%3D2%7D%5Et%20%5Ctext%7Bdiag%7D%28%5Ctanh">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cprod_%7Bk%3D2%7D%5Et%20W_h%20%3D%20W_h%5E%7Bt-1%7D%20%5Ccdot%20%5C%7CW_h%5E%7Bt-1%7D%5C%7C">
+<meta property="og:image" content="https://math.now.sh?inline=W_h%5E%7Bt-1%7D">
+<meta property="og:image" content="https://math.now.sh?inline=%5C%7CW_h%5C%7C%5E%7Bt-1%7D">
+<meta property="og:image" content="https://math.now.sh?inline=%5C%7CW_h%5C%7C%20%3E%201">
+<meta property="og:image" content="https://math.now.sh?inline=t">
+<meta property="og:image" content="https://math.now.sh?inline=%5C%7CW_h%5C%7C%20%3C%201">
+<meta property="og:image" content="https://math.now.sh?inline=t">
+<meta property="og:image" content="https://math.now.sh?inline=%5Ctanh">
+<meta property="og:image" content="https://math.now.sh?from=%5C%7C%5Cprod_%7Bk%3D2%7D%5Et%20%5Ctext%7Bdiag%7D%28%5Ctanh">
+<meta property="og:image" content="https://math.now.sh?from=%5Cleq%20%5Cprod_%7Bk%3D2%7D%5Et%20%5C%7C%5Ctext%7Bdiag%7D%28%5Ctanh">
+<meta property="og:image" content="https://math.now.sh?from=%5Cleq%20%5Cunderbrace%7B%5Cprod_%7Bk%3D2%7D%5Et%20%5C%7C%5Ctext%7Bdiag%7D%28%5Ctanh">
+<meta property="og:image" content="https://math.now.sh?inline=g">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cxi%20%3C%200">
+<meta property="og:image" content="https://math.now.sh?from=%5Chat%7Bg%7D%3D%5Cxi%5Cfrac%7Bg%7D%7B%5C%7Cg%5C%7C%7D%0A">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure14.png">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cxi">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure15.png">
+<meta property="og:image" content="https://math.now.sh?inline=%5Cfrac%7B%5Cpartial%20h_t%7D%7B%5Cpartial%20h_1%7D">
+<meta property="og:image" content="https://math.now.sh?inline=t">
+<meta property="og:image" content="https://math.now.sh?inline=c">
+<meta property="og:image" content="https://math.now.sh?inline=h">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure16.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure17.png">
+<meta property="og:image" content="https://math.now.sh?inline=h">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure18.png">
+<meta property="og:image" content="https://math.now.sh?inline=c">
+<meta property="og:image" content="https://math.now.sh?inline=f">
+<meta property="og:image" content="https://math.now.sh?inline=W">
+<meta property="og:image" content="https://math.now.sh?inline=c_2">
+<meta property="og:image" content="https://math.now.sh?inline=c_3">
+<meta property="og:image" content="https://math.now.sh?inline=f">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure19.png">
+<meta property="og:image" content="https://math.now.sh?inline=W_h">
+<meta property="og:image" content="https://math.now.sh?inline=W_h">
+<meta property="og:image" content="https://math.now.sh?inline=W_h">
+<meta property="og:image" content="https://math.now.sh?from=%5Cmin_%7BW_h%2CW_x%7D%20L%28W%29%20%5Cquad%20%5Ctext%7Bs.t.%20%24W_h%24%20orthogonal%7D%0A">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure20.png">
+<meta property="og:image" content="https://math.now.sh?inline=h">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure21.png">
+<meta property="article:published_time" content="2021-01-08T06:04:20.000Z">
+<meta property="article:modified_time" content="2021-01-08T06:09:34.991Z">
+<meta property="article:author" content="Gaoxiang Luo">
+<meta property="article:tag" content="Neural Network">
+<meta property="article:tag" content="RNN">
+<meta property="article:tag" content="Gradient Explosion">
+<meta property="article:tag" content="Vanishing Gradient">
+<meta property="article:tag" content="Language Model">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure7.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Recurrent Neural Network (RNN): Overview</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Leon" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/&text=Recurrent Neural Network (RNN): Overview"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/&title=Recurrent Neural Network (RNN): Overview"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/&is_video=false&description=Recurrent Neural Network (RNN): Overview"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Recurrent Neural Network (RNN): Overview&body=Check out this article: https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/&title=Recurrent Neural Network (RNN): Overview"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/&title=Recurrent Neural Network (RNN): Overview"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/&title=Recurrent Neural Network (RNN): Overview"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/&title=Recurrent Neural Network (RNN): Overview"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/&name=Recurrent Neural Network (RNN): Overview&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/&t=Recurrent Neural Network (RNN): Overview"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Recap of CNN</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Basic RNNs</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Basic-setup"><span class="toc-number">2.1.</span> <span class="toc-text">Basic setup</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Example-a-statistical-language-modeling"><span class="toc-number">2.1.1.</span> <span class="toc-text">Example: a statistical language modeling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Representing-words-word-embedding"><span class="toc-number">2.1.2.</span> <span class="toc-text">Representing words: word embedding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#A-simple-RNN-language-model"><span class="toc-number">2.1.3.</span> <span class="toc-text">A simple RNN language model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Training-the-model"><span class="toc-number">2.1.4.</span> <span class="toc-text">Training the model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-texts"><span class="toc-number">2.1.5.</span> <span class="toc-text">Generate texts</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vanishing-exploding-gradient"><span class="toc-number">2.2.</span> <span class="toc-text">Vanishing&#x2F;exploding gradient</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#How-to-compute-gradients"><span class="toc-number">2.2.1.</span> <span class="toc-text">How to compute gradients?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Look-into-the-gradient"><span class="toc-number">2.2.2.</span> <span class="toc-text">Look into the gradient</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#What%E2%80%99s-wrong-with-the-gradient"><span class="toc-number">2.2.3.</span> <span class="toc-text">What’s wrong with the gradient?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gradient-clipping"><span class="toc-number">2.2.4.</span> <span class="toc-text">Gradient clipping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Problem-with-gradient-Vanishing"><span class="toc-number">2.2.5.</span> <span class="toc-text">Problem with gradient Vanishing</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Long-Short-Term-Memory-LSTM"><span class="toc-number">2.3.</span> <span class="toc-text">Long Short-Term Memory (LSTM)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gated-Recurrent-Unit-GRU"><span class="toc-number">2.4.</span> <span class="toc-text">Gated Recurrent Unit (GRU)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Do-they-save-the-vanishing-gradient"><span class="toc-number">2.4.1.</span> <span class="toc-text">Do they save the vanishing gradient?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Do-we-need-to-modify-the-architecture"><span class="toc-number">2.4.2.</span> <span class="toc-text">Do we need to modify the architecture?</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">Modern RNNs</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Bidirectional-RNNs"><span class="toc-number">3.1.</span> <span class="toc-text">Bidirectional RNNs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deep-RNNs"><span class="toc-number">3.2.</span> <span class="toc-text">Deep RNNs</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Recurrent Neural Network (RNN): Overview
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Leon</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-08T06:04:20.000Z" itemprop="datePublished">2021-01-08</time>
+        
+        (Updated: <time datetime="2021-01-08T06:09:34.991Z" itemprop="dateModified">2021-01-08</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Gradient-Explosion/" rel="tag">Gradient Explosion</a>, <a class="tag-link-link" href="/tags/Language-Model/" rel="tag">Language Model</a>, <a class="tag-link-link" href="/tags/Neural-Network/" rel="tag">Neural Network</a>, <a class="tag-link-link" href="/tags/RNN/" rel="tag">RNN</a>, <a class="tag-link-link" href="/tags/Vanishing-Gradient/" rel="tag">Vanishing Gradient</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>Acknowledgement: This course (CSCI 8980) is being offered by <a target="_blank" rel="noopener" href="https://sunju.org/">Prof. Ju Sun</a> at the University of Minnesota in Fall 2020. Pictures of slides are from the course.</p>
+</blockquote>
+<h1>Recap of CNN</h1>
+<p>We didn’t talk about scattering transform conlutional network. It is also a deep neural network but it is not trainable; instead, it’s a deterministic deep learning neural network. The weights of the network are from a kind of mathematical transoform. While CNN is a blackbox, scattering transform is more rigorous and provable.</p>
+<p>CNNs are not only for images. Ideally, it’s for tensors where <strong>axis directions</strong> do/should not matter. For instance, if I flip the image, it won’t influce my detection performance so its axis directions don’t matter, which implies that CNN will work. A counterexample is video. In video, timeflame is a meaningful direction. Playing forward and playing backward are different if my task is to analysis the moment of filling a swimming pool with water. Playing forward is the water level increasing but backward is another totally different event.</p>
+<p>For applications that directions do matter, what really matters is usually the <strong>temporal sequences</strong>, such as disease prognosis (development from day 1 to day 500 for instance), video generation, speech to text, etc.<br>
+<img src="figure7.png" alt="figure7"></p>
+<p>Another sequence is <strong>lexical sequence</strong>, which includes today’s Natual Language Processing (NLP), such as machine translation (English and Chinese), typing prediction (Gmail smart compose), semantic classification, etc.</p>
+<h1>Basic RNNs</h1>
+<h2 id="Basic-setup">Basic setup</h2>
+<p>A sequence: <img src="https://math.now.sh?inline=x_0%20%5Crightarrow%20x_1%20%5Crightarrow%20x_2%20%5Crightarrow%20%5Cdots%20%5Crightarrow%20x_%7Bn-1%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br>
+A <strong>state-space</strong> model: <img src="https://math.now.sh?inline=h" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> denotes the state, and state translation modeled by the <strong>recurrence</strong> formula</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=h_t%20%3D%20f_W%28h_%7Bt-1%7D%2Cx_t%29%20%5Cquad%20%5Ctext%7Bwhere%20we'll%20replace%20W%20with%20a%20neural%20network%7D%0A" /></p><p>with optional output</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=y_t%3Dg_V%28h_t%29%20%5Cquad%20%5Ctext%7Bwhere%20we'll%20replace%20V%20with%20a%20neural%20network%7D%0A" /></p><p><img src="figure1.png" alt="figure1"><br>
+The image above is from Stanford CS231N. Let’s look at an very simple example:</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=h_t%20%3Dtanh%28W_hh_%7Bt-1%7D%2BW_xx_t%29%20%5C%5C%20y_t%3DV_yh_t%0A" /></p><p>where <img src="https://math.now.sh?inline=W_h%2CW_x%2CV_y" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> are shared across the sequence, and <img src="https://math.now.sh?inline=h_%7Bt-1%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is my past state and <img src="https://math.now.sh?inline=x_t" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is my current input.</p>
+<h3 id="Example-a-statistical-language-modeling">Example: a statistical language modeling</h3>
+<ul>
+<li><strong>Language modeling</strong> is a task of predicting future words.</li>
+<li>Statical formalism: given a sequence of words <img src="https://math.now.sh?inline=x%5E%7B%281%29%7D%2C%5Cdots%2Cx%5E%7B(t)%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, compute the next possible word after a sequence of words given</li>
+</ul>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=%5Cmathbb%20P%20%5Clbrack%20x%5E%7B%28t%2B1%29%7D%20%7C%20x%5E%7B(t)%7D%2C%20%5Cdots%2C%20x%5E%7B(1)%7D%20%5Crbrack%0A" /></p><p>where <img src="https://math.now.sh?inline=x%5E%7Bt%2B1%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> can be any word from a vocabulary <img src="https://math.now.sh?inline=%5C%7Bw_1%2C%5Cdots%2C%20w_N%20%5C%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, or sometimes given some text<img src="https://math.now.sh?inline=x%5E%7B%281%29%7D%2C%5Cdots%2Cx%5E%7B(T)%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>,</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=%5Cmathbb%20P%20%5Clbrack%20x%5E%7B%281%29%7D%2C%20%5Cdots%2C%20x%5E%7B(T)%7D%20%5Crbrack%20%3D%20%5Cprod_%7Bt%3D1%7D%5ET%20%5Cmathbb%20P%20%5Clbrack%20x%5E%7B(t)%7D%7C%20x%5E%7B(t-1)%7D%2C%20%5Cdots%2C%20x%5E%7B(1)%7D%20%5Crbrack%20%0A" /></p><ul>
+<li>Applications: Google smart search (fill out what you want to search for you, before you hit enter), and Gmail smart compose (where you can tab and have the computer finish your sentences).</li>
+</ul>
+<h3 id="Representing-words-word-embedding">Representing words: word embedding</h3>
+<p>How to represent words?</p>
+<ul>
+<li>One hot encoding</li>
+</ul>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=I%20%5Crightarrow%20%5B1%2C0%2C0%2C0%2C...%5D%2C%20you%20%5Crightarrow%20%5B0%2C1%2C0%2C0%2C...%5D%2Cwe%20%5Crightarrow%20%5B0%2C0%2C1%2C0%2C...%5D%2C...%0A" /></p><p>This may work, but it’s really inefficient, because the dimension would be very high. Think about that, some words may be similiar meaning (distance), and some words may have meaning falling between two words. If you image a hyper-cube, one-hot encoding makes all words to be the corner of the hyper-cude, and it’s hard to represent a word that has a meaning falling between two words.</p>
+<ul>
+<li>word-to-vector embedding: map words into dense vectors centain arthmetic operations are consistent with semantics.<br>
+<img src="figure8.png" alt="figure8"></li>
+</ul>
+<h3 id="A-simple-RNN-language-model">A simple RNN language model</h3>
+<p><img src="figure3.png" alt="figure3"><br>
+In NLP, people usually use hypertangent function as the activation function. Our training data could be any trunk of text. It could be a paper, a book, a paragraph, etc, and that’s my corpus/collection of words. First you will encode each word into a vector and then pass into the RNN, what you will get as a output is a probability. I will compare the output with my one-hot encoding groud truth then I will get the loss. When we sum up all the loss and divide by the training example, now we have the loss of the model as shown below.<br>
+<img src="figure4.png" alt="figure4"></p>
+<h3 id="Training-the-model">Training the model</h3>
+<ul>
+<li>Step 1: collect a large corpus of text, i.e., a long sequence</li>
+</ul>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=%5Cmathcal%20T%20%3D%20x%5E%7B%281%29%7D%20%5Crightarrow%20%5Ccdots%20%5Crightarrow%20x%5E%7B(T)%7D%20%5Cquad%20%5Ctext%7B(e.g.%2C%20a%20sentence%2C%20a%20document%2C%20etc)%7D%0A" /></p><ul>
+<li>Step 2: feed <img src="https://math.now.sh?inline=T" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> into the model, and compute ouput distribution <img src="https://math.now.sh?inline=%5Chat%7By%7D%5E%7B%28t%29%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> for each <img src="https://math.now.sh?inline=t" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+<li>Step 3: define loss, e.g., cross entropy between <img src="https://math.now.sh?inline=%5Chat%7By%7D%5E%7B%28t%29%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> and <img src="https://math.now.sh?inline=y%5E%7B%28t%29%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> (one-hot encoding of <img src="https://math.now.sh?inline=x%5E%7B%28t%2B1%29%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>)<br>
+<img src="figure5.png" alt="figure5"></li>
+<li>Step 4: gather and average all losses:<br>
+<img src="figure6.png" alt="figure6"></li>
+<li>Step 5: optimization: SGD<br>
+Note that people are using SGD in common practices, but there are some confusion of implication. Because for SGD we assume all summation terms are independent and identically distributed (iid) in the objective, but here each term is determined by the previous term. It’s definitely not iid but probably because some other unknown reasons/implications that makes it work.<br>
+<img src="figure9.png" alt="figure9"></li>
+</ul>
+<h3 id="Generate-texts">Generate texts</h3>
+<p><img src="figure10.png" alt="figure10"><br>
+starting from <img src="https://math.now.sh?inline=h%5E%7B%280%29%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> and the word “my”, repeat</p>
+<ul>
+<li>compute <img src="https://math.now.sh?inline=y%5E%7B%28t%29%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> and sample a word from the distribution</li>
+<li>feed the word as input to the next step</li>
+</ul>
+<h2 id="Vanishing-exploding-gradient">Vanishing/exploding gradient</h2>
+<h3 id="How-to-compute-gradients">How to compute gradients?</h3>
+<p>The vanishing gradient problems are not significant in CNNs but they are still there and many CNNs people ignore it. But what we’re emphaszing here is that it’s very significant in RNNs.<br>
+Can we use auto differentiation in RNNs? Yes! Because it’s firstly sharing the weights and secondly the computational graph is acyclic directed graph (no loops) as image below.<br>
+<img src="figure11.png" alt="figure11"></p>
+<h3 id="Look-into-the-gradient">Look into the gradient</h3>
+<p><img src="figure12.png" alt="figure12"><br>
+In the image above, we don’t have to worry about <img src="https://math.now.sh?inline=x_t" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> because that’s the given value and we know the gradient of a given value is always zero. The variables are <img src="https://math.now.sh?inline=h_%7Bt-1%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> and <img src="https://math.now.sh?inline=h_t" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> and optimization variable is <img src="https://math.now.sh?inline=W" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. Let’s look at the computation graph above again. The total loss <img src="https://math.now.sh?inline=L" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is equal with the summation of the loss (<img src="https://math.now.sh?inline=L_1%2C%20L_2%2C%20%5Cdots%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> of each state. Since we know the derivative of the summation is the same as the summation of the derivative, so we have the following:<br>
+<img src="figure13.png" alt="figure13"></p>
+<h3 id="What’s-wrong-with-the-gradient">What’s wrong with the gradient?</h3>
+<p>Consider <img src="https://math.now.sh?inline=%5Cprod_%7Bk%3D2%7D%5Et%20%5Ctext%7Bdiag%7D%28%5Ctanh'(W_hh_%7Bk-1%7D%2BW_xx_k%29)W_h" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> above</p>
+<ul>
+<li>
+<p>For intuition, consider identity activation (could be hypertangent, but we just assume it’s identity here) at this moment, i.e, <img src="https://math.now.sh?inline=%5Cprod_%7Bk%3D2%7D%5Et%20W_h%20%3D%20W_h%5E%7Bt-1%7D%20%5Ccdot%20%5C%7CW_h%5E%7Bt-1%7D%5C%7C" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, i.e., the largest singular value of <img src="https://math.now.sh?inline=W_h%5E%7Bt-1%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, scale as <img src="https://math.now.sh?inline=%5C%7CW_h%5C%7C%5E%7Bt-1%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>.</p>
+<ul>
+<li>When <img src="https://math.now.sh?inline=%5C%7CW_h%5C%7C%20%3E%201" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, gradient explodes if <img src="https://math.now.sh?inline=t" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> large.</li>
+<li>When <img src="https://math.now.sh?inline=%5C%7CW_h%5C%7C%20%3C%201" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, gradient vanishes if <img src="https://math.now.sh?inline=t" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> small.</li>
+</ul>
+</li>
+<li>
+<p>What happens with the tanh activation?</p>
+<ul>
+<li><img src="https://math.now.sh?inline=%5Ctanh'%28x%29%3D1-%5Ctanh%5E2(x)%20%5Cleq%201" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> – effectively always smaller</li>
+<li>We have</li>
+</ul>
+</li>
+</ul>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=%5C%7C%5Cprod_%7Bk%3D2%7D%5Et%20%5Ctext%7Bdiag%7D%28%5Ctanh'(W_hh_%7Bk-1%7D%2BW_xx_k%29)W_h%5C%7C%0A" /></p><p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=%5Cleq%20%5Cprod_%7Bk%3D2%7D%5Et%20%5C%7C%5Ctext%7Bdiag%7D%28%5Ctanh'(W_hh_%7Bk-1%7D%2BW_xx_k%29)%5C%7C%20%5C%7CW_h%5C%7C%0A" /></p><p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=%5Cleq%20%5Cunderbrace%7B%5Cprod_%7Bk%3D2%7D%5Et%20%5C%7C%5Ctext%7Bdiag%7D%28%5Ctanh'(W_hh_%7Bk-1%7D%2BW_xx_k%29)%5C%7C%7D_%5Ctext%7Bproduct%20of%20many%20numbers%20%3C%201%20when%20t%20large%7D%20%5C%7CW_h%5C%7C%5E%7Bt-1%7D%0A" /></p><p>In this case of using hypertangent, gradient vanishing is more common.</p>
+<h3 id="Gradient-clipping">Gradient clipping</h3>
+<p>When the gradient is too large (exploding), rescale (i.e., clip) it. Let <img src="https://math.now.sh?inline=g" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> be the gradient and <img src="https://math.now.sh?inline=%5Cxi%20%3C%200" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> be a threshold, because when we’re doing gradient descent, what we’re really caring about is more the direction rather than the magnitude.</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=%5Chat%7Bg%7D%3D%5Cxi%5Cfrac%7Bg%7D%7B%5C%7Cg%5C%7C%7D%0A" /></p><p><img src="figure14.png" alt="figure14"><br>
+You just normalize the direction and rescale by the factor <img src="https://math.now.sh?inline=%5Cxi" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, by clipping large gradient you can avoid the very large movement as the left graph above.</p>
+<h3 id="Problem-with-gradient-Vanishing">Problem with gradient Vanishing</h3>
+<p><img src="figure15.png" alt="figuer15"><br>
+If we look at the image above, when I evaluate the value of the current node with earlier node, the gradient can be exponentially small such as <img src="https://math.now.sh?inline=%5Cfrac%7B%5Cpartial%20h_t%7D%7B%5Cpartial%20h_1%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> when <img src="https://math.now.sh?inline=t" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is large, which implies ealier states have little impact on latter states. However, what we want in sequential modeling is that we want to make sure what we’ve seen have reasonable influence on the current state.</p>
+<p>The problem is that we hope RNN can encode reasonably long-term historial/contextual information.</p>
+<h2 id="Long-Short-Term-Memory-LSTM">Long Short-Term Memory (LSTM)</h2>
+<p>The key idea of LSTM is to introduce a cell state <img src="https://math.now.sh?inline=c" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> to explicitly store history, beside the hidden state <img src="https://math.now.sh?inline=h" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. It build a universal storage. No matter how far you’re concerning the time step, you can access to the information on the “universal storage”.<br>
+<img src="figure16.png" alt="figure16"><br>
+All the four gates in the images are a vector, and every step we not only update the state now but also write new things into the universal storage (i.e., cell).</p>
+<h2 id="Gated-Recurrent-Unit-GRU">Gated Recurrent Unit (GRU)</h2>
+<p><img src="figure17.png" alt="figure17"><br>
+There is a simplified version of LSTM. GRU doesn’t have the universal storage (i.e., cell), but a state with two gates. Each time we write some new content and make it as a linear combination to update the current state <img src="https://math.now.sh?inline=h" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. Both of LSTM and GRU are popular in the field, but LSTM is more powerful but slower in training.</p>
+<h3 id="Do-they-save-the-vanishing-gradient">Do they save the vanishing gradient?</h3>
+<p><img src="figure18.png" alt="figure18"><br>
+If we ask ourselves what is the Jacobian of the cell state <img src="https://math.now.sh?inline=c" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, it’s simply the diagonal matrix of <img src="https://math.now.sh?inline=f" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. There is no multiplication by <img src="https://math.now.sh?inline=W" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, so it’s not computational complicated. If we track the flow backward, the dependency between <img src="https://math.now.sh?inline=c_2" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> and <img src="https://math.now.sh?inline=c_3" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is only <img src="https://math.now.sh?inline=f" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>.</p>
+<p><img src="figure19.png" alt="figure19"><br>
+If this looks familiar to you, it’s actually somewhat similiar to ResNet (they’re all skip-connections! Skip-connection allows long-distance dependency), as well as a extreme version of ResNet, which is DenseNet. But there is not a solid understanding that if we really solve the gradient vanishing/exploding problem.</p>
+<h3 id="Do-we-need-to-modify-the-architecture">Do we need to modify the architecture?</h3>
+<p>The problem here is that <img src="https://math.now.sh?inline=W_h" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> can have singular values other than 1, becaues greater than 1 leading to explosion while smaller than 1 leading to vanishing gradient. So, a natual solution is to keep all singular values to be 1, but <img src="https://math.now.sh?inline=W_h" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is square, which implies that <img src="https://math.now.sh?inline=W_h" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is orthogonal.<br>
+So we can formulate the problem as:</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=%5Cmin_%7BW_h%2CW_x%7D%20L%28W%29%20%5Cquad%20%5Ctext%7Bs.t.%20%24W_h%24%20orthogonal%7D%0A" /></p><p>an instance of Riemannian optimization. This is a constrainted optimization problem, which is still largely unexplored in deep neural networks.</p>
+<h1>Modern RNNs</h1>
+<h2 id="Bidirectional-RNNs">Bidirectional RNNs</h2>
+<p>This is to deal with situation such as “… terribly exciting …”. The RNN always tryes to keep the historical information but not utilize the future information, once it reaches to the word “terribly” it may guess the sentence is negative. However, if you read “terribly exciting” together it’s actually expressing positive meaning. So, people have developped a RNN reads both forward and backward – Bidirectional RNNs.<br>
+<img src="figure20.png" alt="figure20"><br>
+It’s only useful whenever you have the full setences, and it cannot be used in language modeling because you don’t know the future information (user hasn’t typed yet).</p>
+<h2 id="Deep-RNNs">Deep RNNs</h2>
+<p>Hidden state <img src="https://math.now.sh?inline=h" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> can be thought of representation, and so far we only have one layer, how about going deeper for more powerful representation learning.<br>
+<img src="figure21.png" alt="figure21"><br>
+Typically, people only have only a few layers (no more than 20), because there is a price to pay – computational intensive.</p>
+<hr>
+<div style="text-align: right"> To be continued... </div>
+  </div>
+</article>
+
+
+  <!-- Gitalk start  -->
+
+  <!-- Link Gitalk files  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"/></script> 
+  <div id="gitalk-container"></div>     
+  <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+        // gitalk's main params
+        clientID: `3ce407f9c6ed6aaffdf8`,
+        clientSecret: `2c6bc0465d806a6dc4ee20c9b1a0043d7a6101fe`,
+        repo: `gaoxiangluo.github.io`,
+        owner: 'GaoxiangLuo',
+        admin: ['GaoxiangLuo'],
+        id: location.pathname.slice(0, 50),
+        distractionFreeMode: true,
+        enableHotKey: true,
+        language: `en`
+      });
+      gitalk.render('gitalk-container');
+  </script> 
+  <!-- Gitalk end -->
+
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Recap of CNN</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Basic RNNs</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Basic-setup"><span class="toc-number">2.1.</span> <span class="toc-text">Basic setup</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Example-a-statistical-language-modeling"><span class="toc-number">2.1.1.</span> <span class="toc-text">Example: a statistical language modeling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Representing-words-word-embedding"><span class="toc-number">2.1.2.</span> <span class="toc-text">Representing words: word embedding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#A-simple-RNN-language-model"><span class="toc-number">2.1.3.</span> <span class="toc-text">A simple RNN language model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Training-the-model"><span class="toc-number">2.1.4.</span> <span class="toc-text">Training the model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-texts"><span class="toc-number">2.1.5.</span> <span class="toc-text">Generate texts</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vanishing-exploding-gradient"><span class="toc-number">2.2.</span> <span class="toc-text">Vanishing&#x2F;exploding gradient</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#How-to-compute-gradients"><span class="toc-number">2.2.1.</span> <span class="toc-text">How to compute gradients?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Look-into-the-gradient"><span class="toc-number">2.2.2.</span> <span class="toc-text">Look into the gradient</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#What%E2%80%99s-wrong-with-the-gradient"><span class="toc-number">2.2.3.</span> <span class="toc-text">What’s wrong with the gradient?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gradient-clipping"><span class="toc-number">2.2.4.</span> <span class="toc-text">Gradient clipping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Problem-with-gradient-Vanishing"><span class="toc-number">2.2.5.</span> <span class="toc-text">Problem with gradient Vanishing</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Long-Short-Term-Memory-LSTM"><span class="toc-number">2.3.</span> <span class="toc-text">Long Short-Term Memory (LSTM)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gated-Recurrent-Unit-GRU"><span class="toc-number">2.4.</span> <span class="toc-text">Gated Recurrent Unit (GRU)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Do-they-save-the-vanishing-gradient"><span class="toc-number">2.4.1.</span> <span class="toc-text">Do they save the vanishing gradient?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Do-we-need-to-modify-the-architecture"><span class="toc-number">2.4.2.</span> <span class="toc-text">Do we need to modify the architecture?</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">Modern RNNs</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Bidirectional-RNNs"><span class="toc-number">3.1.</span> <span class="toc-text">Bidirectional RNNs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deep-RNNs"><span class="toc-number">3.2.</span> <span class="toc-text">Deep RNNs</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/&text=Recurrent Neural Network (RNN): Overview"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/&title=Recurrent Neural Network (RNN): Overview"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/&is_video=false&description=Recurrent Neural Network (RNN): Overview"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Recurrent Neural Network (RNN): Overview&body=Check out this article: https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/&title=Recurrent Neural Network (RNN): Overview"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/&title=Recurrent Neural Network (RNN): Overview"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/&title=Recurrent Neural Network (RNN): Overview"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/&title=Recurrent Neural Network (RNN): Overview"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/&name=Recurrent Neural Network (RNN): Overview&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/&t=Recurrent Neural Network (RNN): Overview"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    Gaoxiang Luo
+  </div>
+  <!-- <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div> -->
+  <div class="busuanzi-count">
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span class="site-pv">
+      Page View <i class="fa fa-users"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+    <!-- <span class="site-uv">
+      Number of Visitors <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuansi_value_site_uv"></span>
+    </span> -->
+  </div>
+  <div class="Word-count">
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">24.6k</span>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-176745887-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":200,"height":400,"hOffset":5,"vOffset":-38},"mobile":{"show":false,"scale":0.2},"react":{"opacityDefault":0.8,"opacityOnHover":0.2},"log":false});</script></body>
+</html>
