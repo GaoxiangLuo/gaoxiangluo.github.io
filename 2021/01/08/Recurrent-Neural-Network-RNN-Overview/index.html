@@ -91,12 +91,12 @@
 <meta property="og:image" content="https://math.now.sh?inline=W_h">
 <meta property="og:image" content="https://math.now.sh?inline=W_h">
 <meta property="og:image" content="https://math.now.sh?inline=W_h">
-<meta property="og:image" content="https://math.now.sh?from=%5Cmin_%7BW_h%2CW_x%7D%20L%28W%29%20%5Cquad%20%5Ctext%7Bs.t.%20%24W_h%24%20orthogonal%7D%0A">
+<meta property="og:image" content="https://math.now.sh?from=%5Cmin_%7BW_h%2CW_x%7D%20L%28W%29%20%5Cquad%20s.t.%20%5Cquad%20W_h%20%5Cquad%20%5Ctext%7Borthogonal%7D%0A">
 <meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure20.png">
 <meta property="og:image" content="https://math.now.sh?inline=h">
 <meta property="og:image" content="https://gaoxiangluo.github.io/2021/01/08/Recurrent-Neural-Network-RNN-Overview/figure21.png">
 <meta property="article:published_time" content="2021-01-08T06:04:20.000Z">
-<meta property="article:modified_time" content="2021-01-08T06:09:34.991Z">
+<meta property="article:modified_time" content="2021-01-10T06:10:50.615Z">
 <meta property="article:author" content="Gaoxiang Luo">
 <meta property="article:tag" content="Neural Network">
 <meta property="article:tag" content="RNN">
@@ -169,6 +169,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" href="/2021/01/09/Applications-of-CNNs-in-Computer-Vision/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" href="/2021/01/07/A-Survey-of-Deep-Semantic-Segmentation-on-Computed-Tomography/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -224,7 +226,7 @@
       
         <time datetime="2021-01-08T06:04:20.000Z" itemprop="datePublished">2021-01-08</time>
         
-        (Updated: <time datetime="2021-01-08T06:09:34.991Z" itemprop="dateModified">2021-01-08</time>)
+        (Updated: <time datetime="2021-01-10T06:10:50.615Z" itemprop="dateModified">2021-01-10</time>)
         
       
     </div>
@@ -356,7 +358,7 @@ If this looks familiar to you, it’s actually somewhat similiar to ResNet (they
 <h3 id="Do-we-need-to-modify-the-architecture">Do we need to modify the architecture?</h3>
 <p>The problem here is that <img src="https://math.now.sh?inline=W_h" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> can have singular values other than 1, becaues greater than 1 leading to explosion while smaller than 1 leading to vanishing gradient. So, a natual solution is to keep all singular values to be 1, but <img src="https://math.now.sh?inline=W_h" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is square, which implies that <img src="https://math.now.sh?inline=W_h" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is orthogonal.<br>
 So we can formulate the problem as:</p>
-<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=%5Cmin_%7BW_h%2CW_x%7D%20L%28W%29%20%5Cquad%20%5Ctext%7Bs.t.%20%24W_h%24%20orthogonal%7D%0A" /></p><p>an instance of Riemannian optimization. This is a constrainted optimization problem, which is still largely unexplored in deep neural networks.</p>
+<p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=%5Cmin_%7BW_h%2CW_x%7D%20L%28W%29%20%5Cquad%20s.t.%20%5Cquad%20W_h%20%5Cquad%20%5Ctext%7Borthogonal%7D%0A" /></p><p>an instance of Riemannian optimization. This is a constrainted optimization problem, which is still largely unexplored in deep neural networks.</p>
 <h1>Modern RNNs</h1>
 <h2 id="Bidirectional-RNNs">Bidirectional RNNs</h2>
 <p>This is to deal with situation such as “… terribly exciting …”. The RNN always tryes to keep the historical information but not utilize the future information, once it reaches to the word “terribly” it may guess the sentence is negative. However, if you read “terribly exciting” together it’s actually expressing positive meaning. So, people have developped a RNN reads both forward and backward – Bidirectional RNNs.<br>
@@ -485,7 +487,7 @@ Typically, people only have only a few layers (no more than 20), because there i
     </span> -->
   </div>
   <div class="Word-count">
-    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">24.6k</span>
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">25.7k</span>
   </div>
 </footer>
 
