@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="Acknowledgement: This course (CSCI 5523) is being offered by Prof. Vipin Kumar at the University of Minnesota in Fall 2020.  Association Rule: Basic Concept Association Rule Mining Given a set of tra">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Association Rules: Basic Concept">
+<meta property="og:title" content="Association Rules: Basic and Advanced Concept">
 <meta property="og:url" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/index.html">
 <meta property="og:site_name" content="Leon">
 <meta property="og:description" content="Acknowledgement: This course (CSCI 5523) is being offered by Prof. Vipin Kumar at the University of Minnesota in Fall 2020.  Association Rule: Basic Concept Association Rule Mining Given a set of tra">
@@ -77,11 +77,37 @@
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure16.png">
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure17.png">
 <meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure18.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure21.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure22.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure23.png">
+<meta property="og:image" content="https://math.now.sh?inline=s%20%3D%20%3Ce_1%20e_2%20e_3%20%5Cdots%3E">
+<meta property="og:image" content="https://math.now.sh?inline=e_i%20%3D%20%5Clbrace%20i_1%2C%20i_2%2C%20%5Cdots%2C%20i_k%20%5Crbrace">
+<meta property="og:image" content="https://math.now.sh?inline=%7Cs%7C">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure24.png">
+<meta property="og:image" content="https://math.now.sh?inline=w">
+<meta property="og:image" content="https://math.now.sh?inline=w">
+<meta property="og:image" content="https://math.now.sh?inline=support%20%5Cgeq%20minsup">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure25.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure26.png">
+<meta property="og:image" content="https://math.now.sh?inline=n">
+<meta property="og:image" content="https://math.now.sh?inline=i_1%2C%20i_2%2C%20%5Cdots%2C%20i_n">
+<meta property="og:image" content="https://math.now.sh?inline=%3C%5C%7Bi_1%5C%7D%3E%2C%20%3C%5C%7Bi_2%5C%7D%3E%2C%20%5Cdots%2C%20%3C%5C%7Bi_n%5C%7D%3E">
+<meta property="og:image" content="https://math.now.sh?inline=%3C%5C%7Bi_1%2C%20i_2%5C%7D%3E%2C%20%3C%5C%7Bi_1%2C%20i_3%5C%7D%3E%2C%20%5Cdots%2C">
+<meta property="og:image" content="https://math.now.sh?inline=%3C%5C%7Bi_1%5C%7D%2C%20%5C%7Bi_1%5C%7D%3E%2C%20%3C%5C%7Bi_1%5C%7D%2C%20%5C%7Bi_2%5C%7D%3E%2C%20%5Cdots%20%3C%5C%7Bi_n%5C%7D%2C%5C%7Bi_n%5C%7D%3E">
+<meta property="og:image" content="https://math.now.sh?inline=%3C%5C%7Bi_1%2C%20i_2%2C%20i_3%5C%7D%3E%2C%20%3C%5C%7Bi_1%2C%20i_2%2C%20i_4%5C%7D%3E%2C%20%5Cdots%2C">
+<meta property="og:image" content="https://math.now.sh?inline=%3C%5C%7Bi_1%2C%20i_2%5C%7D%2C%20%5C%7Bi_1%5C%7D%3E%2C%20%3C%5C%7Bi_1%2C%20i_2%5C%7D%2C%20%5C%7Bi_2%5C%7D%3E%2C%20%5Cdots%2C">
+<meta property="og:image" content="https://math.now.sh?inline=%3C%5C%7Bi_1%2C%20i_2%5C%7D%2C%20%5C%7Bi_1%5C%7D%3E%2C%20%3C%5C%7Bi_1%2C%20i_2%5C%7D%2C%20%5C%7Bi_2%5C%7D%3E%2C%20%5Cdots%20%3C%5C%7Bi_n%5C%7D%2C%5C%7Bi_n%5C%7D%3E">
+<meta property="og:image" content="https://math.now.sh?inline=%3C%5C%7Bi_1%5C%7D%2C%20%5C%7Bi_1%5C%7D%2C%20%5C%7Bi_1%5C%7D%3E%2C%20%3C%5C%7Bi_1%5C%7D%2C%20%5C%7Bi_1%5C%7D%2C%20%5C%7Bi_2%5C%7D%3E%2C%20%5Cdots%2C">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure27.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure28.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figur29.png">
+<meta property="og:image" content="https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/figure30.png">
 <meta property="article:published_time" content="2020-10-14T15:54:37.000Z">
-<meta property="article:modified_time" content="2020-10-27T15:03:19.793Z">
+<meta property="article:modified_time" content="2021-02-15T16:44:00.872Z">
 <meta property="article:author" content="Gaoxiang Luo">
 <meta property="article:tag" content="Association Rule">
 <meta property="article:tag" content="Apriori Algorithm">
+<meta property="article:tag" content="Sequential Rules Mining">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://math.now.sh?inline=%5Csigma">
     
@@ -103,7 +129,7 @@
         
     
     <!-- title -->
-    <title>Association Rules: Basic Concept</title>
+    <title>Association Rules: Basic and Advanced Concept</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -165,21 +191,21 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&text=Association Rules: Basic Concept"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&is_video=false&description=Association Rules: Basic Concept"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Association Rules: Basic Concept&body=Check out this article: https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&name=Association Rules: Basic Concept&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&t=Association Rules: Basic Concept"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&text=Association Rules: Basic and Advanced Concept"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic and Advanced Concept"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&is_video=false&description=Association Rules: Basic and Advanced Concept"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Association Rules: Basic and Advanced Concept&body=Check out this article: https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic and Advanced Concept"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic and Advanced Concept"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic and Advanced Concept"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic and Advanced Concept"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&name=Association Rules: Basic and Advanced Concept&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&t=Association Rules: Basic and Advanced Concept"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Association Rule: Basic Concept</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Association-Rule-Mining"><span class="toc-number">1.1.</span> <span class="toc-text">Association Rule Mining</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Def-Frequent-Itemset"><span class="toc-number">1.1.1.</span> <span class="toc-text">Def: Frequent Itemset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Association-Rule-Mining-Task"><span class="toc-number">1.1.2.</span> <span class="toc-text">Association Rule Mining Task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apriori-Algorithm"><span class="toc-number">1.1.3.</span> <span class="toc-text">Apriori Algorithm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rule-Generation"><span class="toc-number">1.1.4.</span> <span class="toc-text">Rule Generation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Algorithms-and-Complexity"><span class="toc-number">1.2.</span> <span class="toc-text">Algorithms and Complexity</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Maximal-Frequent-Itemset"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">Maximal Frequent Itemset</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Closed-Itemset"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">Closed Itemset</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pattern-Evaluation"><span class="toc-number">1.3.</span> <span class="toc-text">Pattern Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Statistical-Relationship-between-X-and-Y"><span class="toc-number">1.3.1.</span> <span class="toc-text">Statistical Relationship between X and Y</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Measures-that-take-into-account-statistical-dependence"><span class="toc-number">1.3.2.</span> <span class="toc-text">Measures that take into account statistical dependence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Simpson%E2%80%99s-Paradox"><span class="toc-number">1.3.3.</span> <span class="toc-text">Simpson’s Paradox</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Association Rule: Basic Concept</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Association-Rule-Mining"><span class="toc-number">1.1.</span> <span class="toc-text">Association Rule Mining</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Def-Frequent-Itemset"><span class="toc-number">1.1.1.</span> <span class="toc-text">Def: Frequent Itemset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Association-Rule-Mining-Task"><span class="toc-number">1.1.2.</span> <span class="toc-text">Association Rule Mining Task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apriori-Algorithm"><span class="toc-number">1.1.3.</span> <span class="toc-text">Apriori Algorithm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rule-Generation"><span class="toc-number">1.1.4.</span> <span class="toc-text">Rule Generation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Algorithms-and-Complexity"><span class="toc-number">1.2.</span> <span class="toc-text">Algorithms and Complexity</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Maximal-Frequent-Itemset"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">Maximal Frequent Itemset</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Closed-Itemset"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">Closed Itemset</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pattern-Evaluation"><span class="toc-number">1.3.</span> <span class="toc-text">Pattern Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Statistical-Relationship-between-X-and-Y"><span class="toc-number">1.3.1.</span> <span class="toc-text">Statistical Relationship between X and Y</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Measures-that-take-into-account-statistical-dependence"><span class="toc-number">1.3.2.</span> <span class="toc-text">Measures that take into account statistical dependence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Simpson%E2%80%99s-Paradox"><span class="toc-number">1.3.3.</span> <span class="toc-text">Simpson’s Paradox</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Data Mining: Advance Concepts of Association Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sequential-Patterns"><span class="toc-number">2.1.</span> <span class="toc-text">Sequential Patterns</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Formal-def-of-sequence"><span class="toc-number">2.1.1.</span> <span class="toc-text">Formal def of sequence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Visual-def-of-subsequence"><span class="toc-number">2.1.2.</span> <span class="toc-text">Visual def of subsequence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sequential-Pattern-Mining"><span class="toc-number">2.1.3.</span> <span class="toc-text">Sequential Pattern Mining</span></a></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -191,7 +217,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        Association Rules: Basic Concept
+        Association Rules: Basic and Advanced Concept
     </h1>
 
 
@@ -205,8 +231,6 @@
       
         <time datetime="2020-10-14T15:54:37.000Z" itemprop="datePublished">2020-10-14</time>
         
-        (Updated: <time datetime="2020-10-27T15:03:19.793Z" itemprop="dateModified">2020-10-27</time>)
-        
       
     </div>
 
@@ -216,7 +240,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link-link" href="/tags/Apriori-Algorithm/" rel="tag">Apriori Algorithm</a>, <a class="tag-link-link" href="/tags/Association-Rule/" rel="tag">Association Rule</a>
+        <a class="tag-link-link" href="/tags/Apriori-Algorithm/" rel="tag">Apriori Algorithm</a>, <a class="tag-link-link" href="/tags/Association-Rule/" rel="tag">Association Rule</a>, <a class="tag-link-link" href="/tags/Sequential-Rules-Mining/" rel="tag">Sequential Rules Mining</a>
     </div>
 
 
@@ -396,6 +420,67 @@ Mosteller: underlying associations hould be independent of the relative number o
 <p>For example, say we have two hospitals where hospital A has 80% of recovery rate from COVID, and hospital B has 90% of recovery rate from COVID. Which hospital is better?<br>
 Let’s further look at the recovery rate of different age group by a age threshold. It turns out that Hospital A has 50% of recovery rate on older population, and Hospital B has 30% of recovery rate on older population. Meanshilw, Hospital A has 99% of recovery rate on younder population while Hospital B’s is 98%.<br>
 Hospital A has both higher recovery rate than Hospital B in terms of old and yound population, but why the overall recovery is lower than the Hospital B? This is the simpson’s paradox.</p>
+<h1>Data Mining: Advance Concepts of Association Analysis</h1>
+<h2 id="Sequential-Patterns">Sequential Patterns</h2>
+<p>Example of sequence:</p>
+<ul>
+<li>Sequence of different transaction by a customer at an online store<br>
+&lt;{Digital Camera, iPad} {Memory card} {headphone, iPad cover}&gt;</li>
+<li>Sequence of book checked out at a library:<br>
+&lt;{Fellowship of the Ring} {The Two Towers} {Return of the King}&gt;</li>
+<li>more on the table below<br>
+<img src="figure21.png" alt="figure1"></li>
+</ul>
+<p>How does the sequence data look like in database?<br>
+<img src="figure22.png" alt="figure2"></p>
+<p>What does sequence data differ from market-basket data?<br>
+<img src="figure23.png" alt="figure3"><br>
+From Sequence data, we can tell people who bought item {2} would be likely to buy item {1} afterward on the next purchase. And Market-basket data tells us that people who bought item {1,8} would be likely to buy item {7} on the same purchase.</p>
+<h3 id="Formal-def-of-sequence">Formal def of sequence</h3>
+<p>A sequence is an ordered list of elements <img src="https://math.now.sh?inline=s%20%3D%20%3Ce_1%20e_2%20e_3%20%5Cdots%3E" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, when each element contains a collection of events(items) <img src="https://math.now.sh?inline=e_i%20%3D%20%5Clbrace%20i_1%2C%20i_2%2C%20%5Cdots%2C%20i_k%20%5Crbrace" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. Length of a sequence <img src="https://math.now.sh?inline=%7Cs%7C" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is given by the number of elements in the sequence. A k-sequence is a sequence that contains k events (items).</p>
+<h3 id="Visual-def-of-subsequence">Visual def of subsequence</h3>
+<p><img src="figure24.png" alt="figure4"><br>
+A subsequence is contained in another data sequence if each element of subsuence is a subset of a corresponding element of the data sequence. For the second row of the table, element {1} of subsuquence is a subset of element {1,2} of data sequence. Since {2} is a element in subsequence but it doesn’t have a corresponding element in data sequence, it’s not contained. Note that the order in subsequence doesn’t matter.</p>
+<h3 id="Sequential-Pattern-Mining">Sequential Pattern Mining</h3>
+<p>Now let’s talk about support again. The support of a subsequence <img src="https://math.now.sh?inline=w" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is defined as the fraction of data sequences that contain <img src="https://math.now.sh?inline=w" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. A sequential pattern is a frequent subsequence (i.e., a subsequence where <img src="https://math.now.sh?inline=support%20%5Cgeq%20minsup" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>). Suppose we’re given a database of sequences and a user-specified minimum support threshold (i.e., minsup), the task is to find all subsuquences with support greater than or equal to minsup. There is an example of frequent subsequences:<br>
+<img src="figure25.png" alt="figure5"><br>
+Here are only examples but not all the frequent subsequences. For instance, if we look at subsuquence &lt;{1,2}&gt;, since it’s a subset of sequence A B C out of A B C D E, the support of it is 60% which is higher than our specified minsup, so it’s a frequent subsequence.</p>
+<p>After talking about support, let’s talk about confidence. The calculation of confidence here is different from normal transaction database (market-basket data).<br>
+<img src="figure26.png" alt="figure6"></p>
+<p>How can we extract sequential patterns?</p>
+<ul>
+<li>Given <img src="https://math.now.sh?inline=n" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> events: <img src="https://math.now.sh?inline=i_1%2C%20i_2%2C%20%5Cdots%2C%20i_n" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+<li>Candidate 1-subsequences:<br>
+<img src="https://math.now.sh?inline=%3C%5C%7Bi_1%5C%7D%3E%2C%20%3C%5C%7Bi_2%5C%7D%3E%2C%20%5Cdots%2C%20%3C%5C%7Bi_n%5C%7D%3E" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+<li>Candidate 2-subsequences:<br>
+<img src="https://math.now.sh?inline=%3C%5C%7Bi_1%2C%20i_2%5C%7D%3E%2C%20%3C%5C%7Bi_1%2C%20i_3%5C%7D%3E%2C%20%5Cdots%2C" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br>
+<img src="https://math.now.sh?inline=%3C%5C%7Bi_1%5C%7D%2C%20%5C%7Bi_1%5C%7D%3E%2C%20%3C%5C%7Bi_1%5C%7D%2C%20%5C%7Bi_2%5C%7D%3E%2C%20%5Cdots%20%3C%5C%7Bi_n%5C%7D%2C%5C%7Bi_n%5C%7D%3E" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+<li>Candidate 3-subquences:<br>
+<img src="https://math.now.sh?inline=%3C%5C%7Bi_1%2C%20i_2%2C%20i_3%5C%7D%3E%2C%20%3C%5C%7Bi_1%2C%20i_2%2C%20i_4%5C%7D%3E%2C%20%5Cdots%2C" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br>
+<img src="https://math.now.sh?inline=%3C%5C%7Bi_1%2C%20i_2%5C%7D%2C%20%5C%7Bi_1%5C%7D%3E%2C%20%3C%5C%7Bi_1%2C%20i_2%5C%7D%2C%20%5C%7Bi_2%5C%7D%3E%2C%20%5Cdots%2C" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br>
+<img src="https://math.now.sh?inline=%3C%5C%7Bi_1%2C%20i_2%5C%7D%2C%20%5C%7Bi_1%5C%7D%3E%2C%20%3C%5C%7Bi_1%2C%20i_2%5C%7D%2C%20%5C%7Bi_2%5C%7D%3E%2C%20%5Cdots%20%3C%5C%7Bi_n%5C%7D%2C%5C%7Bi_n%5C%7D%3E" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br>
+<img src="https://math.now.sh?inline=%3C%5C%7Bi_1%5C%7D%2C%20%5C%7Bi_1%5C%7D%2C%20%5C%7Bi_1%5C%7D%3E%2C%20%3C%5C%7Bi_1%5C%7D%2C%20%5C%7Bi_1%5C%7D%2C%20%5C%7Bi_2%5C%7D%3E%2C%20%5Cdots%2C" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li>
+</ul>
+<p>A 2 events example:<br>
+<img src="figure27.png" alt="figure7"><br>
+As you can see, the idea seems to be computational expensive here if we have many events. So we introduce a method called Generalized Sequential Pattern (GSP) to deal with it.</p>
+<ol>
+<li>Make the first pass over the sequence database D to yield all the 1-element frequent sequences</li>
+<li>Repeat until no new frequent sequences are found
+<ul>
+<li>Candidate Generation: Merge pairs of frequent subsequences found in the (k-1)th pass to generate candidate sequences that contain k items</li>
+<li>Candidate Pruning: Prune candidate k-sequences that contain infrequent (k-1)-subsequences</li>
+<li>Support Counting: Make a new pass over the sequence database D to find the support for these candidate sequences</li>
+<li>Candidate Elimination: Eliminate candidate k-sequences whose actual support is less than minsup</li>
+</ul>
+</li>
+</ol>
+<p>What does “merge” mean above? Some example below:<br>
+<img src="figure28.png" alt="figure8"><br>
+A visual walk-through of candidate generation:<br>
+<img src="figur29.png" alt="figure9"><br>
+<img src="figure30.png" alt="figure10"><br>
+No matter which item I cross out in &lt;{1} {2 5} {3}&gt;, I can always find it in the frequent 3-sequences. For instance, if I cross out {1}, check if &lt;{2 5} {3}&gt; is in the frequent 3-sequences. If I cross out {2}, check if &lt;{1} {5} {3}&gt; is in the frequent 3-sequences. If I cross out {3}, check if &lt;{1} {2 5}&gt; is in the frequent 3-sequences. Do it for all cadidate generation and you will find only &lt;{1} {2 5} {3}&gt; survives, the others have been pruned.</p>
 
   </div>
 </article>
@@ -447,22 +532,22 @@ Hospital A has both higher recovery rate than Hospital B in terms of old and you
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Association Rule: Basic Concept</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Association-Rule-Mining"><span class="toc-number">1.1.</span> <span class="toc-text">Association Rule Mining</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Def-Frequent-Itemset"><span class="toc-number">1.1.1.</span> <span class="toc-text">Def: Frequent Itemset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Association-Rule-Mining-Task"><span class="toc-number">1.1.2.</span> <span class="toc-text">Association Rule Mining Task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apriori-Algorithm"><span class="toc-number">1.1.3.</span> <span class="toc-text">Apriori Algorithm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rule-Generation"><span class="toc-number">1.1.4.</span> <span class="toc-text">Rule Generation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Algorithms-and-Complexity"><span class="toc-number">1.2.</span> <span class="toc-text">Algorithms and Complexity</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Maximal-Frequent-Itemset"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">Maximal Frequent Itemset</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Closed-Itemset"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">Closed Itemset</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pattern-Evaluation"><span class="toc-number">1.3.</span> <span class="toc-text">Pattern Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Statistical-Relationship-between-X-and-Y"><span class="toc-number">1.3.1.</span> <span class="toc-text">Statistical Relationship between X and Y</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Measures-that-take-into-account-statistical-dependence"><span class="toc-number">1.3.2.</span> <span class="toc-text">Measures that take into account statistical dependence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Simpson%E2%80%99s-Paradox"><span class="toc-number">1.3.3.</span> <span class="toc-text">Simpson’s Paradox</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Association Rule: Basic Concept</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Association-Rule-Mining"><span class="toc-number">1.1.</span> <span class="toc-text">Association Rule Mining</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Def-Frequent-Itemset"><span class="toc-number">1.1.1.</span> <span class="toc-text">Def: Frequent Itemset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Association-Rule-Mining-Task"><span class="toc-number">1.1.2.</span> <span class="toc-text">Association Rule Mining Task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apriori-Algorithm"><span class="toc-number">1.1.3.</span> <span class="toc-text">Apriori Algorithm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rule-Generation"><span class="toc-number">1.1.4.</span> <span class="toc-text">Rule Generation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Algorithms-and-Complexity"><span class="toc-number">1.2.</span> <span class="toc-text">Algorithms and Complexity</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Maximal-Frequent-Itemset"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">Maximal Frequent Itemset</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Closed-Itemset"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">Closed Itemset</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pattern-Evaluation"><span class="toc-number">1.3.</span> <span class="toc-text">Pattern Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Statistical-Relationship-between-X-and-Y"><span class="toc-number">1.3.1.</span> <span class="toc-text">Statistical Relationship between X and Y</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Measures-that-take-into-account-statistical-dependence"><span class="toc-number">1.3.2.</span> <span class="toc-text">Measures that take into account statistical dependence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Simpson%E2%80%99s-Paradox"><span class="toc-number">1.3.3.</span> <span class="toc-text">Simpson’s Paradox</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Data Mining: Advance Concepts of Association Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sequential-Patterns"><span class="toc-number">2.1.</span> <span class="toc-text">Sequential Patterns</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Formal-def-of-sequence"><span class="toc-number">2.1.1.</span> <span class="toc-text">Formal def of sequence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Visual-def-of-subsequence"><span class="toc-number">2.1.2.</span> <span class="toc-text">Visual def of subsequence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sequential-Pattern-Mining"><span class="toc-number">2.1.3.</span> <span class="toc-text">Sequential Pattern Mining</span></a></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&text=Association Rules: Basic Concept"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&is_video=false&description=Association Rules: Basic Concept"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Association Rules: Basic Concept&body=Check out this article: https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic Concept"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&name=Association Rules: Basic Concept&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&t=Association Rules: Basic Concept"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&text=Association Rules: Basic and Advanced Concept"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic and Advanced Concept"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&is_video=false&description=Association Rules: Basic and Advanced Concept"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Association Rules: Basic and Advanced Concept&body=Check out this article: https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic and Advanced Concept"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic and Advanced Concept"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic and Advanced Concept"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&title=Association Rules: Basic and Advanced Concept"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&name=Association Rules: Basic and Advanced Concept&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://gaoxiangluo.github.io/2020/10/14/Association-Rules-Basic-Concept/&t=Association Rules: Basic and Advanced Concept"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -514,7 +599,7 @@ Hospital A has both higher recovery rate than Hospital B in terms of old and you
     </span> -->
   </div>
   <div class="Word-count">
-    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">25.7k</span>
+    <i class="fas fa-chart-area"></i> Total count: </i><span class="post-count">25.5k</span>
   </div>
 </footer>
 
