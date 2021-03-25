@@ -4,6 +4,38 @@
   
     
     <entry>
+      <title>I wrote an interview article for our undergraduate journal</title>
+      <link href="/2021/03/25/I-wrote-an-interview-article-for-our-undergraduate-journal/"/>
+      <url>/2021/03/25/I-wrote-an-interview-article-for-our-undergraduate-journal/</url>
+      
+        <content type="html"><![CDATA[<p><img src="figure1.png" alt="figure1"></p><p>The link to the publication (Vol. 4 No. 3 (2021)): <a href="https://pubs.lib.umn.edu/index.php/muraj/issue/view/231">https://pubs.lib.umn.edu/index.php/muraj/issue/view/231</a></p><h2 id="What-is-MURAJ">What is MURAJ</h2><p>The Minnesota Undergraduate Research &amp; Academic Journal (MURAJ) engages undergraduate students across the University of Minnesota - Twin Cities in the collaborative and educational process of assembling an academic journal that celebrates the breadth and depth of innovative thinking among undergraduate students.</p><h2 id="What-is-MURAJ-In-Focus">What is MURAJ: In Focus</h2><p>MURAJ: In Focus is a project that highlights the diversity of research at the University of Minnesota through a profile series that supplements our annual spring publication of student research. Our readers, like our authors, come from a wide array of backgrounds, and we believe that it is educational for students, faculty, and the University community to hear about the discoveries made and innovations happening on our campus.</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Publication </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Applications of CNNs in Computer Vision</title>
+      <link href="/2021/01/09/Applications-of-CNNs-in-Computer-Vision/"/>
+      <url>/2021/01/09/Applications-of-CNNs-in-Computer-Vision/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>Acknowledgement: This course (CSCI 8980) is being offered by <a href="https://sunju.org/">Prof. Ju Sun</a> at the University of Minnesota in Fall 2020. Pictures of slides are from the course. The content of this blog is from one of the grad students in the class, Andrea Walker, who were giving a presentation.</p></blockquote><h1>Object Detection</h1><h2 id="What-is-object-detection">What is object detection?</h2><p>There are 2 main tasks:</p><ul><li>Localizing one or more objects in the image</li><li>Classifying each object in the image<br><img src="figure1.png" alt="figure1"><br>Credit: The image above is from <a href="https://arxiv.org/abs/1809.06849">Islam el al., 2019</a>.</li></ul><h2 id="Object-Detection-Network">Object Detection Network</h2><p><img src="figure2.png" alt="figure2"><br>The image above is from <a href="http://vision.stanford.edu/teaching/cs231n/slides/2020/lecture_12.pdf">Stanford CS231N</a>. The inputs here are a image and a bounding box which contains the object, and the outputs here are a classification score of multiclass and a bounding box of the classified object. Since after the CNN conponent, there are two fully connected layers to output two different outcomes respectively. Here the obejctive loss we use is simply add the loss of both tasks together. I believe you’re familair with the softmax loss as it’s used in handwritten digit recognition in MNIST, and notably the localization here can be treated as a regression problem so that we can use the L2 loss.</p><h3 id="Multiple-Objects">Multiple Objects</h3><p>In the example above, we only have one object (a cat) in the image. What if we have multiple objects in the image? If we have one more object in the images, in the input we will have one more class label with four values to indicate another bounding box, here we see that the program starts to scale once we have multiple obejcts in a image.</p><p>A simple solution to multiple obejcts could be a slicing window over the entire image, which means we apply a CNN to many different crops of the image and then CNN classifies each crop as object or background. However, this is very computationally expensive! Most of the object detection application require this to be happened in the real time. So, what can be a good solution to multiple obejcts?</p><h3 id="4-step-object-detection-framwork">4-step object-detection framwork</h3><h4 id="1-Region-Proposal-indentify-regions-of-interest-RoI-for-potential-locations-of-objects">1. Region Proposal: indentify regions of interest (RoI) for potential locations of objects</h4><ul><li>General procesures for region proposal:<ul><li>Generate thousands of bouding boxes</li><li>Classify them as forground or background based on ‘objectness score’</li><li>Pass only foreground through rest of the network<br>People commonly use <strong>selective search</strong>, which is a fast algorithm, ~200 region proposals in a few seconds on CPU<br><img src="figure3.png" alt="figure3"><br>The images under this entire section are from <a href="https://www.manning.com/books/deep-learning-for-vision-systems">Elendy, 2020</a>.</li></ul></li></ul><h5 id="Selective-Search">Selective Search</h5><p>Selective search is a greedy search algorithm. The following are the steps of selective search.</p><ol><li>Segmentation. It basically defines the ‘blobs’ within the image in the segmentations step that can potentially be objects.<br><img src="figure4.png" alt="figure4"></li><li>Take these proposed regions that may contain objects as input, and the output will be as the image shown below. Those blue boxes are the regions that may contain a object, and the algorithm combines the two similiar regions into one region. So, after many iteration we’ll find we have less blue boxes now. This step will continue until the entire object is in a bounding box.<br><img src="figure5.png" alt="figure5"></li></ol><h4 id="2-Feature-Extraction-extract-visial-features-within-each-RoI-for-classification">2. Feature Extraction: extract visial features within each RoI for classification</h4><ul><li>Use a pretrained CNN network, and extract features</li><li>Make 2 predictions using additional layers:<ul><li>Bounding box prediction (x, y, width, height) <em>You may be curious why we have to make a prediction of bounding boxes here, since we’ve already identify a region of interest in the previous step. It’s important for the network to predict a bounding box, because we’re interested in having a bounding box that predicts the optimal bounding box for the obejct that we’re detecting. The region of interest may not include the entire obejct, so we don’t want to be limited by that.</em></li><li>Class prediction (softmax function predicting the class probability for each object)</li></ul></li></ul><h4 id="3-Non-maximum-Suppression-NMS-avoid-repeated-detections">3. Non-maximum Suppression (NMS): avoid repeated detections</h4><p>There is a 4-step technique for eliminating duplicate detections of objects.</p><ol><li>Discard bounding boxes with prediction below a <strong>confident threshold</strong>.</li><li>Select the bounding boxes with the highest probability</li><li>Calculate the overlap of all remaining boxes with the same class prediction</li><li>Supress any box with an IoU smaller than a threshold (NMS threshold, usually 0.5).<br><img src="figure6.png" alt="figure6"></li></ol><h4 id="4-Evaluateion-metrics-evaluate-performance-of-model">4. Evaluateion metrics: evaluate performance of model</h4><p>Once an object detector has been developed, it’s typically evaluated using two main metrics:</p><ul><li>Frames per second (FPS) - detection speed</li><li>Mean Average Precision (mAP) - network precision<ul><li>mAP calculated from a bounding box’s object score and the precision-recall curve</li></ul></li></ul><h3 id="State-of-the-Art-Object-Detection-CNNS">State of the Art Object Detection CNNS</h3><h4 id="R-CNNs-Region-based-CNNs">R-CNNs: Region-based CNNs</h4><p>R-CNN family networks:</p><ul><li>R-CNN</li><li>Fast-RCNN</li><li>Faster-RCNN (SOTA)<br><img src="figure7.png" alt="figure7"><br>R-CNN starts with a selective search to extract regions of interest (RoI) and wrapped them, then pass through a pretrain CNN to extract featrues. Once the feature extraction has been completed, classification and regression are performed to identify the class within each RoI as well as the bounding box. In order to understand this pipeline better, let’s look at R-CNN in a different angle.<br><img src="figure8.png" alt="figure8"><br>Each region that pass through selective search will be sent to CNN to extract the featuers, and then the features will be passed to two modules – classification module, which is a support vector machine (SVM) and a regression module, which is a regerssor that estimate the bounding box. This is the base level of the family of R-CNNs.</li></ul><p><img src="figure9.png" alt="figure9"><br>The image above is Fast-RCNN. The major change is where the CNN appears in the architecture. This time the input image will be directly sent into the CNN, and the region extractor happens after the CNN. This is important, because it speed up the network by only running one CNN instead of runnign ~2000 CNNs on each RoI.</p><p>CNN here performs both classification and feature extraction, and the SVM classification module is replaced with a softmax layer.</p><p><img src="figure10.png" alt="figure10"><br>The image above is Faster-RCNN, and it reaches the SOTA performance. Its overal architectural design is similiar with Fast-RCNN, with the exceptionthat a different algorithm is used for region proposal. I used the same base CNN to do the feature extraction, the main change is that they created a region proposal network (PRN), this plays the role of the selective search algorithm. So, it’s really taking out the selective search algorithm from Fast-RCNN and replace it with PRN.</p><hr><div style="text-align: right"> To be continued... </div>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Recurrent Neural Network (RNN): Overview</title>
       <link href="/2021/01/08/Recurrent-Neural-Network-RNN-Overview/"/>
       <url>/2021/01/08/Recurrent-Neural-Network-RNN-Overview/</url>
@@ -142,6 +174,27 @@
     
     
     <entry>
+      <title>Association Rules: Advanced Concept</title>
+      <link href="/2020/11/01/Association-Rules-Advanced-Concept/"/>
+      <url>/2020/11/01/Association-Rules-Advanced-Concept/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>Acknowledgement: This course (CSCI 5523) is being offered by <a href="https://www-users.cs.umn.edu/~kumar001/">Prof. Vipin Kumar</a> at the University of Minnesota in Fall 2020.</p></blockquote><h1>Data Mining: Advance Concepts of Association Analysis</h1><h2 id="Sequential-Patterns">Sequential Patterns</h2><p>Example of sequence:</p><ul><li>Sequence of different transaction by a customer at an online store<br>&lt;{Digital Camera, iPad} {Memory card} {headphone, iPad cover}&gt;</li><li>Sequence of book checked out at a library:<br>&lt;{Fellowship of the Ring} {The Two Towers} {Return of the King}&gt;</li><li>more on the table below<br><img src="figure1.png" alt="figure1"></li></ul><p>How does the sequence data look like in database?<br><img src="figure2.png" alt="figure2"></p><p>What does sequence data differ from market-basket data?<br><img src="figure3.png" alt="figure3"><br>From Sequence data, we can tell people who bought item {2} would be likely to buy item {1} afterward on the next purchase. And Market-basket data tells us that people who bought item {1,8} would be likely to buy item {7} on the same purchase.</p><h3 id="Formal-def-of-sequence">Formal def of sequence</h3><p>A sequence is an ordered list of elements <img src="https://math.now.sh?inline=s%20%3D%20%3Ce_1%20e_2%20e_3%20%5Cdots%3E" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, when each element contains a collection of events(items) <img src="https://math.now.sh?inline=e_i%20%3D%20%5Clbrace%20i_1%2C%20i_2%2C%20%5Cdots%2C%20i_k%20%5Crbrace" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. Length of a sequence <img src="https://math.now.sh?inline=%7Cs%7C" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is given by the number of elements in the sequence. A k-sequence is a sequence that contains k events (items).</p><h3 id="Visual-def-of-subsequence">Visual def of subsequence</h3><p><img src="figure4.png" alt="figure4"><br>A subsequence is contained in another data sequence if each element of subsuence is a subset of a corresponding element of the data sequence. For the second row of the table, element {1} of subsuquence is a subset of element {1,2} of data sequence. Since {2} is a element in subsequence but it doesn’t have a corresponding element in data sequence, it’s not contained. Note that the order in subsequence doesn’t matter.</p><h3 id="Sequential-Pattern-Mining">Sequential Pattern Mining</h3><p>Now let’s talk about support again. The support of a subsequence <img src="https://math.now.sh?inline=w" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is defined as the fraction of data sequences that contain <img src="https://math.now.sh?inline=w" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>. A sequential pattern is a frequent subsequence (i.e., a subsequence where <img src="https://math.now.sh?inline=support%20%5Cgeq%20minsup" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>). Suppose we’re given a database of sequences and a user-specified minimum support threshold (i.e., minsup), the task is to find all subsuquences with support greater than or equal to minsup. There is an example of frequent subsequences:<br><img src="figure5.png" alt="figure5"><br>Here are only examples but not all the frequent subsequences. For instance, if we look at subsuquence &lt;{1,2}&gt;, since it’s a subset of sequence A B C out of A B C D E, the support of it is 60% which is higher than our specified minsup, so it’s a frequent subsequence.</p><p>After talking about support, let’s talk about confidence. The calculation of confidence here is different from normal transaction database (market-basket data).<br><img src="figure6.png" alt="figure6"></p><p>How can we extract sequential patterns?</p><ul><li>Given <img src="https://math.now.sh?inline=n" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> events: <img src="https://math.now.sh?inline=i_1%2C%20i_2%2C%20%5Cdots%2C%20i_n" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li><li>Candidate 1-subsequences:<br><img src="https://math.now.sh?inline=%3C%5C%7Bi_1%5C%7D%3E%2C%20%3C%5C%7Bi_2%5C%7D%3E%2C%20%5Cdots%2C%20%3C%5C%7Bi_n%5C%7D%3E" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li><li>Candidate 2-subsequences:<br><img src="https://math.now.sh?inline=%3C%5C%7Bi_1%2C%20i_2%5C%7D%3E%2C%20%3C%5C%7Bi_1%2C%20i_3%5C%7D%3E%2C%20%5Cdots%2C" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br><img src="https://math.now.sh?inline=%3C%5C%7Bi_1%5C%7D%2C%20%5C%7Bi_1%5C%7D%3E%2C%20%3C%5C%7Bi_1%5C%7D%2C%20%5C%7Bi_2%5C%7D%3E%2C%20%5Cdots%20%3C%5C%7Bi_n%5C%7D%2C%5C%7Bi_n%5C%7D%3E" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li><li>Candidate 3-subquences:<br><img src="https://math.now.sh?inline=%3C%5C%7Bi_1%2C%20i_2%2C%20i_3%5C%7D%3E%2C%20%3C%5C%7Bi_1%2C%20i_2%2C%20i_4%5C%7D%3E%2C%20%5Cdots%2C" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br><img src="https://math.now.sh?inline=%3C%5C%7Bi_1%2C%20i_2%5C%7D%2C%20%5C%7Bi_1%5C%7D%3E%2C%20%3C%5C%7Bi_1%2C%20i_2%5C%7D%2C%20%5C%7Bi_2%5C%7D%3E%2C%20%5Cdots%2C" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br><img src="https://math.now.sh?inline=%3C%5C%7Bi_1%2C%20i_2%5C%7D%2C%20%5C%7Bi_1%5C%7D%3E%2C%20%3C%5C%7Bi_1%2C%20i_2%5C%7D%2C%20%5C%7Bi_2%5C%7D%3E%2C%20%5Cdots%20%3C%5C%7Bi_n%5C%7D%2C%5C%7Bi_n%5C%7D%3E" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br><img src="https://math.now.sh?inline=%3C%5C%7Bi_1%5C%7D%2C%20%5C%7Bi_1%5C%7D%2C%20%5C%7Bi_1%5C%7D%3E%2C%20%3C%5C%7Bi_1%5C%7D%2C%20%5C%7Bi_1%5C%7D%2C%20%5C%7Bi_2%5C%7D%3E%2C%20%5Cdots%2C" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li></ul><p>A 2 events example:<br><img src="figure7.png" alt="figure7"><br>As you can see, the idea seems to be computational expensive here if we have many events. So we introduce a method called Generalized Sequential Pattern (GSP) to deal with it.</p><ol><li>Make the first pass over the sequence database D to yield all the 1-element frequent sequences</li><li>Repeat until no new frequent sequences are found<ul><li>Candidate Generation: Merge pairs of frequent subsequences found in the (k-1)th pass to generate candidate sequences that contain k items</li><li>Candidate Pruning: Prune candidate k-sequences that contain infrequent (k-1)-subsequences</li><li>Support Counting: Make a new pass over the sequence database D to find the support for these candidate sequences</li><li>Candidate Elimination: Eliminate candidate k-sequences whose actual support is less than minsup</li></ul></li></ol><p>What does “merge” mean above? Some example below:<br><img src="figure8.png" alt="figure8"><br>A visual walk-through of candidate generation:<br><img src="figure8.png" alt="figure9"><br><img src="figure10.png" alt="figure10"><br>No matter which item I cross out in &lt;{1} {2 5} {3}&gt;, I can always find it in the frequent 3-sequences. For instance, if I cross out {1}, check if &lt;{2 5} {3}&gt; is in the frequent 3-sequences. If I cross out {2}, check if &lt;{1} {5} {3}&gt; is in the frequent 3-sequences. If I cross out {3}, check if &lt;{1} {2 5}&gt; is in the frequent 3-sequences. Do it for all cadidate generation and you will find only &lt;{1} {2 5} {3}&gt; survives, the others have been pruned.</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Sequential Rules Mining </tag>
+            
+            <tag> Association Rule </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Basic Methods of Training Deep Neural Networks (DNNs)</title>
       <link href="/2020/10/27/Basic-Methods-of-Training-Deep-Neural-Networks-DNNs/"/>
       <url>/2020/10/27/Basic-Methods-of-Training-Deep-Neural-Networks-DNNs/</url>
@@ -227,11 +280,11 @@
       
         <tags>
             
+            <tag> Sequential Rules Mining </tag>
+            
             <tag> Association Rule </tag>
             
             <tag> Apriori Algorithm </tag>
-            
-            <tag> Sequential Rules Mining </tag>
             
         </tags>
       
@@ -327,9 +380,9 @@
       
         <tags>
             
-            <tag> Deep Learning </tag>
-            
             <tag> Machine Learning </tag>
+            
+            <tag> Deep Learning </tag>
             
             <tag> Taylor&#39;s Theorem </tag>
             
@@ -371,13 +424,13 @@
       
         <tags>
             
+            <tag> Study Note </tag>
+            
             <tag> Deep Learning </tag>
             
             <tag> Neural Network </tag>
             
             <tag> Theory </tag>
-            
-            <tag> Study Note </tag>
             
         </tags>
       
@@ -465,9 +518,9 @@
             
             <tag> Study Note </tag>
             
-            <tag> Robotics </tag>
-            
             <tag> Coursera </tag>
+            
+            <tag> Robotics </tag>
             
             <tag> Perception </tag>
             
