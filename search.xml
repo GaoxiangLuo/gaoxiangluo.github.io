@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>I have been selected to be a volunteer of ICLR 2021</title>
+      <link href="/2021/04/18/I-have-been-selected-to-be-a-volunteer-of-ICLR-2021/"/>
+      <url>/2021/04/18/I-have-been-selected-to-be-a-volunteer-of-ICLR-2021/</url>
+      
+        <content type="html"><![CDATA[<p>The first time I came across with Learning Presentation this phrase is from a paper that we were reviewing in the group, which talks about Causal Representation Learning <a href="https://arxiv.org/abs/2102.11107">arXiv</a>, and later I realized learning good representation is important to the success of machine learning algorithms including deep neural networks. It yields the possibility of solving the issue of out-of-distribution (OOD) data where i.i.d hypothesis doesn’t hold, as well as the interpretability of AI. It didn’t take me too long to find out there is a conference specifically set for Learning Representation, and I’m very happy that I could be part of the volunteer team in <a href="https://iclr.cc/Conferences/2021/Volunteers">ICLR 2021</a>.</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> ICLR </tag>
+            
+            <tag> Conference </tag>
+            
+            <tag> Learning Representation </tag>
+            
+            <tag> Volunteer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>I had an oral presentation at UMN Undergrad Research Symposium</title>
+      <link href="/2021/04/16/I-had-an-oral-presentation-at-UMN-Undergrad-Research-Symposium/"/>
+      <url>/2021/04/16/I-had-an-oral-presentation-at-UMN-Undergrad-Research-Symposium/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>Gaoxiang: This is my <a href="https://gaoxiangluo.github.io/2020/12/15/I-received-Undergraduate-Research-Scholarship/">UROP</a> project with <a href="https://www-users.cs.umn.edu/~gupta423/index.html">Jayant Gupta</a> and Professor <a href="https://www-users.cs.umn.edu/~shekhar/">Shashi Shekhar</a> in Spring 2021. I’m grad that I had a chance to present this work on <a href="https://ugresearch.umn.edu/symposium/presenters2021">2021 Virtual Undergraduate Research Symposium</a>. This video is recorded half-way through the semester, and we’re still working on improving the overall accuracies of this apporach.</p></blockquote><h1>Title: Wetland Mapping Using Spatial Variability Aware Neural Networks (SVANN)</h1><h2 id="Abstract">Abstract</h2><p>We perform the wetland mapping task using deep convolutional neural networks on high spatial resolution drone imagery in this work. As one of the largest ecosystems, wetlands have essential value to the earth’s environment and human society (e.g., flood reduction, water quality improvement, etc.). Thus, due to climate change and urbanization, there is a need to update wetland inventory frequently with accurate boundaries and improved delineation of smaller wetlands. However, wetland mapping is expensive, and the classification is affected by spatial heterogeneity in data. For example, last nationwide wetland mapping took 40 years and 300 million dollars to complete and required a separate rule-set for each wetland type. Hence, the procedure of wetland mapping has changed from costly manual photo interpretation to multi-fusion semi-automated approaches. Previous work is based on a random forest approach, which can effectively separate two distinct classes through stair-case boundaries in feature space. In contrast, our deep neural network approach can separate classes with limited distinction using complex non-linear boundaries. Our results show that the deep neural network outperforms the random forest based approach before applying any post-processing techniques. Additionally, we show that applying SVANN adjusts spatial heterogeneity and improves the overall accuracy of wetland mapping.</p><h2 id="Link-to-the-presentation-https-ugresearch-umn-edu-symposium-presenters2021-Gaoxiang-Luo">Link to the presentation: <a href="https://ugresearch.umn.edu/symposium/presenters2021/Gaoxiang-Luo">https://ugresearch.umn.edu/symposium/presenters2021/Gaoxiang-Luo</a></h2>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Deep Learning </tag>
+            
+            <tag> Neural Network </tag>
+            
+            <tag> Presentation </tag>
+            
+            <tag> Symposium </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>I wrote an interview article for our undergraduate journal</title>
       <link href="/2021/03/25/I-wrote-an-interview-article-for-our-undergraduate-journal/"/>
       <url>/2021/03/25/I-wrote-an-interview-article-for-our-undergraduate-journal/</url>
