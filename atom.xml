@@ -6,7 +6,7 @@
   <link href="https://gaoxiangluo.github.io/atom.xml" rel="self"/>
   
   <link href="https://gaoxiangluo.github.io/"/>
-  <updated>2021-04-19T03:56:37.946Z</updated>
+  <updated>2021-05-17T16:49:21.583Z</updated>
   <id>https://gaoxiangluo.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>I was featured on our CS&amp;E department website</title>
+    <link href="https://gaoxiangluo.github.io/2021/05/15/I-was-featured-on-our-CS-E-department-website/"/>
+    <id>https://gaoxiangluo.github.io/2021/05/15/I-was-featured-on-our-CS-E-department-website/</id>
+    <published>2021-05-15T16:45:00.000Z</published>
+    <updated>2021-05-17T16:49:21.583Z</updated>
+    
+    <content type="html"><![CDATA[<p>Recently, I was interviewed to share my experience as an undergrad researcher by our CS&amp;E department.<br>For more information: <a href="https://cse.umn.edu/cs/news/cspotlight-experiencing-research-undergrad">CSpotlight: Experiencing research as an undergrad</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Recently, I was interviewed to share my experience as an undergrad researcher by our CS&amp;amp;E department.&lt;br&gt;
+For more information: &lt;a hr</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>I have been selected to be a volunteer of ICLR 2021</title>
@@ -529,31 +550,6 @@
     <category term="Deep Learning" scheme="https://gaoxiangluo.github.io/tags/Deep-Learning/"/>
     
     <category term="Taylor&#39;s Theorem" scheme="https://gaoxiangluo.github.io/tags/Taylor-s-Theorem/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Data Mining: Bayesian Classifiers</title>
-    <link href="https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/"/>
-    <id>https://gaoxiangluo.github.io/2020/09/29/Data-Mining-Bayesian-Classifiers/</id>
-    <published>2020-09-29T14:26:59.000Z</published>
-    <updated>2020-10-02T06:39:55.862Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>Acknowledgement: This course (CSCI 5523) is being offered by <a href="https://www-users.cs.umn.edu/~kumar001/">Prof. Vipin Kumar</a> at the University of Minnesota in Fall 2020.</p></blockquote><h1>Bayesian Classifiers</h1><p>Let’s recall what bayes theorem is from Intro to Stat.</p><p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=P%28Y%20%7C%20X%29%20%3D%20%5Cfrac%7BP(X%20%7C%20Y)P(Y)%7D%7BP(X)%7D%0A" /></p><h2 id="Using-bayes-theorem-for-classification">Using bayes theorem for classification</h2><p><img src="figure1.png" alt="figure1"></p><p>If each attribute <img src="https://math.now.sh?inline=X_d" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is independent while being given a class attribute <img src="https://math.now.sh?inline=Y_j" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, we can have:</p><p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=P%28X_1%2CX_2%2C...%2CX_d%7CY_j%29%3DP(X_1%7CY_j)P(X_2%7CY_j)...P(X_d%7CY_j)%0A" /></p><p>For instance:<br><img src="figure2.png" alt="figure2"></p><h3 id="Estimate-probabilities-from-data">Estimate probabilities from data</h3><p><img src="figure4.png" alt="figure4"><br>While considering binary values are easy by counting, let’s look at what should we do with continues data.<br><img src="figure3.png" alt="figure3"></p><p style="filter: opacity(100%);transform:scale(1.00);text-align:center;"><img src="https://math.now.sh?from=P%28X_i%7CY_j%29%3D%5Cfrac%7B1%7D%7B%5Csqrt%7B2%20%5Cpi%20%5Csigma_%7Bij%7D%5E2%7D%7De%5E-%5Cfrac%7B(X_i-%20%5Cmu_%7Bij%7D)%5E2%7D%7B2%20%5Csigma_%7Bij%7D%5E2%7D%0A" /></p><p>Still the sample dataset above, let’s apply this naive bayer classifier.</p><ul><li>given a test data point<br><img src="figure5.png" alt="figure5"></li><li>follow a decision tree<br><img src="figure6.png" alt="figure6"></li></ul><h3 id="Issue-with-naive-bayes-classifier">Issue with naive bayes classifier</h3><ol><li>If the test data point has missing attribute, we might have the possibility to identify one class to be 0.</li><li>If there is a missing data, we might not be able to classify as following:<br><img src="figure7.png" alt="figure7"></li></ol><p>Therefore, we want to use other estimates of conditional probabilities than simple fraction.</p><p>Original: <img src="https://math.now.sh?inline=P%28X_i%20%3D%20c%20%7C%20y%29%20%3D%20%5Cfrac%7Bn_c%7D%7Bn%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></p><ul><li><img src="https://math.now.sh?inline=n" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the number of training instances belonging to class y</li><li><img src="https://math.now.sh?inline=n_c" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the number of instances with <img src="https://math.now.sh?inline=X_i%20%3D%20c" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> and <img src="https://math.now.sh?inline=Y%20%3D%20y" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/><br>Laplace Estimate: <img src="https://math.now.sh?inline=P%28X_i%20%3D%20c%20%7C%20y%29%20%3D%20%5Cfrac%7Bn_c%20%2B%201%7D%7Bn%20%2B%20v%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li><li><img src="https://math.now.sh?inline=v" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the total number of attribute values that <img src="https://math.now.sh?inline=X_i" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> can take<br>m - estimate: <img src="https://math.now.sh?inline=P%28X_i%20%3D%20c%20%7C%20y%29%20%3D%20%5Cfrac%7Bn_c%20%2B%20mp%7D%7Bn%20%2B%20m%7D" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li><li><img src="https://math.now.sh?inline=p" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the initial estimate of <img src="https://math.now.sh?inline=P%28X_i%20%3D%20c%20%7C%20y%29" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> known apriori</li><li><img src="https://math.now.sh?inline=m" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> is the hyper-parameter for our confidence in <img src="https://math.now.sh?inline=p" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/></li></ul><h2 id="Naive-Bayes-Summary">Naive Bayes (Summary)</h2><ul><li>Robust to isolated noise points</li><li>Handle missing values by ignoring the instance during probability estimate calculations</li><li>Robust to irrelevant attributes (because irrelevant attributes will have the similar weights to classified label e.g: 50%, 50%)</li><li><strong>Drawback</strong>: redundant and correlated attributes will violate class condition assumption<ul><li>Use other techniques such as Bayesian Belief Networks (BBN)</li></ul></li></ul><p>A intuitive bad example:<br><img src="figure8.png" alt="figure8"><br>No, we cannot use naive bayes because conditional independence of attributes is violated. For instance, if <img src="https://math.now.sh?inline=x%3D5" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/>, then <img src="https://math.now.sh?inline=y" style="filter: opacity(100%);transform:scale(1.00);text-align:center;display:inline-block;margin: 0;"/> can be either red or blue.</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;Acknowledgement: This course (CSCI 5523) is being offered by &lt;a href=&quot;https://www-users.cs.umn.edu/~kumar001/&quot;&gt;Prof. Vipin K</summary>
-      
-    
-    
-    
-    
-    <category term="Data Mining" scheme="https://gaoxiangluo.github.io/tags/Data-Mining/"/>
-    
-    <category term="Bayesian Classifier" scheme="https://gaoxiangluo.github.io/tags/Bayesian-Classifier/"/>
     
   </entry>
   
