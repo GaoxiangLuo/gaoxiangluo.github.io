@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>I received departmental scholarship</title>
+      <link href="/2021/06/10/I-received-departmental-scholarship/"/>
+      <url>/2021/06/10/I-received-departmental-scholarship/</url>
+      
+        <content type="html"><![CDATA[<p><img src="figure1.png" alt="figure1"></p><p>Update (June 21, 2021):<br><img src="figure2.png" alt="figure2"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Scholarship </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>I was featured on our CS&amp;E department website</title>
       <link href="/2021/05/15/I-was-featured-on-our-CS-E-department-website/"/>
       <url>/2021/05/15/I-was-featured-on-our-CS-E-department-website/</url>
@@ -46,7 +65,7 @@
       <link href="/2021/04/16/I-had-an-oral-presentation-at-UMN-Undergrad-Research-Symposium/"/>
       <url>/2021/04/16/I-had-an-oral-presentation-at-UMN-Undergrad-Research-Symposium/</url>
       
-        <content type="html"><![CDATA[<blockquote><p>Gaoxiang: This is my <a href="https://gaoxiangluo.github.io/2020/12/15/I-received-Undergraduate-Research-Scholarship/">UROP</a> project with <a href="https://www-users.cs.umn.edu/~gupta423/index.html">Jayant Gupta</a> and Professor <a href="https://www-users.cs.umn.edu/~shekhar/">Shashi Shekhar</a> in Spring 2021. I’m grad that I had a chance to present this work on <a href="https://ugresearch.umn.edu/symposium/presenters2021">2021 Virtual Undergraduate Research Symposium</a>. This video is recorded half-way through the semester, and we’re still working on improving the overall accuracies of this apporach.</p></blockquote><h1>Title: Wetland Mapping Using Spatial Variability Aware Neural Networks (SVANN)</h1><h2 id="Abstract">Abstract</h2><p>We perform the wetland mapping task using deep convolutional neural networks on high spatial resolution drone imagery in this work. As one of the largest ecosystems, wetlands have essential value to the earth’s environment and human society (e.g., flood reduction, water quality improvement, etc.). Thus, due to climate change and urbanization, there is a need to update wetland inventory frequently with accurate boundaries and improved delineation of smaller wetlands. However, wetland mapping is expensive, and the classification is affected by spatial heterogeneity in data. For example, last nationwide wetland mapping took 40 years and 300 million dollars to complete and required a separate rule-set for each wetland type. Hence, the procedure of wetland mapping has changed from costly manual photo interpretation to multi-fusion semi-automated approaches. Previous work is based on a random forest approach, which can effectively separate two distinct classes through stair-case boundaries in feature space. In contrast, our deep neural network approach can separate classes with limited distinction using complex non-linear boundaries. Our results show that the deep neural network outperforms the random forest based approach before applying any post-processing techniques. Additionally, we show that applying SVANN adjusts spatial heterogeneity and improves the overall accuracy of wetland mapping.</p><h2 id="Link-to-the-presentation-https-ugresearch-umn-edu-symposium-presenters2021-Gaoxiang-Luo">Link to the presentation: <a href="https://ugresearch.umn.edu/symposium/presenters2021/Gaoxiang-Luo">https://ugresearch.umn.edu/symposium/presenters2021/Gaoxiang-Luo</a></h2>]]></content>
+        <content type="html"><![CDATA[<blockquote><p>Gaoxiang: This is my <a href="https://gaoxiangluo.github.io/2020/12/15/I-received-Undergraduate-Research-Scholarship/">UROP</a> project with <a href="https://www-users.cs.umn.edu/~gupta423/index.html">Jayant Gupta</a> and Professor <a href="https://www-users.cs.umn.edu/~shekhar/">Shashi Shekhar</a> in Spring 2021. I’m grad that I had a chance to present this work on <a href="https://ugresearch.umn.edu/symposium/presenters2021">2021 Virtual Undergraduate Research Symposium</a>. This video is recorded half-way through the semester, and we’re still working on improving the overall accuracies of this apporach.</p></blockquote><h1>Title: Wetland Mapping Using Spatial Variability Aware Neural Networks (SVANN)</h1><h2 id="Abstract">Abstract</h2><p>We perform the wetland mapping task using deep convolutional neural networks on high spatial resolution drone imagery in this work. As one of the largest ecosystems, wetlands have essential value to the earth’s environment and human society (e.g., flood reduction, water quality improvement, etc.). Thus, due to climate change and urbanization, there is a need to update wetland inventory frequently with accurate boundaries and improved delineation of smaller wetlands. However, wetland mapping is expensive, and the classification is affected by spatial heterogeneity in data. For example, last nationwide wetland mapping took 40 years and 300 million dollars to complete and required a separate rule-set for each wetland type. Hence, the procedure of wetland mapping has changed from costly manual photo interpretation to multi-fusion semi-automated approaches. Previous work is based on a random forest approach, which can effectively separate two distinct classes through stair-case boundaries in feature space. In contrast, our deep neural network approach can separate classes with limited distinction using complex non-linear boundaries. Our results show that the deep neural network outperforms the random forest based approach before applying any post-processing techniques. Additionally, we show that applying SVANN adjusts spatial heterogeneity and improves the overall accuracy of wetland mapping.</p><h2 id="Link-to-the-presentation-https-ugresearch-umn-edu-symposium-presenters2021-Gaoxiang-Luo">Link to the presentation: <a href="https://ugresearch.umn.edu/symposium/presenters2021/Gaoxiang-Luo">https://ugresearch.umn.edu/symposium/presenters2021/Gaoxiang-Luo</a></h2><h2 id="Permanent-Link-【https-cse-umn-edu-cs-feature-stories-wetland-mapping-using-spatial-variability-aware-neural-networks-svann-talk-https-cse-umn-edu-cs-feature-stories-wetland-mapping-using-spatial-variability-aware-neural-networks-svann-talk">Permanent Link: 【<a href="https://cse.umn.edu/cs/feature-stories/wetland-mapping-using-spatial-variability-aware-neural-networks-svann-talk">https://cse.umn.edu/cs/feature-stories/wetland-mapping-using-spatial-variability-aware-neural-networks-svann-talk</a>](<a href="https://cse.umn.edu/cs/feature-stories/wetland-mapping-using-spatial-variability-aware-neural-networks-svann-talk">https://cse.umn.edu/cs/feature-stories/wetland-mapping-using-spatial-variability-aware-neural-networks-svann-talk</a>)</h2>]]></content>
       
       
       
